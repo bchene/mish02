@@ -1,0 +1,8 @@
+# ignore files named
+*.o
+*.a
+.vscode
+minishell
+
+# ignore directory named temp
+objs/
