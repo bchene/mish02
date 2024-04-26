@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:49:39 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 21:18:57 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 18:15:58 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ char	*t_process_set_cmd(t_process *process)
 	return (str);
 }
 
-void	t_process_printf(t_process *p)
+void	t_process_print(t_process *p)
 {
+	if (p == NULL)
+	{
+		printf("(null)\n");
+		return ;
+	}
 	printf("|||| T_PROCESS\n");
 	printf("index = %d\n", p->index);
 	printf("line = %s\n", p->line);

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:29:31 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 19:35:08 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 18:32:22 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,16 @@ void	ft_print_split(char **pathlist)
 {
 	int	j;
 
-	j = -1;
-	while (pathlist && pathlist[++j])
-		ft_printf("%s\n", pathlist[j]);
+	if (pathlist)
+	{
+		j = -1;
+		while (pathlist[++j])
+			ft_printf("%s\n", pathlist[j]);
+	}
+	else
+	{
+		ft_printf("(null)\n");
+	}
 }
 
 void	ft_printf_strtab(char **str, int size, const char *sep)

@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/04/25 20:27:06 by bchene           ###   ########.fr        #
+#    Updated: 2024/04/26 19:53:41 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,19 @@ SRCS =		lo_check_syntax_error.c \
 			lo_substitute.c \
 			lo_substitute_vars.c \
 			mish_00_main.c \
-			mish_01_mish.c \
+			mish_01_mish_00.c \
+			mish_01_mish_01_error.c \
+			mish_01_mish_02_prompt.c \
+			mish_01_mish_03_line.c \
+			mish_01_mish_04_splitline.c \
+			mish_01_mish_05_p.c \
+			mish_01_mish_06_fds.c \
+			mish_01_mish_07_pid.c \
+			mish_01_mish_08_env.c \
+			mish_01_mish_09_unset.c \
+			mish_01_mish_10_env_unset.c \
+			mish_01_mish_11_exit_status.c \
+			mish_01_mish_12_pathlist.c \
 			mish_02_t_error.c \
 			mish_03_t_env.c \
 			mish_50_process.c \

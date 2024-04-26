@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:21:00 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 21:03:13 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 17:31:30 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,25 @@
 
 // const static int	g_signal;
 
-/* main pour tester le parsing */
+int	main(int argc, char **argv, char **env)
+{
+	t_mish	mish;
+	int		exit_status;
+
+	exit_status = 0;
+	if (argc != 1)
+		return (1); //mettre le num de l erreur syntaxe error
+	mish_init(&mish, env);
+	mish_print(&mish);
+	mish_free(&mish);
+	return (exit_status);
+	(void) argv;
+}
+
+/* 24/04/24 					*/
+/* Louis						*/
+/* main pour tester le parsing 	*/
+/*
 int	main(int argc, char **argv, char **env)
 {
 	t_mish	mish;
@@ -34,4 +52,5 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (0);
 }
+*/
 

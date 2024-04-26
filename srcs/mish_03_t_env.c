@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:07:17 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 21:17:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 18:22:01 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,3 +137,11 @@ int	t_env_setstr(t_env *env, char *var, char *value)
 	return (0);
 }
 
+void	t_env_print(t_env *tenv)
+{
+	while (tenv)
+	{
+		printf("%s\n", tenv->str);
+		tenv = tenv->next;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:14:03 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 18:16:22 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 18:53:41 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,24 @@ void	t_error_lst_free(t_error **err)
 t_err_type	t_error_exist(t_error *err)
 {
 	if (err)
-		return (err->type);
+		if (err->type)
+			return (err->type);
 	return (err_none);
+}
+
+void	t_error_print(t_error *err)
+{
+	t_error	*tmp;
+
+	if (err)
+	{
+		tmp = err;
+		while(tmp)
+		{
+			printf("type=%i \t err_no=%i \t data=%s\n", tmp->type, tmp->err_no, tmp->data);
+			tmp = tmp->next;
+		}
+	}
+	else
+		printf("(null)");
 }

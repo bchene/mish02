@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 21:41:36 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 17:12:16 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*						*/
 /* 50_process			*/
 void		t_process_free(t_process *process);
-void		t_process_printf(t_process *p);
+void		t_process_print(t_process *p);
 
 char		*t_process_set_cmd(t_process *process);
 
