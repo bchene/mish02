@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 19:23:11 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:15:08 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,16 @@ t_err_type	mish_t_error_add(t_mish *mish, t_err_type t, int en, char *d);
 t_err_type	mish_p_malloc(t_mish *mish);
 void		mish_p_free(t_mish *mish);
 t_err_type	mish_p_init(t_mish *mish, int index, char *line);
+void		mish_p_print(t_mish *mish);
 
 /* 01-06 mish->fds */
 t_err_type	mish_fds_malloc(t_mish *mish);
 void		mish_fds_close(t_mish *mish);
 void		mish_fds_free(t_mish *mish);
-void        mish_fds_print(t_mish *mish);
+void		mish_fds_print(t_mish *mish);
 
 /* 01-07 mish->pid */
+void		mish_pid_print(t_mish *mish);
 
 /* 01-08 mish->env */
 char		*mish_env_get(t_mish *mish, char *var);
@@ -55,7 +57,7 @@ int			mish_unset_set(t_mish *mish, char *var, char *value);
 /* 01-10 mish->env_unset */
 void		mish_env_unset_init(t_mish *mish, char **envp);
 void		mish_env_unset_free(t_mish *mish);
-void        mish_env_unset_print(t_mish *mish);
+void		mish_env_unset_print(t_mish *mish);
 
 /* 01-11 exit status */
 void		mish_exit_status_set(t_mish *mish, char *value);
@@ -71,7 +73,7 @@ void		t_error_add(t_error **lst, t_error *new);
 void		t_error_del(t_error *err);
 void		t_error_lst_free(t_error **err);
 t_err_type	t_error_exist(t_error *err);
-void        t_error_print(t_error *err);
+void		t_error_print(t_error *err);
 
 /*						*/
 /* 03_t_env 			*/
@@ -83,6 +85,6 @@ int			t_env_remove(t_env **env, t_env *to_remove);
 t_env		*t_env_getvar(t_env *env, char *var);
 char		*t_env_getdata(t_env *env, char *var);
 int			t_env_setstr(t_env *env, char *var, char *value);
-void        t_env_print(t_env *tenv);
+void		t_env_print(t_env *tenv);
 
 #endif

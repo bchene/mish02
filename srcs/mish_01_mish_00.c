@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 19:32:16 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:20:09 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,6 @@ void	mish_reset(t_mish *mish)
 
 void	mish_print(t_mish *mish)
 {
-	int	i;
-	//mish_pid_print(t_mish *mish);
-
 	printf("\n////////////////////////// \n");
 	printf("///   mish_print ///////// \n");
 	printf("///   error : \n");
@@ -90,15 +87,13 @@ void	mish_print(t_mish *mish)
 	ft_print_split(mish->splitline);
 	printf("///   nb = %i\n", mish->nb);
 	printf("///   process : \n");
-	i = -1;
-	while(++i < mish->nb)
-		t_process_print(mish->p);
+	mish_p_print(mish);
+	printf("///   fds : \n");
 	mish_fds_print(mish);
-
-	//mish_pid_print(mish);
-
-	//printf("///   env :\n");
-	//t_env_print(mish->env);
+	printf("///   pid = ");
+	mish_pid_print(mish);
+	printf("///   env :\n");
+	t_env_print(mish->env);
 	printf("///   unset :\n");
 	t_env_print(mish->unset);
 	printf("///   pathlist : \n");

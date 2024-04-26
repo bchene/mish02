@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:14:03 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 18:53:41 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:16:58 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ void	t_error_print(t_error *err)
 		}
 	}
 	else
-		printf("(null)");
+		printf("(null)\n");
 }

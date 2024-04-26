@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 19:29:46 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:17:34 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,18 @@ t_err_type	mish_p_init(t_mish *mish, int index, char *line)
 	process->infiles = NULL;
 	process->outfiles = NULL;
 	return (t_error_exist(mish->error));
+}
+
+void	mish_p_print(t_mish *mish)
+{
+	int	i;
+
+	if (mish && mish->nb > 0 && mish->p)
+	{
+		i = -1;
+		while(++i < mish->nb)
+			t_process_print((mish->p) + i);
+	}
+	else
+		printf("(null)\n");
 }
