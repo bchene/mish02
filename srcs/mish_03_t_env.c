@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:07:17 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 18:22:01 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 21:51:11 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ t_env	*t_env_getvar(t_env *tenv, char *var)
 		return (NULL);
 	while (env)
 	{
-		if (ft_strncmp(env->str, var, ft_strlen(var)) && 
-		ft_strncmp((env->str) + ft_strlen(var), "=", 1))
+		if (ft_strncmp(env->str, var, ft_strlen(var)) == 0 && 
+		ft_strncmp((env->str) + ft_strlen(var), "=", 1) == 0)
 			return (env);
 		env = env->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:12:47 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/25 21:02:42 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:45:18 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	first_substitution(t_mish *mish, char **line, char *var)
 				is_alphanum_underscore) + 1);
 	if (!var)
 	{
-		mish_t_error_add(mish, err_malloc, errno, "first_substitution");
+		mish_error_add(mish, err_malloc, errno, "first_substitution");
 		return; //(NULL);
 	}
 	*line = substitute_hub(mish, *line, var);

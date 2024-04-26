@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 19:37:56 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:45:45 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static t_err_type	mish_path_empty(t_mish *mish)
 {
 	mish->pathlist = malloc(sizeof(char *) * 2);
 	if (mish->pathlist == NULL)
-		return (mish_t_error_add(mish, err_malloc, errno, 
+		return (mish_error_add(mish, err_malloc, errno, 
 		"mish->pathlist == NULL"));	
 	mish->pathlist[0] = malloc(sizeof(char));
 	if (mish->pathlist[0] == NULL)
-		return (mish_t_error_add(mish, err_malloc, errno, 
+		return (mish_error_add(mish, err_malloc, errno, 
 		"mish->pathlist[0] == NULL"));		
 	mish->pathlist[0] = ft_strempty(mish->pathlist[0]);
 	if (mish->pathlist[0] == NULL)
-		return (mish_t_error_add(mish, err_malloc, errno, 
+		return (mish_error_add(mish, err_malloc, errno, 
 		"mish->pathlist[0] == NULL"));
 	mish->pathlist[1] = NULL;
 	return (0);

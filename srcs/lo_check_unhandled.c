@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:54:20 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/25 17:09:46 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:45:16 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int	mish_check_unhandled(t_mish *mish)
 			if (err)
 			{
 				err[0] = mish->line[i];
-				mish_t_error_add(mish, err_unhandled, errno, err);
+				mish_error_add(mish, err_unhandled, errno, err);
 				free(err);
 				return (err_unhandled);
 			}
 			else
-				return (mish_t_error_add(mish, err_malloc, errno,
+				return (mish_error_add(mish, err_malloc, errno,
 						"check_unhandled"));
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 18:39:36 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/25 17:09:48 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:45:07 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	dup_err_str(t_mish *mish, char *src, int n, t_err_type err)
 	int		result;
 
 	dst = ft_strndup(src, n);
-	result = mish_t_error_add(mish, err, errno, dst);
+	result = mish_error_add(mish, err, errno, dst);
 	free(dst);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 12:45:56 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/25 19:52:03 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:45:38 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ char	*substitute_0(t_mish *mish, char *src, char *var)
 	{
 		dst = dup_substituting(src, var, sub);
 		if (!dst)
-			mish_t_error_add(mish, err_malloc, errno, "substitute_0");
+			mish_error_add(mish, err_malloc, errno, "substitute_0");
 		free(sub);
 	}
 	else
-		mish_t_error_add(mish, err_malloc, errno, "substitute_0");
+		mish_error_add(mish, err_malloc, errno, "substitute_0");
 	return (dst);
 }
 
@@ -82,12 +82,12 @@ char	*substitute_exit_status(t_mish *mish, char *src, char *var)
 	{
 		dst = dup_substituting(src, var, sub);
 		if (!dst)
-			mish_t_error_add(mish, err_malloc,
+			mish_error_add(mish, err_malloc,
 					errno, "substitute_exit_status");
 		free(sub);
 	}
 	else
-		mish_t_error_add(mish, err_malloc, errno, "substitute_exit_status");
+		mish_error_add(mish, err_malloc, errno, "substitute_exit_status");
 	return (dst);
 }
 
@@ -102,10 +102,10 @@ char	*substitute_var(t_mish *mish, char *src, char *var)
 	{
 		dst = dup_substituting(src, var, sub);
 		if (!dst)
-			mish_t_error_add(mish, err_malloc, errno, "substitute_var");
+			mish_error_add(mish, err_malloc, errno, "substitute_var");
 		free(sub);
 	}
 	else
-		mish_t_error_add(mish, err_malloc, errno, "substitute_var");
+		mish_error_add(mish, err_malloc, errno, "substitute_var");
 	return (dst);
 }

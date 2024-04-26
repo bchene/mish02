@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 21:31:33 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:45:54 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_file	*t_file_new(t_mish *mish, char *path, t_tfile_type type)
 	tf = malloc(sizeof(t_file));
 	if (tf == NULL)
 	{
-		mish_t_error_add(mish, err_malloc, errno, "t_file_new");
+		mish_error_add(mish, err_malloc, errno, "t_file_new");
 		return (NULL);
 	}
 	tf->fd = -1;

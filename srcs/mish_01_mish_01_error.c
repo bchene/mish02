@@ -6,14 +6,14 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:26:04 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 19:26:41 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:45:39 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
 // si erreur de malloc dans erreur comment sortir
-t_err_type	mish_t_error_add(t_mish *mish, t_err_type t, int en, char *d)
+t_err_type	mish_error_add(t_mish *mish, t_err_type t, int en, char *d)
 {
 	t_error	*new;
 

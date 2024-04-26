@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 12:51:15 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/25 17:13:19 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:45:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_var_value(t_mish *mish, char *var)
 	{
 		sub = ft_strdup(sub);
 		if (!sub)
-			mish_t_error_add(mish, err_malloc, errno, "get_var_value");
+			mish_error_add(mish, err_malloc, errno, "get_var_value");
 	}
 	else
 		sub = ft_calloc(1, sizeof(char));
@@ -69,7 +69,7 @@ void	mish_var_dup(t_mish *mish, char **line, char *var)
 				is_alphanum_underscore) + 1);
 	if (!var)
 	{
-		mish_t_error_add(mish, err_malloc, errno, "var_dup");
+		mish_error_add(mish, err_malloc, errno, "var_dup");
 		return ;
 	}
 	*line = substitute_hub(mish, *line, var);
@@ -118,7 +118,7 @@ void	mish_remove_quotes(t_mish *mish, char **p_lines)
 			tmp = ft_strndup(&p_lines[i][1], ft_strlen(p_lines[i]) - 2);
 			if (!tmp)
 			{
-				mish_t_error_add(mish, err_malloc,
+				mish_error_add(mish, err_malloc,
 						errno, "mish_remove_quotes");
 				return ;
 			}

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 21:26:58 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:45:53 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_err_type	mish_fork_parent(t_mish *mish)
 	i = -1;
 	while (++i < mish->nb)
 		if (pipe((mish->fds)[i]) == -1)
-			mish_t_error_add(mish, err_pipe, errno, "pipe(fds[i])==-1");
+			mish_error_add(mish, err_pipe, errno, "pipe(fds[i])==-1");
 	// forking
 	i = -1;
 	p = mish->p;
@@ -65,7 +65,7 @@ t_err_type	mish_fork_parent(t_mish *mish)
 	{
 		mish->pid[i] = fork();
 		if (mish->pid[i] == -1)
-			mish_t_error_add(mish, err_fork, errno, "fork() == -1");
+			mish_error_add(mish, err_fork, errno, "fork() == -1");
 		if (mish->pid[i] == 0)
 			t_process_fork_child((mish->p) + i);
 	}
