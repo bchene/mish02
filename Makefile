@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/04/27 16:23:55 by bchene           ###   ########.fr        #
+#    Updated: 2024/04/27 16:32:28 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS = 	-Wall -Wextra -Werror -g
 HEADERS = 	-I ./includes -I ./libs/libft
 LIBS = 		./libs/libft/libft.a
 
-# lister les fichier sous forme de colone dans bash : 
+# lister les fichier sous forme de colone a partir de srcs/ : 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
 SRCS =		lo_check_syntax_error.c \
 			lo_check_unhandled.c \

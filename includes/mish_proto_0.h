@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/27 15:31:55 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/27 17:42:09 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ void		mish_pid_print(t_mish *mish);
 char		*mish_env_get(t_mish *mish, char *var);
 int			mish_env_set(t_mish *mish, char *var, char *value);
 int			mish_env_add(t_mish *mish, char *var, char *value);
+int			mish_env_remove(t_mish *mish, char *var);
 /* 01-09	mish_unset */
 char		*mish_unset_get(t_mish *mish, char *var);
 int			mish_unset_set(t_mish *mish, char *var, char *value);
+int			mish_unset_remove(t_mish *mish, char *var);
 /* 01-10	mish_env_unset */
 void		mish_env_unset_init(t_mish *mish, char **envp);
 void		mish_env_unset_free(t_mish *mish);
+int			mish_env_unset_export(t_mish *mish, char* var, char *value);
+int			mish_env_unset_unset(t_mish *mish, char* var);
 void		mish_env_unset_print(t_mish *mish);
 /* 01-11	mish_exit_status */
 void		mish_exit_status_set(t_mish *mish, int value);
