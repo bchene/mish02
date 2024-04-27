@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/04/27 14:49:49 by bchene           ###   ########.fr        #
+#    Updated: 2024/04/27 16:23:55 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,7 @@ gdb: all
 	gdb -tui $(NAME)
 
 valgrind: all
-	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes ./$(NAME)
+	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --suppressions=vsupp ./$(NAME)
 
 run: all
 	./$(NAME)

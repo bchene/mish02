@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/27 14:47:54 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/27 16:19:56 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 void	mish_prompt(t_mish *mish)
 {
 	if (mish->prompt == NULL)
-		mish_prompt_begin(mish);
+	{
+		mish_prompt_start(mish);
+		mish->prompt = ft_strempty(mish->prompt);
+		mish_prompt(mish);
+		return ;
+	}
 	else
 	{
-		add_history(mish->line);
+		if(mish->line)
+			add_history(mish->line);
 		if (mish->line)
 			free(mish->line);
 		free(mish->prompt);
@@ -28,26 +34,27 @@ void	mish_prompt(t_mish *mish)
 		mish_error_add(mish, err_malloc, errno, "mish->prompt is NULL");
 	else
 	{
-		printf("%s", mish->prompt);
 		mish->line = readline(mish->prompt);
 	}
 }
 
 void	mish_prompt_set(t_mish *mish)
 {
-	char	*session_m;
+	char	*str;
 
-	session_m = getenv("SESSION_MANAGER");
-	session_m = ft_strchr(session_m, '/');
-	session_m = ft_strndup(session_m + 1, ft_strchr(session_m, '.') - (session_m + 1));
-	if (!session_m)
+	str = mish_env_get(mish, "SESSION_MANAGER");
+	str = ft_strchr(str, '/');
+	str = ft_strndup(str + 1, ft_strchr(str, '.') - (str + 1));
+	if (!str)
 		return ;
-	mish->prompt = ft_strjoin_va("", "\001\e[1;36m\002\001\e[40m\002", getenv("LOGNAME"), 
-	"\001\e[0;35m\002\001\e[40m\002"," @", session_m, " ", 
-	"\001\e[0;34m\002\001\e[40m\002", ft_strnrchr(getenv("PWD"), 2, '/'), "/", 
-	"\001\e[0m\002 $>", NULL);
-	free(session_m);
-	return ;
+	mish->prompt = ft_strjoin_va("", 
+	"\001\e[1;36m\002", mish_env_get(mish, "LOGNAME"), 
+	"\001\e[0;35m\002", " @", 
+	str, " ", 
+	"\001\e[0;34m\002", ft_strnrchr(mish_env_get(mish, "PWD"), 2, '/'), "/", 
+	"\001\e[0m\002 $>", 
+	NULL);
+	free(str);
 }
 
 /*
@@ -57,14 +64,27 @@ static void	mish_setprompt(t_mish *mish)
 }
 */
 
-void	mish_prompt_begin(t_mish *mish)
+
+/* https://patorjk.com/software/taag/#p=display&f=Graffiti&t=minishell */
+void	mish_prompt_start(t_mish *mish)
 {
-	mish->prompt = ft_strjoin("\001\e[0;31m\002:::::::::::::::::::::>MINISHELL \n\
-\001\e[0;32m\002::::::::::::::::::>MINISHELL \n\
-\001\e[0;33m\002:::::::::::::::>MINISHELL \n\
-\001\e[0;34m\002::::::::::::>MINISHELL \n\
-\001\e[0;35m\002:::::::::>MINISHELL \n\
-\001\e[0;36m\002::::::>MINISHELL \n", \
-	mish->prompt);
+	char *str;
+
+	str = ft_strjoin_va("", \
+	"\001\e[0;32m\002        .__       .__       .__           .__  .__   \n",
+	"\001\e[0;32m\002  _____ |__| ____ |__| _____|  |__   ____ |  | |  |  \n",
+	"\001\e[0;32m\002 /     \\|  |/    \\|  |/  ___/  |  \\_/ __ \\|  | |  |  \n",
+	"\001\e[0;32m\002|  Y Y  \\  |   |  \\  |\\___ \\|   Y  \\  ___/|  |_|  |__\n",
+	"\001\e[0;32m\002|__|_|  /__|___|  /__/____  >___|  /\\___  >____/____/\n",
+	"\001\e[0;32m\002      \\/       \\/        \\/     \\/     \\/           \n",
+	"\001\e[0;32m\002                       Louis Charvet & Benjamin Chêne\n\n\n",	
+	NULL);
+	if (str)
+	{
+		printf("%s", str);
+		free(str);		
+	}
+	else
+		mish_error_add(mish, err_malloc, errno, "malloc mish_prompt_start");
 }
 

@@ -3,6 +3,7 @@
 *.a
 .vscode
 minishell
+vsupp
 
 # ignore directory named temp
 objs/
