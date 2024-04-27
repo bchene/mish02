@@ -6,21 +6,32 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 19:37:10 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/27 14:28:57 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void	mish_exit_status_set(t_mish *mish, char *value)
+void	mish_exit_status_set(t_mish *mish, int value)
 {
-	mish_unset_set(mish, "?", value);
+	char *str;
+
+	str = ft_itoa(value);
+	mish_unset_set(mish, "?", str);
+	free (str);
 }
 
-char	*mish_exit_status_get(t_mish *mish)
+int		mish_exit_status_get(t_mish *mish)
 {
-	char *exit_status;
+	char	*s;
+	int 	ret;
 
-	exit_status = mish_unset_get(mish, "?");
-	return (exit_status);
+	s = mish_unset_get(mish, "?");
+	if (s == NULL || ft_strlen(s) == 0)
+	{
+		mish_exit_status_set(mish, 0);
+		return (0);
+	}
+	ret = ft_atoi(s);
+	return (ret);
 }

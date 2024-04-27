@@ -6,39 +6,64 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:21:00 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 21:56:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/27 14:58:28 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-// const static int	g_signal;
+int	g_signal;
+
+t_err_type	mish_parse_line(t_mish *mish)
+{
+	return (t_error_exist(mish->error));
+}
+t_err_type	mish_parse_process_line(t_mish *mish)
+{
+	return (t_error_exist(mish->error));
+}
+t_err_type	mish_pipex(t_mish *mish)
+{
+	return (t_error_exist(mish->error));
+}
+
+int		mish_continue(t_mish *mish)
+{
+	if(mish_exit_status_get(mish) == 42)
+	{
+		return (0);
+	}
+	if (t_error_exist(mish->error))
+	{
+		return (0);
+	}
+	return (1);
+}
 
 int	main(int argc, char **argv, char **env)
 {
 	t_mish	mish;
-	int		exit_status;
 
-	exit_status = 0;
+	(void) argv;
 	if (argc != 1)
 		return (2); //exit status qd je fait ls -z
 	mish_init(&mish, env);
-	
-	//mish_print(&mish);
-	printf("LOGNAME=%s\n",mish_env_get(&mish, "LOGNAME"));
-	printf("NO_ENV=%s\n",mish_env_get(&mish, "NO_ENV"));
-	mish_env_add(&mish, "NO_ENV", "SET_ENV");
-	printf("NO_ENV=%s\n",mish_env_get(&mish, "NO_ENV"));
-	printf("0=%s\n",mish_unset_get(&mish, "0"));
-	printf("NO_UNUSET=%s\n",mish_unset_get(&mish, "NO_UNUSET"));
-	mish_unset_set(&mish, "NO_UNUSET", "SET_UNUSET");
-	printf("NO_UNUSET=%s\n",mish_unset_get(&mish, "NO_UNUSET"));	
-	mish_exit_status_set(&mish, "124");
-	printf("EXIT_STATUS=%s\n",mish_exit_status_get(&mish));
-
+	while (mish_continue(&mish))
+	{
+		mish_prompt(&mish);
+		mish_error_add(&mish, err_other, errno, "TEST"); // TEST 
+		if (mish_continue(&mish))
+			mish_parse_line(&mish);
+		if (mish_continue(&mish))
+			mish_parse_process_line(&mish);
+		if (mish_continue(&mish))
+			mish_pipex(&mish);
+	}
+	main_test_env(&mish); // TEST
+	g_signal = mish_exit_status_get(&mish);
 	mish_free(&mish);
-	return (exit_status);
-	(void) argv;
+	rl_clear_history();
+	return (g_signal);
 }
 
 /* 24/04/24 					*/

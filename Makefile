@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/04/26 19:53:41 by bchene           ###   ########.fr        #
+#    Updated: 2024/04/27 14:49:49 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ CFLAGS = 	-Wall -Wextra -Werror -g
 HEADERS = 	-I ./includes -I ./libs/libft
 LIBS = 		./libs/libft/libft.a
 
+# lister les fichier sous forme de colone dans bash : 
+# ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
 SRCS =		lo_check_syntax_error.c \
 			lo_check_unhandled.c \
 			lo_fill_processes.c \
@@ -45,15 +47,17 @@ SRCS =		lo_check_syntax_error.c \
 			mish_01_mish_10_env_unset.c \
 			mish_01_mish_11_exit_status.c \
 			mish_01_mish_12_pathlist.c \
-			mish_02_t_error.c \
+			mish_02_t_error_00.c \
+			mish_02_t_error_01.c \
 			mish_03_t_env.c \
+			mish_09_main_test.c \
 			mish_50_process.c \
 			mish_52_process_pipe.c \
 			mish_53_process_exec.c \
 			mish_59_pipex.c \
 			mish_60_t_file.c \
 			mish_90_ft_strjoin_va.c \
-			mish_91_ft_00.c 
+			mish_91_ft_00.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
@@ -89,7 +93,3 @@ fclean: clean
 re: clean all
 
 .PHONY: all, clean, fclean, re, libft, gdb, valgrind, run
-
-
-# lister les fichier sous forme de colone dans bash : 
-# ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'

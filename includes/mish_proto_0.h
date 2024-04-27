@@ -6,12 +6,16 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 20:46:16 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/27 14:28:50 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MISH_PROTO_0_H
 # define MISH_PROTO_0_H
+
+/*							*/
+/* 00-00	main			*/
+int			mish_continue(t_mish *mish);
 
 /*							*/
 /* 01-00	mish 			*/
@@ -23,6 +27,10 @@ void		mish_print(t_mish *mish);
 /* 01-01	mish_error */
 t_err_type	mish_error_add(t_mish *mish, t_err_type t, int en, char *d);
 /* 01-02	mish_prompt */
+void		mish_prompt(t_mish *mish);
+void		mish_prompt_set(t_mish *mish);
+void		mish_prompt_begin(t_mish *mish);
+
 /* 01-03	mish_line */
 /* 01-04	mish_splitline */
 /* 01-05	mish_p */
@@ -49,8 +57,8 @@ void		mish_env_unset_init(t_mish *mish, char **envp);
 void		mish_env_unset_free(t_mish *mish);
 void		mish_env_unset_print(t_mish *mish);
 /* 01-11	mish_exit_status */
-void		mish_exit_status_set(t_mish *mish, char *value);
-char		*mish_exit_status_get(t_mish *mish);
+void		mish_exit_status_set(t_mish *mish, int value);
+int			mish_exit_status_get(t_mish *mish);
 /* 01-12	mish_path */
 t_err_type	mish_path_set(t_mish *mish);
 
@@ -75,5 +83,9 @@ t_env		*t_env_getvar(t_env *env, char *var);
 char		*t_env_getdata(t_env *env, char *var);
 int			t_env_setstr(t_env *env, char *var, char *value);
 void		t_env_print(t_env *tenv);
+
+/*					    */
+/* 09_main_test		    */
+void	main_test_env(t_mish *mish);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 12:45:56 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/26 20:45:38 by bchene           ###   ########.fr       */
+/*   Updated: 2024/04/27 14:41:10 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*substitute_exit_status(t_mish *mish, char *src, char *var)
 
 	dst = NULL;
 	
-	sub = ft_strdup(mish_exit_status_get(mish));
+	sub = ft_itoa(mish_exit_status_get(mish));
 	//sub = ft_itoa(mish->exit_stat);
 	if (sub)
 	{
