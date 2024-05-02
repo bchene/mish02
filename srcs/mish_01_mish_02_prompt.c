@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/27 16:55:12 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/02 17:44:35 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	mish_prompt(t_mish *mish)
 {
 	if (mish->prompt == NULL)
 	{
-		mish_prompt_start(mish);
+		mish_prompt_start2(mish);
 		mish->prompt = ft_strempty(mish->prompt);
 		mish_prompt(mish);
 		return ;
@@ -41,30 +41,31 @@ void	mish_prompt(t_mish *mish)
 
 void	mish_prompt_set(t_mish *mish)
 {
-	char	*str;
+	char *str;
 
-	str = mish_env_get(mish, "SESSION_MANAGER");
-	str = ft_strchr(str, '/');
-	str = ft_strndup(str + 1, ft_strchr(str, '.') - (str + 1));
-	if (!str)
-		return ;
-	mish->prompt = ft_strjoin_va("", 
-	"\001\e[0;32m\002", mish_env_get(mish, "LOGNAME"), 
-	"\001\e[2;32m\002", " @", 
-	str, " ", 
-	"\001\e[0;32m\002", ft_strnrchr(mish_env_get(mish, "PWD"), 1, '/') + 1, "/", 
-	"\001\e[0m\002 $>", 
-	NULL);
-	free(str);
+	mish->prompt = ft_strempty(NULL);
+	if (mish->prompt && ft_strlen(mish_env_get(mish, "LOGNAME")))
+	{
+		mish->prompt = ft_strjointo(mish->prompt, "\001\e[0;32m\002");
+		mish->prompt = ft_strjointo(mish->prompt, mish_env_get(mish, "LOGNAME"));
+	}
+	if (mish->prompt && ft_strlen(mish_env_get(mish, "SESSION_MANAGER")))
+	{
+		str = mish_env_get(mish, "SESSION_MANAGER");
+		str = ft_strchr(str, '/');
+		str = ft_strndup(str + 1, ft_strchr(str, '.') - (str + 1));
+		mish->prompt = ft_strjointo(mish->prompt, "\001\e[2;32m\002 @");
+		mish->prompt = ft_strjointo(mish->prompt, str);
+		free (str);
+	}
+	if (mish->prompt && ft_strlen(mish_env_get(mish, "PWD")))
+	{
+		mish->prompt = ft_strjointo(mish->prompt, "\001\e[0;32m\002 ");
+		mish->prompt = ft_strjointo(mish->prompt, ft_strnrchr(mish_env_get(mish, "PWD"), 1, '/') + 1);
+		mish->prompt = ft_strjointo(mish->prompt, "/");
+	}
+	mish->prompt = ft_strjointo(mish->prompt, "\001\e[0m\002 $>");
 }
-
-/*
-static void	mish_setprompt(t_mish *mish)
-{
-	mish->prompt = ft_strjoin(mish->prompt, "\033[0;31m:>user");
-}
-*/
-
 
 /* https://patorjk.com/software/taag/#p=display&f=Graffiti&t=minishell */
 void	mish_prompt_start(t_mish *mish)
@@ -72,13 +73,15 @@ void	mish_prompt_start(t_mish *mish)
 	char *str;
 
 	str = ft_strjoin_va("", \
-	"\001\e[0;32m\002        .__       .__       .__           .__  .__   \n",
-	"\001\e[0;32m\002  _____ |__| ____ |__| _____|  |__   ____ |  | |  |  \n",
-	"\001\e[0;32m\002 /     \\|  |/    \\|  |/  ___/  |  \\_/ __ \\|  | |  |  \n",
-	"\001\e[0;32m\002|  Y Y  \\  |   |  \\  |\\___ \\|   Y  \\  ___/|  |_|  |__\n",
-	"\001\e[0;32m\002|__|_|  /__|___|  /__/____  >___|  /\\___  >____/____/\n",
-	"\001\e[0;32m\002      \\/        \\/        \\/     \\/     \\/           \n",
-	"\001\e[0;32m\002                       Louis Charvet & Benjamin Chêne\n\n\n",	
+	"\001\e[0;32m\002", 
+	"        .__       .__       .__           .__  .__   \n",
+	"  _____ |__| ____ |__| _____|  |__   ____ |  | |  |  \n",
+	" /     \\|  |/    \\|  |/  ___/  |  \\_/ __ \\|  | |  |  \n",
+	"|  Y Y  \\  |   |  \\  |\\___ \\|   Y  \\  ___/|  |_|  |__\n",
+	"|__|_|  /__|___|  /__/____  >___|  /\\___  >____/____/\n",
+	"      \\/        \\/        \\/     \\/     \\/           \n",
+	"\001\e[0;32m\002", 
+	"                       Louis Charvet & Benjamin Chêne\n\n\n",	
 	NULL);
 	if (str)
 	{
@@ -88,3 +91,30 @@ void	mish_prompt_start(t_mish *mish)
 	else
 		mish_error_add(mish, err_malloc, errno, "malloc mish_prompt_start");
 }
+
+void	mish_prompt_start2(t_mish *mish)
+{
+	char *str;
+
+	str = ft_strjoin_va("", \
+"\001\e[0;32m\002", \
+"              d8b          d8b          888               888 888\n", 
+"              Y8P          Y8P          888               888 888\n", 
+"                                        888               888 888\n", 
+"88888b.d88b.  888 88888b.  888 .d8888b  88888b.   .d88b.  888 888\n",  
+"888 \"888 \"88b 888 888 \"88b 888 88K      888 \"88b d8P  Y8b 888 888\n",  
+"888  888  888 888 888  888 888 \"Y8888b. 888  888 88888888 888 888\n", 
+"888  888  888 888 888  888 888      X88 888  888 Y8b.     888 888\n",  
+"888  888  888 888 888  888 888  88888P' 888  888  \"Y8888  888 888\n", 
+"\001\e[2;32m\002\n", 
+"                                   Louis Charvet & Benjamin Chêne\n\n", 
+	NULL);
+	if (str)
+	{
+		printf("%s", str);
+		free(str);		
+	}
+	else
+		mish_error_add(mish, err_malloc, errno, "malloc mish_prompt_start");
+}
+

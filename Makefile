@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/04/27 16:32:28 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/02 17:46:57 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,16 @@ valgrind: all
 	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --suppressions=vsupp ./$(NAME)
 
 run: all
+	clear
 	./$(NAME)
+
+rtest: all
+	mv $(NAME) ../test_minishell/$(NAME)
+	./../test_minishell/$(NAME)
+
+vtest: all
+	mv $(NAME) ../test_minishell/$(NAME)
+	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --suppressions=vsupp ./../test_minishell/$(NAME)
 
 clean:
 	rm -rf $(OBJS_DIR)
@@ -92,4 +101,4 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all, clean, fclean, re, libft, gdb, valgrind, run
+.PHONY: all, clean, fclean, re, libft, gdb, valgrind, run, rtest, vtest

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:29:31 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 18:32:22 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/02 19:07:59 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	ft_printf_strtab(char **str, int size, const char *sep)
 	while(i < size)
 	{
 		if (i != 0)
-			write(1, sep, ft_strlen(sep));
+			printf("%s", sep);
 		if (str[i])
-			write(1, str[i], ft_strlen(str[i]));
+			printf("%s", str[i]);
 		i++;
 	}
 }

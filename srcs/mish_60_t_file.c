@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 20:45:54 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/02 17:04:44 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	t_file_del(t_file	*tf)
 	free(tf);
 }
 
+// t_file		*t_process_add_file_line(t_mish *mish, char *line);
+/*
 t_file	*t_process_line_to_file(t_mish *mish, char *line)
 {
 	(void) mish;
@@ -66,6 +68,7 @@ t_file	*t_process_line_to_file(t_mish *mish, char *line)
 
 	return (NULL);
 }
+*/
 
 t_file	*t_process_add_file(t_process *p, char *path, t_tfile_type type)
 {

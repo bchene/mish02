@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:21:00 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/27 17:42:35 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/02 19:10:14 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ int	main(int argc, char **argv, char **env)
 		if (mish_continue(&mish))
 			mish_pipex(&mish);
 	}
-	main_test_env(&mish); // TEST
-	g_signal = mish_exit_status_get(&mish);
+	// main_test_env(&mish); 		// TEST
+	main_test_set_process(&mish); 	// TEST
+	mish.nb = mish_exit_status_get(&mish);
 	mish_free(&mish);
 	rl_clear_history();
-	return (g_signal);
+	return (mish.nb);
 }
 
 /* 24/04/24 					*/

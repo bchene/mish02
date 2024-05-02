@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:49:39 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 20:45:46 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/02 19:10:08 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	t_process_free(t_process *process)
 	t_file_free(process->outfiles);
 }
 
-char	*t_process_set_cmd(t_process *process)
+char	*t_process_cmd_get(t_process *process)
 {
 	int		i;
 	char	*str;
@@ -45,6 +45,12 @@ char	*t_process_set_cmd(t_process *process)
 	str = ft_strdup((process->av)[0]);
 	return (str);
 }
+/*
+void		t_process_t_file_set(t_process *process)
+{}
+void		t_process_arg_set(t_process *process)
+{}
+*/
 
 void	t_process_print(t_process *p)
 {
@@ -58,8 +64,9 @@ void	t_process_print(t_process *p)
 	printf("line = %s\n", p->line);
 	printf("ac = %d\n", p->ac);
 	printf("av = ");
-	ft_printf_strtab(p->av, p->ac, "\\-\\");
+	//ft_print_split(p->av);
+	ft_printf_strtab(p->av, p->ac, " ");
 	printf("\n");
 	printf("cmd = %s\n", p->cmd);
-	printf("|||| T_PROCESS\n");
+	printf("\n");
 }
