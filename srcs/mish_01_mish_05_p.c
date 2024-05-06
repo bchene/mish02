@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/02 18:57:30 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/06 14:08:53 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	mish_p_free(t_mish *mish)
 {
 	int	i;
 
-	if (mish && mish->nb > 0 && mish->p)
+	if (mish && mish->p)
 	{
 		i = -1;
 		while(++i < mish->nb)

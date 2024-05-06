@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/27 17:42:18 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/06 15:05:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,29 @@ int	mish_env_remove(t_mish *mish, char *var)
 		return (1);
 	}
 	return (0);
+}
+
+char	**mish_env_to_envp(t_mish *mish)
+{
+	int		nb;
+	int		i;
+	t_env	*tmp;
+	char	**ret;
+
+	nb = 0;
+	tmp = mish->env;
+	while (tmp)
+	{
+		nb++;
+		tmp = tmp->next;
+	}
+	ret = ft_calloc(nb + 1, sizeof(char *));
+	i = -1;
+	tmp = mish->env;
+	while (++i < nb)
+	{
+		ret[i] = tmp->str;
+		tmp = tmp->next;
+	}
+	return (ret);
 }

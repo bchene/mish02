@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 20:45:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/06 15:09:42 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,46 +32,53 @@ t_err_type	mish_create_process(t_mish *mish)
 	return (mish->error->err_no);
 }
 
-void	t_process_fork_child(t_process *p)
+void	t_process_fork_child(t_process *process)
 {
-	(void) p;
-	/*
-	int	i;
+	char	**envp;
 
-	i = p->index;
-	while (--i >= 0)
-		waitpid(ppx->pid[i], NULL, 0);
-	ppx_child_pipe(ppx, p->index);
-	if (execve(p->cmd, p->av, ppx->envp) == -1)
-		ppx_exit_error(ppx, "execve error", errno);
-	exit (EXIT_FAILURE);
-	*/
+	t_process_dup_io(process);
+	// A FAIRE : Detection cmd = fonction interne
+	if (access(process->cmd, X_OK) == 0)
+	{
+		envp = mish_env_to_envp(process->mish);
+		if (envp == NULL)
+			mish_error_add(process->mish, err_malloc, errno, "malloc envp");
+		else if (execve(process->cmd, process->av, envp) == -1)
+			mish_error_add(process->mish, err_fork, errno, "execve");
+		if (envp)
+			free (envp);
+	}
+	else
+	{
+		mish_error_add(process->mish, err_fork, errno, "access");
+		write(2, "EXECVE PROBLEME\n", 17); // TEST
+	}
+	// sortie erreur
+	mish_free(process->mish);		// FIN ERR
+	exit (EXIT_FAILURE);		// FIN ERR
 }
 
 t_err_type	mish_fork_parent(t_mish *mish)
 {
 	int			i;
-	t_process	*p;
+	t_process	*process;
 
-	// piping mish fds
-	i = -1;
-	while (++i < mish->nb)
-		if (pipe((mish->fds)[i]) == -1)
-			mish_error_add(mish, err_pipe, errno, "pipe(fds[i])==-1");
-	// forking
-	i = -1;
-	p = mish->p;
-	while (++i < mish->nb)
+	i = 0;
+	while (i < mish->nb) //&& mish_continue(mish)
 	{
+		//printf("%i\n", i);
+		process = (mish->p) + i;
+		t_process_pipe_fds(process);
 		mish->pid[i] = fork();
 		if (mish->pid[i] == -1)
 			mish_error_add(mish, err_fork, errno, "fork() == -1");
 		if (mish->pid[i] == 0)
-			t_process_fork_child((mish->p) + i);
+			t_process_fork_child(process);
+		i++;
 	}
 	mish_fds_close(mish);
-	i = mish->nb;
-	while (--i >= 0)
+	i = -1;
+	while (++i < mish->nb)
 		waitpid((mish->pid)[i], NULL, 0);
 	return (t_error_exist(mish->error));
 }

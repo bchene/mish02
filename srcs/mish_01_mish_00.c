@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/02 19:10:12 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/06 14:13:17 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ void	mish_free(t_mish *mish)
 		mish_fds_free(mish);
 	if (mish->pid)
 		free(mish->pid);
+	mish->nb = mish_exit_status_get(mish);
 	if (mish->env || mish->unset)
 		mish_env_unset_free(mish);
 	if (mish->pathlist)
 		ft_freesplit(mish->pathlist);
+	rl_clear_history();
 }
 
 void	mish_reset(t_mish *mish)

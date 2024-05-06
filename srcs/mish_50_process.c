@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:49:39 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/02 19:10:08 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/06 14:06:52 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,18 @@ char	*t_process_cmd_get(t_process *process)
 	{
 		str = ft_strjoin(path[i], (process->av)[0]);
 		if (access(str, X_OK) == 0)
+		{	
+			process->cmd = str;
 			return (str);
-//		command not found
-//		else
-//			mish_error_add(process->mish, err_access, errno, "accesspath");
+		}
 		free(str);
 		i++;
 	}
 	str = ft_strdup((process->av)[0]);
+	process->cmd = str;
 	return (str);
 }
+
 /*
 void		t_process_t_file_set(t_process *process)
 {}

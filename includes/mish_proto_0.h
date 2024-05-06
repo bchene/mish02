@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/02 18:03:23 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/06 15:06:19 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ void		mish_fds_close(t_mish *mish);
 void		mish_fds_free(t_mish *mish);
 void		mish_fds_print(t_mish *mish);
 /* 01-07	mish_pid */
+void		mish_pid_malloc(t_mish *mish);
 void		mish_pid_print(t_mish *mish);
 /* 01-08	mish_env */
 char		*mish_env_get(t_mish *mish, char *var);
 int			mish_env_set(t_mish *mish, char *var, char *value);
 int			mish_env_add(t_mish *mish, char *var, char *value);
 int			mish_env_remove(t_mish *mish, char *var);
+char        **mish_env_to_envp(t_mish *mish);
 /* 01-09	mish_unset */
 char		*mish_unset_get(t_mish *mish, char *var);
 int			mish_unset_set(t_mish *mish, char *var, char *value);
