@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/06 11:33:54 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/07 11:20:33 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	mish_fds_close(t_mish *mish)
 		if (mish->fds && (mish->fds)[i])
 			close_reset_fd(((mish->fds)[i]));
 		if (mish->fds && (mish->fds)[i] + 1)
-			close_reset_fd((mish->fds[i] + 1));
+			close_reset_fd((mish->fds[i] + 1));		
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/06 15:09:42 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/07 11:33:08 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	t_process_fork_child(t_process *process)
 {
 	char	**envp;
 
+	main_test_open_files(process); // TESTE
 	t_process_dup_io(process);
 	// A FAIRE : Detection cmd = fonction interne
 	if (access(process->cmd, X_OK) == 0)
