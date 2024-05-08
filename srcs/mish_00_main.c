@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:21:00 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/06 14:21:34 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/08 18:45:50 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_err_type	mish_parse_line(t_mish *mish)
 {
 	return (t_error_exist(mish->error));
 }
-t_err_type	mish_parse_process_line(t_mish *mish)
-{
-	return (t_error_exist(mish->error));
-}
+
 t_err_type	mish_pipex(t_mish *mish)
 {
 	return (t_error_exist(mish->error));
@@ -50,19 +47,19 @@ int	main(int argc, char **argv, char **env)
 	mish_init(&mish, env);
 	while (mish_continue(&mish))
 	{
-		mish_error_add(&mish, err_other, errno, NULL); //TEST
 		mish_prompt(&mish);
+		//mish_error_add(&mish, err_other, errno, "TEST"); // TEST 
 		if (mish_continue(&mish))
-			mish_parse_line(&mish);
+			mish_check_line(&mish);				// only check
 		if (mish_continue(&mish))
-			mish_parse_process_line(&mish);
-		if (mish_continue(&mish))
-			mish_pipex(&mish);
+			mish_parse_process_line(&mish);		// parse
+		if (mish.line && mish.line[0] && mish_continue(&mish))
+			mish_print_processes(&mish);	// print
+		//if (mish_continue(&mish))
+		//	mish_pipex(&mish);
 		//gestion des erreurs
 		//mish_reset(&mish);
 	}
-	//main_test_env(&mish); 		// TEST
-	main_test_set_process(&mish); 	// TEST
 	mish_free(&mish);
 	return (mish.nb);
 }

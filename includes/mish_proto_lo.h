@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 19:52:08 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:32:11 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,20 @@ int		handle_word(char *str, char *sep, int i);
 /* parsing */
 int		mish_parsing(t_mish *mish);
 
-/* print_free */
-void	print_process_lines_free(t_process *p, int count);
-void	print_files_free(t_file *lst);
-void	print_split_free(char **split);
-void	mish_print_processes_free(t_mish *mish);
+/* lo_print */
+void	print_process_lines(t_process *p, int count);
+void	print_files(t_file *lst);
+void	print_split(char **split);
+void	mish_print_processes(t_mish *mish);
 
 /* separate processes */
 void	process_init_line(t_process **p, char **split, int count);
 void	mish_init_p_mish(t_mish *mish);
 int		mish_separate_processes(t_mish *mish);
 
-/* split mish */
+/* t_process_split */
 int		count_words(char *str, char *sep);
-char	**mish_split(t_process *p, char *sep);
+char	**t_process_split(t_process *p, char *sep);
 
 /* substitute vars */
 int		is_there_a_var(char *str);
@@ -63,5 +63,22 @@ char	*dup_substituting(char *src, char *var, char *sub);
 char	*substitute_0(t_mish *mish, char *src, char *var);
 char	*substitute_exit_status(t_mish *mish, char *src, char *var);
 char	*substitute_var(t_mish *mish, char *src, char *var);
+
+/* lo_set_processes */
+t_tfile_type	t_file_line_get_type(char *line);
+char			*t_file_line_get_path(char *line);
+void			t_process_t_file_set(t_process *p, char **io_files);
+void			t_process_arg_set(t_process *p, char **args);
+void			t_process_set(t_process *p);
+
+/* lo_strtab_if */
+// int  strtab_count_if(char **split, t_tfile_type f(char *), int b);
+// int  strtab_set_if(char **dst, char **src, t_tfile_type f(char *), int b);
+char    **strtab_dup_if(char **src, t_tfile_type f(char *), int b);
+
+/* lo_mish_parse_line.c */
+t_err_type  mish_first_substitution(t_mish *mish);
+t_err_type  mish_check_line(t_mish *mish);
+t_err_type  mish_parse_process_line(t_mish *mish);
 
 #endif

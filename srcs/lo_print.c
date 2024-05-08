@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lo_print_free.c                                    :+:      :+:    :+:   */
+/*   lo_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 17:12:47 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/26 20:45:18 by bchene           ###   ########.fr       */
+/*   Created: 2024/05/07 14:31:35 by locharve          #+#    #+#             */
+/*   Updated: 2024/05/07 14:31:36 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void	print_process_lines_free(t_process *p, int count)
+void	print_process_lines(t_process *p, int count)
 {
 	int	i;
 
@@ -22,28 +22,34 @@ void	print_process_lines_free(t_process *p, int count)
 		if (p[i].line)
 		{
 			printf("p->line:\t%s\n", p[i].line);
-			free(p[i].line);
+			//free(p[i].line);
+			//p[i].line = NULL;
 		}
 		else
 			printf("error\n");
 		i++;
 	}
-	free(p);
+	//free(p);
+	//p = NULL;
 	return ;
 }
 
-void	print_files_free(t_file *lst)
+void	print_files(t_file *lst)
 {
 	if (lst)
 	{
-		printf("line = %s\n", lst->line);
-		free(lst->line); ////////
-		print_files_free(lst->next);
-		free(lst); //////////////
+		//if (lst->line)
+		//	printf("line = %s\n", lst->line);
+		printf("PRINT\ttype = %d\tpath = %s\n", lst->type, lst->path); ///
+		//free(lst->line); ////////
+		//lst->line = NULL;
+		print_files(lst->next);
+		//free(lst); //////////////
+		//lst = NULL;
 	}
 }
 
-void	print_split_free(char **split)
+void	print_split(char **split)
 {
 	int	i;
 
@@ -51,13 +57,15 @@ void	print_split_free(char **split)
 	while (split[i])
 	{
 		printf("\t%s\n", split[i]);
-		free(split[i]); /////////
+		//free(split[i]); /////////
+		//split[i] = NULL;
 		i++;
 	}
-	free(split);
+	//free(split);
+	//split = NULL;
 }
 
-void	mish_print_processes_free(t_mish *mish)
+void	mish_print_processes(t_mish *mish)
 {
 	int			i;
 
@@ -68,16 +76,18 @@ void	mish_print_processes_free(t_mish *mish)
 		printf("line = %s\n", mish->p[i].line);
 		printf("ac = %d\n", mish->p[i].ac);
 		printf("av =");
-		print_split_free(mish->p[i].av);
+		print_split(mish->p[i].av);
 		printf("---------- INFILES\n");
-		print_files_free(mish->p[i].infiles);
+		print_files(mish->p[i].infiles);
 		printf("---------- OUTFILES\n");
-		print_files_free(mish->p[i].outfiles);
+		print_files(mish->p[i].outfiles);
 
-		free(mish->p[i].line);
+		//free(mish->p[i].line);
+		//mish->p[i].line = NULL;
 		i++;
 	}
-	free(mish->p);
+	//free(mish->p);
+	//mish->p = NULL;
 }
 /*
 void	first_substitution(t_mish *mish, char **line, char *var)

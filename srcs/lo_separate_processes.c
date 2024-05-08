@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:12:20 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 17:12:23 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/06 17:14:36 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,26 @@ void	mish_init_p_mish(t_mish *mish)
 
 int	mish_separate_processes(t_mish *mish)
 {
-	char	**p_lines;
-	int		count;
-	
-	p_lines = NULL;
-//	if (!mish_check_syntax_error(mish) && !mish_check_unhandled(mish)
-//			&& !mish_check_open_quotes(mish))
-//	{
-		count = char_count(mish->line, '|') + 1;
-		mish->p = ft_calloc(count, sizeof(*(mish->p))); // malloc
-		if (mish->p)
+	int	i;
+
+	mish->nb = char_count(mish->line, '|') + 1;
+	printf("nb = %d\n", mish->nb); /////////
+	if (!mish_p_malloc(mish))
+	{
+		mish->splitline = ft_split(mish->line, '|'); // malloc
+		if (mish->splitline)
 		{
-			p_lines = ft_split(mish->line, '|'); // malloc
-			if (p_lines)
+			i = 0;
+			while (i < mish->nb)
 			{
-				mish->nb = count;
-				process_init_line(&mish->p, p_lines, count);
-				mish_init_p_mish(mish);
-				free(p_lines);
+				printf("splitline %d : %s\n", i, mish->splitline[i]); /////
+				if (mish_p_init(mish, i, mish->splitline[i]))
+					break ; ////////
+				i++;
 			}
+			//process_init_line(&mish->p, mish->splitline, mish->nb);
+			//mish_init_p_mish(mish);
 		}
-		else
-			return (0);
-//	}
-	return (1);
+	}
+	return (t_error_exist(mish->error)); // erreur de malloc ?
 }

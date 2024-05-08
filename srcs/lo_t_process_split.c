@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lo_split_mish.c                                    :+:      :+:    :+:   */
+/*   lo_t_process_split.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 16:35:45 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/25 17:12:33 by bchene           ###   ########.fr       */
+/*   Created: 2024/05/03 14:28:20 by locharve          #+#    #+#             */
+/*   Updated: 2024/05/03 14:28:24 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	*from_str_to_strs(char *str, int *i, char *sep)
 	return (dst);
 }
 
-char	**mish_split(t_process *p, char *sep)
+char	**t_process_split(t_process *p, char *sep)
 {
 	char	**dst;
 	int		count;

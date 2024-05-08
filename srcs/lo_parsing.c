@@ -6,12 +6,12 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:12:06 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 17:12:10 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/06 16:34:16 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-
+/*
 int	mish_parsing(t_mish *mish)
 {
 	int	v;
@@ -28,7 +28,7 @@ int	mish_parsing(t_mish *mish)
 	else
 		return (0);
 }
-
+*/
 /*
 int		str_isopenquote(char *)
 

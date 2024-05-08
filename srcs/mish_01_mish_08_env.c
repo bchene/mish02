@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/06 15:05:25 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/08 18:23:59 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,3 +77,31 @@ char	**mish_env_to_envp(t_mish *mish)
 	}
 	return (ret);
 }
+
+/*
+int	mish_env_change_value(t_mish *mish, t_env *env_or_u, char *var, char *value)
+{
+	t_env	*to_change;
+	char	*str;
+	size_t	len_var;
+
+	to_change = t_env_getvar(env_or_u, var);
+	if (to_change)
+	{
+		len_var = ft_strlen(var);
+		str = ft_calloc(len_var + 1 + ft_strlen(value) + 1, sizeof(char));
+		if (str)
+		{
+			ft_strcpy(str, var);
+			str[len_var] = '=';
+			ft_strcpy(&str[len_var + 1], value);
+			free(to_change->str);
+			to_change->str = str;
+		}
+		else
+			return (mish_error_add(mish, err_malloc,
+					errno, "mish_env_change_value"));
+	}
+	return (0);
+}
+*/
