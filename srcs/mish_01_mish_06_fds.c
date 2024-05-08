@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/07 11:20:33 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/07 13:42:55 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_err_type	mish_fds_malloc(t_mish *mish)
 		(mish->fds)[i][0] = -1;
 		(mish->fds)[i][1] = -1;
 	}
-	return (mish->error->type);
+	return (0);
 }
 
 void	mish_fds_close(t_mish *mish)

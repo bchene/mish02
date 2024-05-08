@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/06 14:08:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:26:05 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ t_err_type	mish_p_malloc(t_mish *mish)
 {
 	// gerer erreur vide
 	if (mish == NULL && mish->nb < 1)
-		return (t_error_exist(mish->error));
+		return (-1);
 	mish->p = ft_calloc(mish->nb, sizeof(t_process));
 	if (mish->p == NULL)
+	{
 		mish_error_add(mish, err_malloc, errno, "mish->p == NULL");
-	return (t_error_exist(mish->error));
+		return (t_error_exist(mish->error));
+	}
+	return (0);
 }
 
 void	mish_p_free(t_mish *mish)
@@ -54,7 +57,7 @@ t_err_type	mish_p_init(t_mish *mish, int index, char *line)
 	process->cmd = NULL;
 	process->infiles = NULL;
 	process->outfiles = NULL;
-	return (t_error_exist(mish->error));
+	return (0);
 }
 
 void	mish_p_print(t_mish *mish)

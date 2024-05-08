@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 20:45:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:26:12 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ t_err_type	mish_path_set(t_mish *mish)
 	{
 		mish_path_empty(mish);
 		free(pathstr);
-		return (mish->error->type);
+		return (0);
 	}
 	i = 0;
 	while (mish->pathlist[(++i)])
 		mish->pathlist[i] = ft_strjointo(mish->pathlist[i], "/");
 	mish->pathlist[0] = ft_strempty(mish->pathlist[0]);
 	free(pathstr);
-	return (err_none);
+	return (0);
 }

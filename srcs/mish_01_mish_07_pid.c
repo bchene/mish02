@@ -6,20 +6,21 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/06 12:05:33 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:26:00 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void	mish_pid_malloc(t_mish *mish)
+t_err_type	mish_pid_malloc(t_mish *mish)
 {
 	if (mish->nb > 0)
 	{
 		mish->pid = ft_calloc(mish->nb, sizeof(int));
 		if (mish->pid == NULL)
-			mish_error_add(mish, err_malloc, errno, "pid malloc");
+			return (mish_error_add(mish, err_malloc, errno, "pid malloc"));
 	}
+	return (0);
 }
 
 void	mish_pid_print(t_mish *mish)

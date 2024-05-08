@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/07 11:31:42 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:25:48 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		mish_fds_close(t_mish *mish);
 void		mish_fds_free(t_mish *mish);
 void		mish_fds_print(t_mish *mish);
 /* 01-07	mish_pid */
-void		mish_pid_malloc(t_mish *mish);
+t_err_type	mish_pid_malloc(t_mish *mish);
 void		mish_pid_print(t_mish *mish);
 /* 01-08	mish_env */
 char		*mish_env_get(t_mish *mish, char *var);
@@ -95,12 +95,6 @@ void		t_env_print(t_env *tenv);
 /* 09_main_test		    */
 void		main_test_env(t_mish *mish);
 void		main_test_set_process(t_mish *mish);
-
-void	main_test_open_files(t_process *p);
-
-int		t_process_heredoc(t_process *process);
-void	t_process_open_infiles(t_process *p);
-void	t_process_open_outfiles(t_process *p);
-void	t_process_open_iofiles(t_process *process);
+void		main_test_open_files(t_process *p);
 
 #endif

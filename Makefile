@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/05/07 10:34:11 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/08 17:55:25 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,10 +52,13 @@ SRCS =		lo_check_syntax_error.c \
 			mish_03_t_env.c \
 			mish_09_main_test.c \
 			mish_50_process.c \
+			mish_51_process_iofiles.c \
 			mish_52_process_pipe.c \
 			mish_53_process_exec.c \
-			mish_59_pipex.c \
 			mish_60_t_file.c \
+			mish_61_p_files_open.c \
+			mish_62_p_files_close.c \
+			mish_63_p_files_heredoc.c \
 			mish_90_ft_strjoin_va.c \
 			mish_91_ft_00.c
 
@@ -77,7 +80,7 @@ gdb: all
 	gdb -tui $(NAME)
 
 valgrind: all
-	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --suppressions=vsupp ./$(NAME)
+	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --track-fds=yes --suppressions=vsupp ./$(NAME)
 
 run: all
 	clear
