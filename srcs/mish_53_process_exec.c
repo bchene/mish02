@@ -6,12 +6,13 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/08 16:57:54 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 14:01:55 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
+// INUTILE OU A REVOIR POUR LANCEMENT EXECUTION
 t_err_type	mish_start_process(t_mish *mish)
 {
 	int	i;

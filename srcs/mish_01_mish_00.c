@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/06 14:13:17 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 15:37:15 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,25 @@ void	mish_free(t_mish *mish)
 
 void	mish_reset(t_mish *mish)
 {
-	if (mish->error->data)
-		free(mish->error->data);
-	mish->error->type = 0;
-	if (mish->line)
-		free(mish->line);
+	// gerrer les erreur pour les vider
+	// if (mish->error->data)
+	// 	free(mish->error->data);
+	// mish->error->type = 0;
+	// if (mish->line)
+	// 	free(mish->line);
 	if (mish->splitline)
 		ft_freesplit(mish->splitline);
 	mish->nb = 0;
 	if (mish->p)
 		mish_p_free(mish);
-	if (mish->fds)
-		free(mish->fds);
+	if (mish->fds)	
+		mish_fds_free(mish);
 	if (mish->pid)
+	{
 		free(mish->pid);
-	//ft_freesplit(mish->pathlist);
+		mish->pid = NULL;
+	}
+	ft_freesplit(mish->pathlist);
 }
 
 void	mish_print(t_mish *mish)

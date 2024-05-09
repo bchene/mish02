@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:49:39 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/08 17:54:19 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 16:08:34 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	t_process_print(t_process *p)
 	//ft_print_split(p->av);
 	ft_printf_strtab(p->av, p->ac, " ");
 	printf("\n");
+	t_process_iofile_print(p);
 	printf("cmd = %s\n", p->cmd);
 	printf("\n");
 }

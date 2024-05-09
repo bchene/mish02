@@ -6,11 +6,18 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:29:31 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/02 19:07:59 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 15:32:51 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
+
+void	ft_strfree(char **str)
+{
+	if (*str)
+		free(*str);
+	*str = NULL;
+}
 
 /*  */
 char	*ft_strnrchr(char *str, int n, char c)
@@ -89,6 +96,7 @@ size_t	ft_strlen_while(char *str, int f(char))
 	return (i);
 }
 
+// on peut utiliser ft_getnbsplit car utiliser pour le split
 int		char_count(char *str, char c)
 {
 	int	count;

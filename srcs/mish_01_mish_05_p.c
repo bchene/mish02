@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/07 14:26:05 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 16:35:11 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,27 @@ t_err_type	mish_p_init(t_mish *mish, int index, char *line)
 	process->cmd = NULL;
 	process->infiles = NULL;
 	process->outfiles = NULL;
+	return (0);
+}
+
+t_err_type	mish_p_parse(t_mish *mish)
+{
+	int	i;
+
+	i = -1;
+	while (++i < mish->nb)
+	{
+		if (mish_p_init(mish, i, mish->splitline[i]))
+			return (t_error_exist(mish->error));
+		// pas de gestion d erreur? rempli iofiles ac et av
+		t_process_set((mish->p) + i);
+		// main_test_open_files((mish->p) + i); //TEST
+		t_process_cmd_get((mish->p) + i); // A METRE dans init p apres traitement de ligne
+		t_process_open_iofiles((mish->p) + i);
+	}
+	// METTRE DANS mish_exec
+	// if (mish_fork_parent(mish))
+	// 	return (t_error_exist(mish->error));
 	return (0);
 }
 

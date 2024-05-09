@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/07 14:26:00 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 16:12:31 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	mish_pid_print(t_mish *mish)
 
 	if (mish && mish->pid)
 	{
-		printf("{");
+		printf("(");
 		i = -1;
 		while (++i < mish->nb)
 		{
 			printf("%i ", (mish->pid)[i]);
 			if (i == mish->nb - 1)
-				printf("}\n");
+				printf(")\n");
 			else
 				printf(",");
 		}

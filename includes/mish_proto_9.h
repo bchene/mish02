@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 19:32:28 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 15:34:34 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*ft_strjoin_va(char *str, ...);
 /* 91_ft utils */
 /* ft a trier / renommer? / transfert vers libft? */
 /* ajouter entete pour description */
+void	ft_strfree(char **str);
 char	*ft_strnrchr(char *str, int n, char c);
 char	*ft_strempty(char *str);
 void	ft_print_split(char **pathlist);

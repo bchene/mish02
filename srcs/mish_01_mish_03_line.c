@@ -6,9 +6,30 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/26 19:28:04 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 14:15:39 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
+t_err_type	mish_line_parse(t_mish *mish)
+{
+	if(mish_check_line(mish))
+		return (t_error_exist(mish->error));
+	// SPLIT ? prend t il en compte les | dans les '' et "" ?
+	// ajouter function isinquote dans le ft_getnbsplit et plit
+	// mish->nb = ft_getnbsplit(mish->line, '|');
+	mish->nb = char_count(mish->line, '|') + 1;
+	mish->splitline = ft_split(mish->line, '|');
+	if (mish->splitline == NULL)
+		return (mish_error_add(mish, err_malloc, errno, "splitline == NULL"));
+	if (mish_path_set(mish))
+		return (t_error_exist(mish->error));
+	if (mish_fds_malloc(mish))
+		return (t_error_exist(mish->error));
+	if (mish_pid_malloc(mish))
+		return (t_error_exist(mish->error));
+	if (mish_p_malloc(mish))
+		return (t_error_exist(mish->error));
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/08 18:44:24 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 16:27:05 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,29 @@ int	t_process_iofile_get(t_process *process, int inorout)
 	return(tf->fd);
 }
 
+void	t_process_iofile_print(t_process *process)
+{
+	t_file *tf;
+
+	tf = process->infiles;
+	printf("infiles = ");
+	while(tf)
+	{
+		printf("(\"%s\", %i) ",tf->path, tf->type );
+		tf = tf->next;
+	}
+	printf("\n");
+	tf = process->outfiles;
+	printf("outfiles = ");
+	while(tf)
+	{
+		printf("(\"%s\", %i) ",tf->path, tf->type );
+		tf = tf->next;
+	}
+	printf("\n");
+}
+
+
 t_file	*t_process_line_to_file(t_process *p, char *line)
 {
 	t_file			*file;
@@ -92,7 +115,7 @@ t_file	*t_process_add_file(t_process *p, char *path, t_tfile_type type)
 	t_file	*new;
 	t_file	*current;
 
-	printf("path = %s\tftype = %d\n", path, type); /////
+	// printf("path = %s\tftype = %d\n", path, type); /////
 	if (type == tf_ifile_rdonly || type == tf_ifile_heredoc)
 		current = p->infiles;
 	else if (type != tf_none)

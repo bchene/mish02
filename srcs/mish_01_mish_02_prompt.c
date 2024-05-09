@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/02 17:44:35 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/09 15:33:41 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	mish_prompt(t_mish *mish)
 		if (mish->line)
 		{
 			add_history(mish->line);
-			free(mish->line);
+			if (mish->line)
+				ft_strfree(&(mish->line));
 		}
 		free(mish->prompt);
 		mish_prompt_set(mish);
