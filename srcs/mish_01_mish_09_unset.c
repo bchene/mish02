@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/27 17:42:23 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/10 15:23:27 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,19 @@ int	mish_unset_remove(t_mish *mish, char *var)
 	}
 	return (0);
 }
+
+/*
+int	is_valid_var_name(char *str)
+{
+	int	i;
+
+	if (str && !ft_isdigit(str[0]))
+	{
+		i = 1;
+		while (str[i] && is_alphanum_underscore(str[i]))
+			i++;
+		return (i);
+	}
+	return (0);
+}
+*/

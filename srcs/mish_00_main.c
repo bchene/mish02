@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:21:00 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/09 16:28:00 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/10 15:12:32 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,16 @@ int	main(int argc, char **argv, char **env)
 		// new BEN
 		if (mish_continue(&mish))
 			mish_line_parse(&mish);				// check>split>feed mish
-		// old LOUIS
-		// if (mish_continue(&mish))
-		//	mish_check_line(&mish);				// only check
 		
 		// new BEN
 		if (mish_continue(&mish))
 			mish_p_parse(&mish);				// parse>feed process
-		// old LOUIS
-		// if (mish_continue(&mish))
-		// 	mish_parse_process_line(&mish);		// parse
-		
-		// if (mish_continue(&mish))
-		// 	mish_exec(&mish);
 		
 		// mish_print(&mish);
 
 		if (mish_fork_parent(&mish))
 			return (t_error_exist(mish.error));
-		// old LOUIS
-		// if (mish.line && mish.line[0] && mish_continue(&mish))
-		// 	mish_print_processes(&mish);	// print
-		
-		//if (mish_continue(&mish))
-		//	mish_pipex(&mish);
+
 		//gestion des erreurs
 		mish_reset(&mish);
 	}

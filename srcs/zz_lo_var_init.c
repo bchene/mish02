@@ -3,28 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lo_var_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:34:19 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/08 16:45:11 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:23:45 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-int	is_valid_var_name(char *str)
-{
-	int	i;
-
-	if (str && !ft_isdigit(str[0]))
-	{
-		i = 1;
-		while (str[i] && is_alphanum_underscore(str[i]))
-			i++;
-		return (i);
-	}
-	return (0);
-}
 
 int	is_var_init(char *str)
 {
@@ -36,6 +23,8 @@ int	is_var_init(char *str)
 	else
 		return (0);
 }
+
+
 
 t_err_type	t_process_var_init_unset(t_process *p)
 {
@@ -66,11 +55,11 @@ t_err_type	t_process_var_init_unset(t_process *p)
 			value = ft_strdup(&p->av[0][eq_index]);
 			if (value)
 			{
-				mish_unset_set(mish, var, value);
+				mish_unset_set(p->mish, var, value);
 				free(value);
 			}
 			free(var);
 		}
 	}
-	return (t_error_exist(mish->error));
+	return (t_error_exist(p->mish->error));
 }

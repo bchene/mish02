@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_mish_check_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:00 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/07 14:41:12 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:03:35 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_err_type  mish_check_line(t_mish *mish)
 		return (t_error_exist(mish->error));
 }
 
+/*
 t_err_type	mish_parse_process_line(t_mish *mish)
 {
 	int	i;
@@ -53,3 +54,4 @@ t_err_type	mish_parse_process_line(t_mish *mish)
 	}
 	return (t_error_exist(mish->error));
 }
+*/

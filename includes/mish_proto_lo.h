@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/07 14:32:11 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:26:08 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		mish_check_unhandled(t_mish *mish);
 
 /* fill_processes */
 void	file_add_back(t_file **lst, t_file *new);
-int		mish_fill_processes(t_mish *mish);
 
 /* handle word */
 int		handle_quotes(char *str, int i, char q);
@@ -33,17 +32,6 @@ int		handle_word(char *str, char *sep, int i);
 
 /* parsing */
 int		mish_parsing(t_mish *mish);
-
-/* lo_print */
-void	print_process_lines(t_process *p, int count);
-void	print_files(t_file *lst);
-void	print_split(char **split);
-void	mish_print_processes(t_mish *mish);
-
-/* separate processes */
-void	process_init_line(t_process **p, char **split, int count);
-void	mish_init_p_mish(t_mish *mish);
-int		mish_separate_processes(t_mish *mish);
 
 /* t_process_split */
 int		count_words(char *str, char *sep);
@@ -79,6 +67,23 @@ char    **strtab_dup_if(char **src, t_tfile_type f(char *), int b);
 /* lo_mish_parse_line.c */
 t_err_type  mish_first_substitution(t_mish *mish);
 t_err_type  mish_check_line(t_mish *mish);
-t_err_type  mish_parse_process_line(t_mish *mish);
+// t_err_type  mish_parse_process_line(t_mish *mish);
+
+//////////////////////////
+/*			zz			*/
+
+/* fill process */
+// int		mish_fill_processes(t_mish *mish);
+
+/* separate processes */
+// void	process_init_line(t_process **p, char **split, int count);
+// void	mish_init_p_mish(t_mish *mish);
+// int		mish_separate_processes(t_mish *mish);
+
+/* lo_print */
+// void	print_process_lines(t_process *p, int count);
+// void	print_files(t_file *lst);
+// void	print_split(char **split);
+// void	mish_print_processes(t_mish *mish);
 
 #endif
