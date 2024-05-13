@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_set_processes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:54:13 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/07 14:28:05 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:21:02 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,17 @@ void	t_process_set(t_process *p)
 		if (io_files)
 		{
 			t_process_t_file_set(p, io_files);
-			//free(io_files); ////
-		} // else mish error add
+			//ft_freesplit(io_files);
+		}
+		else
+			mish_error_add(p->mish, err_malloc, errno, "t_process_set malloc io_files");
 		args = strtab_dup_if(split, t_file_line_get_type, 0);
 		if (args)
-		{
 			t_process_arg_set(p, args);
-			//free(args);
-		} // else mish error add
+		else
+			mish_error_add(p->mish, err_malloc, errno, "t_process_set malloc args");
 		free(split);
 	}
+	else
+		mish_error_add(p->mish, err_malloc, errno, "t_process_set malloc split");
 }

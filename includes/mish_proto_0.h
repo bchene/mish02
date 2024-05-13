@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/09 15:08:36 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/13 14:31:13 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char        **mish_env_to_envp(t_mish *mish);
 char		*mish_unset_get(t_mish *mish, char *var);
 int			mish_unset_set(t_mish *mish, char *var, char *value);
 int			mish_unset_remove(t_mish *mish, char *var);
+int         is_valid_var_name(char *str);
+
 /* 01-10	mish_env_unset */
 void		mish_env_unset_init(t_mish *mish, char **envp);
 void		mish_env_unset_free(t_mish *mish);

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/08 17:54:34 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/13 19:11:47 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ void	t_process_open_infiles(t_process *p)
 		{
 			
 			tfile->fd = open(tfile->path, O_RDONLY);
-			//printf("open %s = %i\n", tfile->path, tfile->fd); //TEST
 			if (tfile->fd == -1)
-				mish_error_add(p->mish, err_fd_open, errno, tfile->path);
+				t_process_iofiles_error(p, errno, tfile->path);
 			else if (tfile->next)
 				close_reset_fd(&(tfile->fd));
 		}
@@ -48,7 +47,7 @@ void	t_process_open_outfiles(t_process *p)
 		{
 			tfile->fd = open(tfile->path, O_RDWR | O_CREAT | O_TRUNC, 0644); // > 
 			if (tfile->fd == -1)
-				mish_error_add(p->mish, err_fd_open, errno, tfile->path);
+				t_process_iofiles_error(p, errno, tfile->path);
 			else if (tfile->next)
 				close_reset_fd(&(tfile->fd));
 		}
@@ -56,7 +55,7 @@ void	t_process_open_outfiles(t_process *p)
 		{
 			tfile->fd = open(tfile->path, O_RDWR | O_CREAT | O_APPEND, 0644); // >>  
 			if (tfile->fd == -1)
-				mish_error_add(p->mish, err_fd_open, errno, tfile->path);
+				t_process_iofiles_error(p, errno, tfile->path);
 			else if (tfile->next)
 				close_reset_fd(&(tfile->fd));
 		}

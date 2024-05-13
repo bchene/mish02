@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/09 16:06:51 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/13 16:50:26 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 /*						*/
 /* 50_process			*/
 void		t_process_free(t_process *process);
-char		*t_process_cmd_get(t_process *process);
 //void		t_process_t_file_set(t_process *process);
 //void		t_process_arg_set(t_process *process);
 void		t_process_print(t_process *p);
@@ -31,15 +30,22 @@ void		t_file_add_back_rec(t_file **lst, t_file *new);
 t_file      *t_process_add_file(t_process *p, char *path, t_tfile_type type);
 
 /*						*/
-/* 52_process_pipe		*/
-void		close_reset_fd(int *fd);
-t_err_type	t_process_pipe_fds(t_process *process);
-t_err_type	t_process_dup_io(t_process *p);
+/* 52_process_cmd	*/
+char		*t_process_cmd_get(t_process *process);
+int			t_process_cmd_isempty(t_process *process);
+int			t_process_cmd_isbuiltin(t_process *process);
 
 /*						*/
 /* 53_process_exec		*/
-t_err_type	mish_start_process(t_mish *mish);
 t_err_type	mish_fork_parent(t_mish *mish);
 t_err_type	t_process_fork_child(t_process *p);
+// t_err_type	mish_start_process(t_mish *mish);
+
+
+/*						*/
+/* 54_process_pipe		*/
+void		close_reset_fd(int *fd);
+t_err_type	t_process_pipe_fds(t_process *process);
+t_err_type	t_process_dup_io(t_process *p);
 
 #endif

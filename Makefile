@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/05/10 15:25:27 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/13 17:58:31 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,14 +53,21 @@ SRCS =		lo_check_syntax_error.c \
 			mish_09_main_test.c \
 			mish_50_process.c \
 			mish_51_process_iofiles.c \
-			mish_52_process_pipe.c \
+			mish_52_process_cmd.c \
 			mish_53_process_exec.c \
+			mish_54_process_pipe.c \
 			mish_60_t_file.c \
 			mish_61_p_files_open.c \
 			mish_62_p_files_close.c \
 			mish_63_p_files_heredoc.c \
+			mish_70_builtin.c \
 			mish_90_ft_strjoin_va.c \
-			mish_91_ft_00.c
+			mish_91_ft_00.c \
+			zz_lo_fill_processes.c \
+			zz_lo_parsing.c \
+			zz_lo_print.c \
+			zz_lo_separate_processes.c \
+			zz_lo_var_init.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
@@ -80,6 +87,7 @@ gdb: all
 	gdb -tui $(NAME)
 
 valgrind: all
+	clear
 	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --track-fds=yes --suppressions=vsupp ./$(NAME)
 
 run: all

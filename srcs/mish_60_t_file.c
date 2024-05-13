@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/08 18:41:16 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/13 19:30:24 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,22 @@ void	t_file_del(t_file	*tf)
 		if(tf->path)
 			free(tf->path);
 	free(tf);
+}
+
+void	t_process_iofiles_error(t_process *p, int en, char *path)
+{
+	if (p->av && (p->av)[0])
+	{
+		if(p->av)
+			p->av = ft_freesplit(p->av);
+		p->av = ft_split("empty_function",' ');
+		p->ac = 1;
+		if(p->cmd)
+		{
+			free(p->cmd);
+			p->cmd = NULL;
+		}
+	}
+	fprintf(stderr, "minishell: %s: %s\n", path, strerror(en));
+	//ajouter ... dev/null en sortie
 }

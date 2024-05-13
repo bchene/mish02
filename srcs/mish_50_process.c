@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:49:39 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/09 16:08:34 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/13 16:55:48 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,11 @@ void	t_process_free(t_process *process)
 {
 	if (process == NULL)
 		return ;
-	ft_freesplit(process->av);
+	process->av = ft_freesplit(process->av);
 	if (process->cmd)
 		free(process->cmd);
 	t_file_free(process->infiles);
 	t_file_free(process->outfiles);
-}
-
-char	*t_process_cmd_get(t_process *process)
-{
-	int		i;
-	char	*str;
-	char	**path;
-
-	path = (process->mish)->pathlist;
-	i = 0;
-	while (path && path[i])
-	{
-		str = ft_strjoin(path[i], (process->av)[0]);
-		if (access(str, X_OK) == 0)
-		{	
-			process->cmd = str;
-			return (str);
-		}
-		free(str);
-		i++;
-	}
-	str = ft_strdup((process->av)[0]);
-	process->cmd = str;
-	return (str);
 }
 
 /*

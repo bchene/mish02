@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/07 13:42:55 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:27:57 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void	mish_fds_free(t_mish *mish)
 		if (mish && mish->fds && (mish->fds)[i])
 			free((mish->fds)[i]);
 	if (mish && mish->fds )
+	{
 		free(mish->fds);
+		mish->fds = NULL;
+	}
 }
 
 void	mish_fds_print(t_mish *mish)

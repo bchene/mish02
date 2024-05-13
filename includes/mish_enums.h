@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:10:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/08 18:36:16 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/13 13:54:08 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ typedef enum	e_err_type
 	err_invalid_option, // a l'execution ? // 15
 	err_access,
 	err_other,
-	err_unhandled
+	err_unhandled,
+	err_exit
 }	t_err_type;
 
 typedef enum	e_tfile_type

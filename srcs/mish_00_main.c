@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:21:00 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/10 15:12:32 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/13 19:23:43 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,16 @@ int	main(int argc, char **argv, char **env)
 	while (mish_continue(&mish))
 	{
 		mish_prompt(&mish);
-		//mish_error_add(&mish, err_other, errno, "TEST"); // TEST 
-		
-		// new BEN
-		if (mish_continue(&mish))
+		if (mish_continue(&mish) && mish.line && mish.line[0])
 			mish_line_parse(&mish);				// check>split>feed mish
-		
-		// new BEN
-		if (mish_continue(&mish))
-			mish_p_parse(&mish);				// parse>feed process
-		
-		// mish_print(&mish);
-
-		if (mish_fork_parent(&mish))
-			return (t_error_exist(mish.error));
-
+		if (mish_continue(&mish) && mish.line && mish.line[0])
+			mish_p_parse(&mish);				// parse>feed process	
+		// mish_print(&mish);					// TEST
+		if (mish_continue(&mish) && mish.line && mish.line[0])
+			mish_fork_parent(&mish);
 		//gestion des erreurs
-		mish_reset(&mish);
+		if (mish.line && mish.line[0])
+			mish_reset(&mish);
 	}
 	mish_free(&mish);
 	return (mish.nb);
