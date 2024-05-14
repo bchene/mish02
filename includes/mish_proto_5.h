@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 10:50:04 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 13:08:14 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_file		*t_process_add_file(t_process *p, char *path, t_tfile_type type);
 /*						*/
 /* 52_process_cmd	*/
 char		*t_process_cmd_get(t_process *process);
+void        t_process_cmd_setempty(t_process *process);
 int			t_process_cmd_isempty(t_process *process);
 int			t_process_cmd_isbuiltin(t_process *process);
 

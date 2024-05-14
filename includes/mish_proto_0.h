@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 12:20:23 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 16:22:03 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		mish_reset(t_mish *mish);
 void		mish_print(t_mish *mish);
 /* 01-01	mish_error */
 t_err_type	mish_error_add(t_mish *mish, t_err_type t, int en, char *d);
+void        mish_error_treat(t_mish *mish);
 void		mish_error_print(int en, char *str);
 /* 01-02	mish_prompt */
 void		mish_prompt(t_mish *mish);
@@ -77,7 +78,7 @@ t_err_type	mish_path_set(t_mish *mish);
 /* 02_t_error			*/
 t_error		*t_error_new(t_err_type t, int en, char *d);
 void		t_error_add(t_error **lst, t_error *new);
-void		t_error_del(t_error *err);
+void		t_error_del(t_error **err);
 void		t_error_lst_free(t_error **err);
 t_err_type	t_error_exist(t_error *err);
 

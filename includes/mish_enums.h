@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:10:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 10:46:16 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 16:35:52 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,16 @@ typedef enum e_err_type
 {
 	err_none,
 	err_malloc,
-	err_quote_open,
-	err_dquote_open,
-	err_token_unexpected,
-	err_fd_open,
-	err_fd_read,
-	err_fd_write,
 	err_dup,
 	err_dup2,
 	err_pipe,
 	err_fork,
-	err_execve,
-	err_argument,
-	err_split,
-	err_invalid_option,
 	err_access,
-	err_other,
+	err_execve,
+	err_quote_open,
+	err_dquote_open,
 	err_unhandled,
+	err_token_unexpected,
 	err_exit
 }	t_err_type;
 

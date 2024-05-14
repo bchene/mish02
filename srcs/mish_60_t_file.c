@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 12:07:31 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 15:03:43 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,7 @@ void	t_file_del(t_file	*tf)
 
 void	t_process_iofiles_error(t_process *p, int en, char *path)
 {
-	if (p->av && (p->av)[0])
-	{
-		if (p->av)
-			p->av = ft_freesplit(p->av);
-		p->av = ft_split("empty_function", ' ');
-		p->ac = 1;
-		if (p->cmd)
-		{
-			free(p->cmd);
-			p->cmd = NULL;
-		}
-	}
+	if (p->av || (p->av)[0])
+		t_process_cmd_setempty(p);
 	mish_error_print(en, path);
 }

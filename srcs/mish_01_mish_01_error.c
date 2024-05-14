@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:26:04 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 20:21:44 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 16:34:50 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,46 @@ t_err_type	mish_error_add(t_mish *mish, t_err_type t, int en, char *d)
 	else
 		return (err_malloc);
 	return (t);
+}
+
+void	mish_error_treat(t_mish *mish)
+{
+	t_error	*error;
+
+	error = mish->error;
+	while (error)
+	{
+		if( err_malloc <= error->type && error->type <= err_fork)
+			mish_error_print(error->err_no, error->data);
+		else if( error->type == err_quote_open)
+			write(2, "minishell: syntax error \" not closed\n", 40);
+		else if( error->type == err_dquote_open)
+			write(2, "minishell: syntax error \' not closed\n", 40);
+		else if( error->type == err_access)
+		{
+			write(2, error->data, ft_strlen(error->data));
+			write(2, ": command not found\n", 21);
+		}
+		else if( error->type == err_token_unexpected)
+		{
+			write(2, "minishell: err_token_unexpected `", 34);
+			write(2, error->data, ft_strlen(error->data));
+			write(2, "\'\n", 3);
+		}
+		else if( error->type == err_unhandled)
+		{
+			write(2, "minishell: err_unhandled `", 27);
+			write(2, error->data, ft_strlen(error->data));
+			write(2, "\'\n", 3);
+		}
+		else if( error->type == err_exit && mish->nb == 1)
+		{
+			write(2, "exit\n", 6);
+			return;
+		}
+		error = error->next;
+	}
+	t_error_lst_free(&(mish->error));
 }
 
 void	mish_error_print(int en, char *str)

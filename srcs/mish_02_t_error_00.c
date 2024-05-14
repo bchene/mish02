@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:14:03 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 19:18:39 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 16:22:32 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,17 @@ void	t_error_add(t_error **lst, t_error *new)
 	return ;
 }
 
-void	t_error_del(t_error *err)
+void	t_error_del(t_error **err)
 {
-	if (err)
+	if ((*err))
 	{
-		if (err->data)
-			free(err->data);
-		free(err);
+		if ((*err)->data)
+		{
+			free((*err)->data);
+			(*err)->data = NULL;
+		}
+		free((*err));
+		*err = NULL;
 	}
 }
 
@@ -57,7 +61,7 @@ void	t_error_lst_free(t_error **err)
 		{
 			if ((*err)->next)
 				t_error_lst_free(&(*err)->next);
-			t_error_del(*err);
+			t_error_del(err);
 		}
 	}
 }

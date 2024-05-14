@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 11:10:18 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 16:00:48 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_err_type	mish_p_init(t_mish *mish, int index, char *line)
 	process = (mish->p) + index;
 	if (process == NULL)
 	{
-		mish_error_add(mish, err_other, errno, "t_process_new == NULL");
+		mish_error_add(mish, err_malloc, errno, "t_process_new == NULL");
 		return (t_error_exist(mish->error));
 	}
 	process->mish = mish;
