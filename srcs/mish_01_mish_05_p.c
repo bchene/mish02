@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 17:15:37 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 11:10:18 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	mish_p_free(t_mish *mish)
 	int	i;
 
 	if (mish && mish->p)
-	{		
+	{
 		i = -1;
-		while(++i < mish->nb)
+		while (++i < mish->nb)
 		{
 			t_process_free((mish->p) + i);
 		}
@@ -74,15 +74,11 @@ t_err_type	mish_p_parse(t_mish *mish)
 			return (t_error_exist(mish->error));
 		// pas de gestion d erreur? rempli iofiles ac et av
 		t_process_set((mish->p) + i);
-		// main_test_open_files((mish->p) + i); //TEST
 		if (!t_process_cmd_isempty((mish->p) + i))
 			if (!t_process_cmd_isbuiltin((mish->p) + i))
-				t_process_cmd_get((mish->p) + i); // A METRE dans init p apres traitement de ligne
+				t_process_cmd_get((mish->p) + i);
 		t_process_open_iofiles((mish->p) + i);
 	}
-	// METTRE DANS mish_exec
-	// if (mish_fork_parent(mish))
-	// 	return (t_error_exist(mish->error));
 	return (0);
 }
 
@@ -93,7 +89,7 @@ void	mish_p_print(t_mish *mish)
 	if (mish && mish->nb > 0 && mish->p)
 	{
 		i = -1;
-		while(++i < mish->nb)
+		while (++i < mish->nb)
 			t_process_print((mish->p) + i);
 	}
 	else

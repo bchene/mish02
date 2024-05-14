@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 20:12:55 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 12:20:23 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ char		*mish_env_get(t_mish *mish, char *var);
 int			mish_env_set(t_mish *mish, char *var, char *value);
 int			mish_env_add(t_mish *mish, char *var, char *value);
 int			mish_env_remove(t_mish *mish, char *var);
-char        **mish_env_to_envp(t_mish *mish);
+char		**mish_env_to_envp(t_mish *mish);
 /* 01-09	mish_unset */
 char		*mish_unset_get(t_mish *mish, char *var);
 int			mish_unset_set(t_mish *mish, char *var, char *value);
 int			mish_unset_remove(t_mish *mish, char *var);
-int         is_valid_var_name(char *str);
+int			is_valid_var_name(char *str);
 
 /* 01-10	mish_env_unset */
 void		mish_env_unset_init(t_mish *mish, char **envp);
 void		mish_env_unset_free(t_mish *mish);
-int			mish_env_unset_export(t_mish *mish, char* var, char *value);
-int			mish_env_unset_unset(t_mish *mish, char* var);
+int			mish_env_unset_export(t_mish *mish, char *var, char *value);
+int			mish_env_unset_unset(t_mish *mish, char *var);
 void		mish_env_unset_print(t_mish *mish);
 /* 01-11	mish_exit_status */
 void		mish_exit_status_set(t_mish *mish, int value);
@@ -94,11 +94,5 @@ t_env		*t_env_getvar(t_env *env, char *var);
 char		*t_env_getdata(t_env *env, char *var);
 int			t_env_setstr(t_env *env, char *var, char *value);
 void		t_env_print(t_env *tenv);
-
-/*					    */
-/* 09_main_test		    */
-void		main_test_env(t_mish *mish);
-void		main_test_set_process(t_mish *mish);
-void		main_test_open_files(t_process *p);
 
 #endif

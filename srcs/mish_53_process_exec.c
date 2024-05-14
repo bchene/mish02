@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 18:32:46 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 12:05:21 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_err_type	mish_fork_parent(t_mish *mish)
 			return (t_error_exist(mish->error));
 		mish->pid[i] = fork();
 		if (mish->pid[i] == -1)
-			return(mish_error_add(mish, err_fork, errno, "fork() == -1"));
+			return (mish_error_add(mish, err_fork, errno, "fork() == -1"));
 		if (mish->pid[i] == 0)
 		{
 			t_process_fork_child((mish->p) + i);
@@ -50,71 +50,18 @@ t_err_type	t_process_fork_child(t_process *process)
 		t_process_builtin(process);
 		return (mish_error_add(process->mish, err_exit, 0, "exit"));
 	}
-	else if(access(process->cmd, X_OK) != 0)
+	else if (access(process->cmd, X_OK) != 0)
 		return (mish_error_add(process->mish, err_fork, errno, "access"));
 	envp = mish_env_to_envp(process->mish);
 	if (envp == NULL)
-		return (mish_error_add(process->mish, err_malloc, errno, "malloc envp"));
+		return (mish_error_add(process->mish, err_malloc, errno, \
+		"malloc envp"));
 	execve(process->cmd, process->av, envp);
 	mish_error_add(process->mish, err_execve, errno, "execve");
 	if (envp)
 		free (envp);
 	return (err_execve);
-	// sortie erreur
+	/* sortie erreur
 	// mish_free(process->mish);	// FIN ERR
-	// exit (EXIT_FAILURE);			// FIN ERR
+	// exit (EXIT_FAILURE);			// FIN ERR */
 }
-
-/*
-t_err_type	mish_create_process(t_mish *mish)
-{
-	int	i;
-
-	mish_p_malloc(mish);
-	if (mish->error->err_no)
-		mish_fds_malloc(mish);
-	if (mish->error->err_no)
-	{
-		i = -1;
-		while(++i < mish->nb && mish->error->err_no)
-		{
-			//t_process_set(mish, i, (mish->line)[i]);
-			//t_process_get_iofiles((mish->p)[i]);
-			//t_process_get_cmd((mish->p)[i]);
-		}
-	}
-	return (mish->error->err_no);
-}
-*/
-
-// INUTILE OU A REVOIR POUR LANCEMENT EXECUTION
-/*
-t_err_type	mish_start_process(t_mish *mish)
-{
-	int	i;
-
-	if (mish_path_set(mish))
-		return (t_error_exist(mish->error));
-	mish->nb = ft_splitsize(mish->splitline);
-	if (mish_p_malloc(mish))
-		return (t_error_exist(mish->error));
-	if (mish_fds_malloc(mish))
-		return (t_error_exist(mish->error));
-	if (mish_pid_malloc(mish))
-		return (t_error_exist(mish->error));
-	i = -1;
-	while (++i < mish->nb)
-	{
-		if (mish_p_init(mish, i, NULL))
-			return (t_error_exist(mish->error));
-		// on rempli iofiles
-		// on rempli ac et av
-		// on ouvre les iofiles
-		main_test_open_files((mish->p) + i); //TEST
-		t_process_cmd_get((mish->p) + i); // A METRE dans init p apres traitement de ligne
-	}
-	if (mish_fork_parent(mish))
-		return (t_error_exist(mish->error));
-	return (0);
-}
-*/

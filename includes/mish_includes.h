@@ -6,21 +6,23 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:08:57 by bchene            #+#    #+#             */
-/*   Updated: 2024/03/26 15:18:41 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:47:28 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MISH_INCLUDES_H
 # define MISH_INCLUDES_H
 
-/* Pour readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay, add_history */
+/* Pour readline, rl_clear_history, rl_on_new_line, rl_replace_line, */
+/* rl_redisplay, add_history */
 # include <readline/readline.h>
 # include <readline/history.h>
 /* Pour printf, perror */
 # include <stdio.h>
 /* Pour malloc, free, exit */
 # include <stdlib.h>
-/* Pour write, access, open, read, close, fork, wait, waitpid, wait3, wait4, isatty, ttyname, ttyslot, ioctl */
+/* Pour write, access, open, read, close, fork, wait, waitpid, wait3, */
+/* wait4, isatty, ttyname, ttyslot, ioctl */
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/types.h>
@@ -36,7 +38,8 @@
 /* Pour strerror, errno */
 # include <string.h>
 # include <errno.h>
-/* Pour getenv, tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs */
+/* Pour getenv, tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum, */
+/* tgetstr, tgoto, tputs */
 # include <term.h>
 # include <termios.h>
 # include <curses.h>

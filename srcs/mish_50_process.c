@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:49:39 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 16:55:48 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 11:40:49 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ void	t_process_free(t_process *process)
 	t_file_free(process->outfiles);
 }
 
-/*
-void		t_process_t_file_set(t_process *process)
-{}
-void		t_process_arg_set(t_process *process)
-{}
-*/
-
 void	t_process_print(t_process *p)
 {
 	if (p == NULL)
@@ -42,7 +35,6 @@ void	t_process_print(t_process *p)
 	printf("line = %s\n", p->line);
 	printf("ac = %d\n", p->ac);
 	printf("av = ");
-	//ft_print_split(p->av);
 	ft_printf_strtab(p->av, p->ac, " ");
 	printf("\n");
 	t_process_iofile_print(p);

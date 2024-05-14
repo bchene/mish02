@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:29:31 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/09 15:32:51 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 12:12:07 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_strfree(char **str)
 	*str = NULL;
 }
 
-/*  */
 char	*ft_strnrchr(char *str, int n, char c)
 {
 	size_t	i;
@@ -68,7 +67,7 @@ void	ft_printf_strtab(char **str, int size, const char *sep)
 	int	i;
 
 	i = 0;
-	while(i < size)
+	while (i < size)
 	{
 		if (i != 0)
 			printf("%s", sep);
@@ -77,57 +76,3 @@ void	ft_printf_strtab(char **str, int size, const char *sep)
 		i++;
 	}
 }
-
-int	is_alphanum_underscore(char c)
-{
-	if (ft_isalpha(c) || ft_isdigit(c) || c == '_')
-		return (1);
-	else
-		return (0);
-}
-
-size_t	ft_strlen_while(char *str, int f(char))
-{
-	size_t	i;
-
-	i = 0;
-	while (str && str[i] && f(str[i]))
-		i++;
-	return (i);
-}
-
-// on peut utiliser ft_getnbsplit car utiliser pour le split
-int		char_count(char *str, char c)
-{
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] == c)
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-// equivaux a ft_freesplit ?
-void	strtab_free(char **strtab)
-{
-	int	i;
-
-	i = 0;
-	if (strtab)
-	{
-		while (strtab[i])
-		{
-			free(strtab[i]);
-			i++;
-		}
-		free(strtab);
-	}
-	return ;
-}
-

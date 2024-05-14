@@ -1,89 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_03_t_env.c                                    :+:      :+:    :+:   */
+/*   mish_03_t_env_01.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:07:17 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 15:35:49 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 11:23:48 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-
-t_env	*t_env_new(char *str)
-{
-	t_env   *new;
-
-	new = malloc(sizeof(t_env));
-	if (new == NULL)
-		return (NULL);
-	new->str = ft_strdup(str);
-	new->next = NULL;
-	return (new);
-}
-
-t_env	*t_env_add(t_env **env, char *str)
-{
-	t_env   *new;
-	t_env	*cur;
-
-	new = t_env_new(str);
-	if (new == NULL)
-		return (NULL);
-	if (*env == NULL)
-	{
-		*env = new;
-		return (new);
-	}
-	cur = *env;
-	while (cur->next)
-		cur = cur->next;
-	cur->next = new;
-	return (new);
-}
-
-void	t_env_del(t_env *env)
-{
-	if (env->str)
-		free (env->str);
-	free (env);
-}
-
-void	t_env_free(t_env *env)
-{
-	if (env)
-	{
-		if (env->next)
-			t_env_free(env->next);
-		t_env_del(env);
-	}
-}
-
-int	t_env_remove(t_env **env, t_env *to_remove)
-{
-	t_env	*cur;
-
-	if (env == NULL || to_remove == NULL)
-		return (-1);
-	cur = *env;
-	if (cur == to_remove)
-	{
-		*env = cur->next;
-		t_env_del(to_remove);
-		return (0);
-	}
-	while (cur->next && (cur->next != to_remove))
-		cur = cur->next;
-	if (cur->next == to_remove)
-	{
-		cur->next = to_remove->next;
-		t_env_del(to_remove);
-		return (0);
-	}
-	return (1);
-}
 
 t_env	*t_env_getvar(t_env *tenv, char *var)
 {
@@ -94,7 +21,7 @@ t_env	*t_env_getvar(t_env *tenv, char *var)
 		return (NULL);
 	while (env)
 	{
-		if (ft_strncmp(env->str, var, ft_strlen(var)) == 0 && 
+		if (ft_strncmp(env->str, var, ft_strlen(var)) == 0 && \
 		ft_strncmp((env->str) + ft_strlen(var), "=", 1) == 0)
 			return (env);
 		env = env->next;
@@ -126,7 +53,7 @@ int	t_env_setstr(t_env *env, char *var, char *value)
 	str = ft_strjointo(str, "=");
 	str = ft_strjointo(str, value);
 	varenv = t_env_getvar(env, var);
-	if (varenv && varenv->str )
+	if (varenv && varenv->str)
 	{
 		free(varenv->str);
 		varenv->str = strdup(str);

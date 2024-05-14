@@ -6,22 +6,11 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 20:22:25 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 12:07:31 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-
-// ajouter des argument pour le constructeur
-// mieux definir la structure
-// a suivre
-
-/*
-char **unxp_token;
-unxp_token = {"||", "\\", "<>", "<&", ";", "&",}
-<> < > <<< <<> 
-echo <      > file
-*/
 
 t_file	*t_file_new(t_mish *mish, char *path, t_tfile_type type)
 {
@@ -39,6 +28,7 @@ t_file	*t_file_new(t_mish *mish, char *path, t_tfile_type type)
 	tf->next = NULL;
 	return (tf);
 }
+
 void	t_file_free(t_file *tf)
 {
 	if (tf)
@@ -52,7 +42,7 @@ void	t_file_free(t_file *tf)
 void	t_file_del(t_file	*tf)
 {
 	if (tf)
-		if(tf->path)
+		if (tf->path)
 			free(tf->path);
 	free(tf);
 }
@@ -61,11 +51,11 @@ void	t_process_iofiles_error(t_process *p, int en, char *path)
 {
 	if (p->av && (p->av)[0])
 	{
-		if(p->av)
+		if (p->av)
 			p->av = ft_freesplit(p->av);
-		p->av = ft_split("empty_function",' ');
+		p->av = ft_split("empty_function", ' ');
 		p->ac = 1;
-		if(p->cmd)
+		if (p->cmd)
 		{
 			free(p->cmd);
 			p->cmd = NULL;

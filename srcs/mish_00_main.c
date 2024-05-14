@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:21:00 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 19:23:43 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:53:30 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,9 @@
 
 int	g_signal;
 
-t_err_type	mish_parse_line(t_mish *mish)
+int	mish_continue(t_mish *mish)
 {
-	return (t_error_exist(mish->error));
-}
-
-t_err_type	mish_pipex(t_mish *mish)
-{
-	return (t_error_exist(mish->error));
-}
-
-int		mish_continue(t_mish *mish)
-{
-	if(mish_exit_status_get(mish) == 42)
+	if (mish_exit_status_get(mish) == 42)
 	{
 		return (0);
 	}
@@ -49,10 +39,10 @@ int	main(int argc, char **argv, char **env)
 	{
 		mish_prompt(&mish);
 		if (mish_continue(&mish) && mish.line && mish.line[0])
-			mish_line_parse(&mish);				// check>split>feed mish
+			mish_line_parse(&mish); // check>split>feed mish
 		if (mish_continue(&mish) && mish.line && mish.line[0])
-			mish_p_parse(&mish);				// parse>feed process	
-		// mish_print(&mish);					// TEST
+			mish_p_parse(&mish); // parse>feed process	
+		// mish_print(&mish); // TEST
 		if (mish_continue(&mish) && mish.line && mish.line[0])
 			mish_fork_parent(&mish);
 		//gestion des erreurs

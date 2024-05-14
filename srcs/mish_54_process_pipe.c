@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_52_process_pipe.c                             :+:      :+:    :+:   */
+/*   mish_54_process_pipe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:17:07 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/08 17:54:24 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 12:06:15 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_err_type	t_process_pipe_fds(t_process *process)
 	if (i == 0)
 	{
 		if (pipe((mish->fds)[0]) == -1)
-			return(mish_error_add(mish, err_pipe, errno, "pipe 0 == -1"));
+			return (mish_error_add(mish, err_pipe, errno, "pipe 0 == -1"));
 	}
 	else
 	{
@@ -40,7 +40,7 @@ t_err_type	t_process_pipe_fds(t_process *process)
 		close_reset_fd((mish->fds)[i - 1] + 1);
 	}
 	if (pipe((mish->fds)[i + 1]) == -1)
-		return(mish_error_add(mish, err_pipe, errno, "pipe index == -1"));
+		return (mish_error_add(mish, err_pipe, errno, "pipe index == -1"));
 	return (0);
 }
 
@@ -59,7 +59,7 @@ t_err_type	t_process_dup_io(t_process *p)
 	}
 	if (t_process_iofile_get(p, 1) < 3)
 	{
-		if (p->index != p->mish->nb - 1) 
+		if (p->index != p->mish->nb - 1)
 			if (dup2((p->mish->fds)[p->index + 1][1], STDOUT_FILENO) == -1)
 				mish_error_add(p->mish, err_dup2, errno, "dup2[i][1]");
 	}

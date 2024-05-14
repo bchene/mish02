@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/08 17:54:37 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 12:09:32 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	t_process_close_infile(t_process *p)
 {
-	t_file *tfile;
+	t_file	*tfile;
 
 	tfile = p->infiles;
 	while (tfile)
@@ -27,7 +27,7 @@ void	t_process_close_infile(t_process *p)
 
 void	t_process_close_outfile(t_process *p)
 {
-	t_file *tfile;
+	t_file	*tfile;
 
 	tfile = p->outfiles;
 	while (tfile)

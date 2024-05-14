@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/05/13 17:58:31 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/14 12:12:57 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,11 @@ SRCS =		lo_check_syntax_error.c \
 			mish_01_mish_12_pathlist.c \
 			mish_02_t_error_00.c \
 			mish_02_t_error_01.c \
-			mish_03_t_env.c \
-			mish_09_main_test.c \
+			mish_03_t_env_00.c \
+			mish_03_t_env_01.c \
 			mish_50_process.c \
-			mish_51_process_iofiles.c \
+			mish_51_process_iofiles_00.c \
+			mish_51_process_iofiles_01.c \
 			mish_52_process_cmd.c \
 			mish_53_process_exec.c \
 			mish_54_process_pipe.c \
@@ -63,11 +64,7 @@ SRCS =		lo_check_syntax_error.c \
 			mish_70_builtin.c \
 			mish_90_ft_strjoin_va.c \
 			mish_91_ft_00.c \
-			zz_lo_fill_processes.c \
-			zz_lo_parsing.c \
-			zz_lo_print.c \
-			zz_lo_separate_processes.c \
-			zz_lo_var_init.c
+			mish_91_ft_01.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 

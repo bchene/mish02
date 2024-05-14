@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/09 14:15:39 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 11:05:19 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 t_err_type	mish_line_parse(t_mish *mish)
 {
-	if(mish_check_line(mish))
+	if (mish_check_line(mish))
 		return (t_error_exist(mish->error));
+	/*
 	// SPLIT ? prend t il en compte les | dans les '' et "" ?
 	// ajouter function isinquote dans le ft_getnbsplit et plit
 	// mish->nb = ft_getnbsplit(mish->line, '|');
+	*/
 	mish->nb = char_count(mish->line, '|') + 1;
 	mish->splitline = ft_split(mish->line, '|');
 	if (mish->splitline == NULL)

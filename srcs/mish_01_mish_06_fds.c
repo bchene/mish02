@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 15:27:57 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 11:11:28 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_err_type	mish_fds_malloc(t_mish *mish)
 	{
 		(mish->fds)[i] = malloc(2 * sizeof(int));
 		if ((mish->fds)[i] == NULL)
-			return (mish_error_add(mish, err_malloc, errno, "(mish->fds)[i] == NULL"));
+			return (mish_error_add(mish, err_malloc, errno, "fds[i] == NULL"));
 		(mish->fds)[i][0] = -1;
 		(mish->fds)[i][1] = -1;
 	}
@@ -41,7 +41,7 @@ void	mish_fds_close(t_mish *mish)
 		if (mish->fds && (mish->fds)[i])
 			close_reset_fd(((mish->fds)[i]));
 		if (mish->fds && (mish->fds)[i] + 1)
-			close_reset_fd((mish->fds[i] + 1));		
+			close_reset_fd((mish->fds[i] + 1));
 	}
 }
 
@@ -53,7 +53,7 @@ void	mish_fds_free(t_mish *mish)
 	while (++i < mish->nb + 1)
 		if (mish && mish->fds && (mish->fds)[i])
 			free((mish->fds)[i]);
-	if (mish && mish->fds )
+	if (mish && mish->fds)
 	{
 		free(mish->fds);
 		mish->fds = NULL;

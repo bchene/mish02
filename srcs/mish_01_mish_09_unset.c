@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 14:29:58 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 11:13:31 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*mish_unset_get(t_mish *mish, char *var)
 {
-	char *str;
+	char	*str;
 
 	str = t_env_getdata(mish->unset, var);
 	return (str);
@@ -22,7 +22,7 @@ char	*mish_unset_get(t_mish *mish, char *var)
 
 int	mish_unset_set(t_mish *mish, char *var, char *value)
 {
-	int ret;
+	int	ret;
 
 	// ajouter verification nom var is ok si var n existe pas deja
 	ret = t_env_setstr(mish->unset, var, value);
@@ -41,7 +41,6 @@ int	mish_unset_remove(t_mish *mish, char *var)
 	}
 	return (0);
 }
-
 
 int	is_valid_var_name(char *str)
 {

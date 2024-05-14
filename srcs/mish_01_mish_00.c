@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/13 18:52:05 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 11:06:29 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	mish_reset(t_mish *mish)
 		mish->splitline = ft_freesplit(mish->splitline);
 	if (mish->p)
 		mish_p_free(mish);
-	if (mish->fds)	
+	if (mish->fds)
 		mish_fds_free(mish);
 	if (mish->pid)
 	{
@@ -93,12 +93,12 @@ void	mish_print(t_mish *mish)
 	mish_fds_print(mish);
 	printf("///   pid = ");
 	mish_pid_print(mish);
-	//printf("///   env :\n");
-	//t_env_print(mish->env);
+	/*	//printf("///   env :\n");
+		//t_env_print(mish->env); */
 	printf("///   unset :\n");
 	t_env_print(mish->unset);
 	printf("///   pathlist : \n");
-	ft_print_split(mish->pathlist);	
+	ft_print_split(mish->pathlist);
 	printf("///   mish_print ///////// \n");
 	printf("////////////////////////// \n\n");
 }
