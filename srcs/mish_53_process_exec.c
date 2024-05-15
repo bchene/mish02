@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 16:41:31 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:46:50 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_err_type	t_process_fork_child(t_process *process)
 		//return (mish_error_add(process->mish, err_exit, 0, "exit"));
 	}
 	else if (access(process->cmd, X_OK) != 0)
-		return (mish_error_add(process->mish, err_access, errno, process->cmd));
+		builtin_no_access(process);
 	envp = mish_env_to_envp(process->mish);
 	if (envp == NULL)
 		return (mish_error_add(process->mish, err_malloc, errno, \

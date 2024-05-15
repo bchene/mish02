@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 16:22:03 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:22:57 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		mish_print(t_mish *mish);
 /* 01-01	mish_error */
 t_err_type	mish_error_add(t_mish *mish, t_err_type t, int en, char *d);
 void        mish_error_treat(t_mish *mish);
+void		mish_error_treat_exit(t_mish *mish);
 void		mish_error_print(int en, char *str);
 /* 01-02	mish_prompt */
 void		mish_prompt(t_mish *mish);
@@ -60,12 +61,12 @@ char		**mish_env_to_envp(t_mish *mish);
 char		*mish_unset_get(t_mish *mish, char *var);
 int			mish_unset_set(t_mish *mish, char *var, char *value);
 int			mish_unset_remove(t_mish *mish, char *var);
-int			is_valid_var_name(char *str);
-
+int			mish_unset_export(t_mish *mish, char *var, char *value);
+int			mish_unset_valid_name(char *str);
 /* 01-10	mish_env_unset */
 void		mish_env_unset_init(t_mish *mish, char **envp);
 void		mish_env_unset_free(t_mish *mish);
-int			mish_env_unset_export(t_mish *mish, char *var, char *value);
+char		*mish_env_unset_get(t_mish *mish, char *var);
 int			mish_env_unset_unset(t_mish *mish, char *var);
 void		mish_env_unset_print(t_mish *mish);
 /* 01-11	mish_exit_status */
@@ -88,8 +89,8 @@ void		t_error_print(t_error *err);
 /* 03_t_env 			*/
 t_env		*t_env_new(char *str);
 t_env		*t_env_add(t_env **env, char *str);
-void		t_env_del(t_env *env);
-void		t_env_free(t_env *env);
+void		t_env_del(t_env **env);
+void		t_env_free(t_env **env);
 int			t_env_remove(t_env **env, t_env *to_remove);
 t_env		*t_env_getvar(t_env *env, char *var);
 char		*t_env_getdata(t_env *env, char *var);

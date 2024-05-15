@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 16:00:48 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:11:19 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ void	mish_p_free(t_mish *mish)
 		i = -1;
 		while (++i < mish->nb)
 		{
-			t_process_free((mish->p) + i);
+			if ((mish->p) + i)
+				t_process_free((mish->p) + i);
 		}
-		free(mish->p);
+		if (mish->p)
+			free(mish->p);
 		mish->p = NULL;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:49:39 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 11:40:49 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:15:11 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ void	t_process_free(t_process *process)
 	if (process == NULL)
 		return ;
 	process->av = ft_freesplit(process->av);
-	if (process->cmd)
-		free(process->cmd);
-	t_file_free(process->infiles);
-	t_file_free(process->outfiles);
+	t_process_cmd_free(process);
+	t_file_free(&(process->infiles));
+	t_file_free(&(process->outfiles));
 }
 
 void	t_process_print(t_process *p)

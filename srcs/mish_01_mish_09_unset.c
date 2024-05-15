@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 11:13:31 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:23:54 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,26 @@ int	mish_unset_remove(t_mish *mish, char *var)
 	return (0);
 }
 
-int	is_valid_var_name(char *str)
+int	mish_unset_export(t_mish *mish, char *var, char *value)
+{
+	if (mish_unset_get(mish, var))
+	{
+		mish_unset_remove(mish, var);
+	}
+	if (mish_env_get(mish, var))
+	{
+		mish_env_set(mish, var, value);
+		return (2);
+	}
+	else
+	{
+		if (mish_env_add(mish, var, value))
+			return (1);
+	}
+	return (0);
+}
+
+int	mish_unset_valid_name(char *str)
 {
 	int	i;
 

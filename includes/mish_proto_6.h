@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 10:50:11 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:26:04 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /*						*/
 /* 60_t_file    		*/
 t_file	*t_file_new(t_mish *mish, char *path, t_tfile_type type);
-void	t_file_free(t_file *tf);
-void	t_file_del(t_file *tf);
+void	t_file_free(t_file **tf);
+void	t_file_del(t_file **tf);
 void	t_process_iofiles_error(t_process *p, int en, char *path);
 
 /*						*/

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:07:17 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 11:21:00 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:25:15 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,25 @@ t_env	*t_env_add(t_env **env, char *str)
 	return (new);
 }
 
-void	t_env_del(t_env *env)
+void	t_env_del(t_env **env)
 {
-	if (env->str)
-		free (env->str);
-	free (env);
+	if (*env)
+	{
+		if ((*env)->str)
+		{
+			free ((*env)->str);
+		}	
+		free (*env);
+		*env = NULL; // A TESTER
+	}
 }
 
-void	t_env_free(t_env *env)
+void	t_env_free(t_env **env)
 {
-	if (env)
+	if (*env)
 	{
-		if (env->next)
-			t_env_free(env->next);
+		if ((*env)->next)
+			t_env_free(&((*env)->next));
 		t_env_del(env);
 	}
 }
@@ -71,7 +77,7 @@ int	t_env_remove(t_env **env, t_env *to_remove)
 	if (cur == to_remove)
 	{
 		*env = cur->next;
-		t_env_del(to_remove);
+		t_env_del(&to_remove);
 		return (0);
 	}
 	while (cur->next && (cur->next != to_remove))
@@ -79,7 +85,7 @@ int	t_env_remove(t_env **env, t_env *to_remove)
 	if (cur->next == to_remove)
 	{
 		cur->next = to_remove->next;
-		t_env_del(to_remove);
+		t_env_del(&to_remove);
 		return (0);
 	}
 	return (1);
