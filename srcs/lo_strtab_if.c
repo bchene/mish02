@@ -6,7 +6,7 @@
 /*   By: locharve <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:30:34 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/06 16:32:46 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:42:10 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ static char	**strtab_set_if(char **dst, char **src, t_tfile_type f(char *), int 
 char **strtab_dup_if(char **src, t_tfile_type f(char *), int b)
 {
 	char	**dst;
+	int		count;
 
-	dst = ft_calloc(strtab_count_if(src, f, b) + 1, sizeof(char *));
-	if (dst)
+	count = strtab_count_if(src, f, b);
+	dst = ft_calloc(count + 1, sizeof(char *));
+	if (dst && count) 					// ca fait la diff ?
 		dst = strtab_set_if(dst, src, f, b);
 	return (dst);
 }

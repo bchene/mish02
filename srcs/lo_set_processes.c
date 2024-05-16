@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_set_processes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:54:13 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/13 19:21:02 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:47:56 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,12 @@ void	t_process_set(t_process *p)
 	split = t_process_split(p, WHITESPACES); // substitution ??
 	if (split)
 	{
-		mish_substitute_vars(p->mish, split);
+		//mish_substitute_vars(p->mish, split);
+		mish_substitute_strtab(p->mish, is_between_quotes, split);
 		mish_remove_quotes(p->mish, split);
 		io_files = strtab_dup_if(split, t_file_line_get_type, 1);
 		if (io_files)
-		{
 			t_process_t_file_set(p, io_files);
-			//ft_freesplit(io_files);
-		}
 		else
 			mish_error_add(p->mish, err_malloc, errno, "t_process_set malloc io_files");
 		args = strtab_dup_if(split, t_file_line_get_type, 0);
@@ -99,6 +97,7 @@ void	t_process_set(t_process *p)
 			t_process_arg_set(p, args);
 		else
 			mish_error_add(p->mish, err_malloc, errno, "t_process_set malloc args");
+		ft_freesplit(io_files);
 		free(split);
 	}
 	else

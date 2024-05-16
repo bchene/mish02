@@ -3,35 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   lo_check_unhandled.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:54:20 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/26 20:45:16 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:13:35 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-int	is_between_quotes(t_mish *mish, char *line, int i)
+int	is_between_quotes(char *str, int i)
 {
 	int		j;
 	int		q;
 
-	(void) mish;
-	j = i;
-	while (j >= 0 && (line[j] != '\'' && line[j] != '\"'))
-		j--;
-	if (j >= 0)
-		q = line[j];
-	else
-		q = 0;
-	if (q)
+	j = 0;
+	q = -1;
+	while (str && str[j] && j < i)
 	{
-		while (line[i] && line[i] != q)
-			i++;
-		if (line[i] && q == '\'')
+		if (q < 0 && (str[j] == '\'' || str[j] == '\"'))
+			q = j;
+		else if (q >= 0 && str[j] == str[q])
+			q = -1;;
+		j++;
+	}
+	if (q >= 0)
+	{
+		j++;
+		while (str && str[j] && str[j] != str[q])
+			j++;
+		if (str[j] && str[q] == '\'')
 			return (1);
-		else if (line[i] && q == '\"')
+		else if (str[j] && str[q] == '\"')
 			return (2);
 	}
 	return (0);
@@ -46,7 +49,7 @@ int	mish_check_unhandled(t_mish *mish)
 	while (mish->line && mish->line[i])
 	{
 		if (is_in_str("\\;&()", mish->line[i])
-				&& !is_between_quotes(mish, mish->line, i))
+				&& !is_between_quotes(mish->line, i))
 		{
 			err = ft_calloc(2, sizeof(char));
 			if (err)
@@ -64,29 +67,3 @@ int	mish_check_unhandled(t_mish *mish)
 	}
 	return (0);
 }
-/*
-int	main(int argc, char **argv)
-{
-	t_mish	mish;
-	t_error	*tmp;
-
-	ft_bzero(&mish, sizeof(mish));
-	if (argc == 2)
-	{
-		mish.line = argv[1];
-		printf("\tcheck_unhandled : %d\n", check_unhandled(&mish));
-		while (mish.error)
-		{
-			printf("error : %d\n", mish.error->type);
-			if (mish.error->data)
-				printf("\tdata : %s\n", mish.error->data);
-			tmp = mish.error;
-			mish.error = mish.error->next;
-			if (tmp->data)
-				free(tmp->data);
-			free(tmp);
-		}
-	}
-	return (0);
-}
-*/

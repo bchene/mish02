@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_check_syntax_error.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 18:39:36 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/26 20:45:07 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 16:42:51 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ int	mish_check_syntax_error(t_mish *mish)
 		if (tmp[0])
 		{
 			i += tmp[0];
+			while (mish->line[i] && is_in_str(WHITESPACES, mish->line[i]))
+				i++;
+			if (!mish->line[i])
+				return (dup_err_str(mish, "newline", 7, err_token_unexpected));
 			tmp[1] = is_special_token(mish->line, i);
-			if (tmp[1] && !is_between_quotes(mish, mish->line, i)
+			if (tmp[1] && !is_between_quotes(mish->line, i)
 					&& (mish->line[i - tmp[0]] != '|' || mish->line[i] == '|')) ////
 				return (dup_err_str(mish, &mish->line[i],
 						tmp[1], err_token_unexpected));

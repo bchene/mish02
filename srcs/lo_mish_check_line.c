@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_mish_check_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:00 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/10 14:03:35 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:16:22 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_err_type	mish_first_substitution(t_mish *mish)
 	v = is_there_a_var(mish->line);
 	while (v >= 0)
 	{
-		if (is_between_quotes(mish, mish->line, v) != 1)
+		if (is_between_quotes(mish->line, v) != 1)
 			mish_var_dup(mish, &mish->line, &mish->line[v]);
 		v = is_there_a_var(mish->line);
 	}
@@ -36,22 +36,3 @@ t_err_type  mish_check_line(t_mish *mish)
 	else
 		return (t_error_exist(mish->error));
 }
-
-/*
-t_err_type	mish_parse_process_line(t_mish *mish)
-{
-	int	i;
-
-	if (mish && mish->line && mish->line[0]
-			&& !mish_separate_processes(mish))
-	{
-		i = 0;
-		while (i < mish->nb)
-		{
-			t_process_set(&mish->p[i]);
-			i++;
-		}
-	}
-	return (t_error_exist(mish->error));
-}
-*/

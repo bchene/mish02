@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lo_handle_word.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:12:38 by locharve          #+#    #+#             */
-/*   Updated: 2024/04/25 17:11:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/14 16:13:42 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
+
+// gerer "salut"poto"ca va ?" -> [salutpotoca va ?]
 
 int	handle_quotes(char *str, int i, char q)
 {
@@ -19,7 +21,12 @@ int	handle_quotes(char *str, int i, char q)
 	j = 1;
 	while (str[i + j] && str[i + j] != q)
 		j++;
-	return (j + 1);
+	j++;
+	while (str[i + j] && ((!is_in_str(WHITESPACES, str[i + j])
+			&& !is_in_str(SPECIAL_SEP, str[i + j]))
+			|| is_between_quotes(str, i + j)))
+		j++;
+	return (j);
 }
 
 int	handle_redirections(char *str, int i, char r)
@@ -59,9 +66,8 @@ int	handle_word(char *str, char *sep, int i)
 	j = 0;
 	if (is_in_str(SPECIAL_SEP, str[i]) || is_in_str("\'\"", str[i]))
 		j = handle_specials(str, i);
-	else
-		while (str[i + j] && !is_in_str(sep, str[i + j])
-				&& !is_in_str(SPECIAL_SEP, str[i + j]))
-			j++;
+	while (str[i + j] && !is_in_str(sep, str[i + j]) // else (avant)
+			&& !is_in_str(SPECIAL_SEP, str[i + j]))
+		j++;
 	return (j);
 }

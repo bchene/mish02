@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/05/15 15:22:07 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/16 17:01:20 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,12 @@ SRCS =		lo_check_syntax_error.c \
 			lo_check_unhandled.c \
 			lo_handle_word.c \
 			lo_mish_check_line.c \
+			lo_mish_split.c \
+			lo_remove_quotes.c \
 			lo_set_processes.c \
 			lo_signals.c \
 			lo_strtab_if.c \
+			lo_substitute_2.c \
 			lo_substitute.c \
 			lo_substitute_vars.c \
 			lo_t_process_split.c \
