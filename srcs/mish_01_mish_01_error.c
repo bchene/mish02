@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:26:04 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/15 17:15:18 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/16 13:42:26 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,15 @@ void	mish_error_treat_exit(t_mish *mish)
 	error = mish->error;
 	while (error)
 	{
+		// if PID==parent...
 		if( error->type == err_exit && mish->nb == 1)
 		{
-			// afficher PID
 			write(2, "exit\n", 6);
 			return;
 		}
 		error = error->next;
-		if(error == NULL)
-			t_error_lst_free(&(mish->error));
 	}
+	t_error_lst_free(&(mish->error));
 }
 
 void	mish_error_print(int en, char *str)

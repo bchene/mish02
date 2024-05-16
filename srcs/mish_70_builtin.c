@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/15 17:49:16 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/16 13:42:21 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,19 @@ void	builtin_pmish(t_process *process)
 
 void	builtin_free(t_process *process)
 {
+	int exstat;
+
 	mish_error_treat(process->mish);
 	t_error_lst_free(&(process->mish->error));
+	exstat = mish_exit_status_get(process->mish);
 	mish_free(process->mish);
-	exit (process->mish->nb);
+	exit (exstat);
 }
 
-t_err_type	builtin_no_access(t_process *process)
+void	builtin_no_access(t_process *process)
 {
 	mish_error_add(process->mish, err_access, 13, process->cmd);
 	builtin_free(process);
-	return (13);
 }
 
 void	t_process_builtin(t_process *process)
