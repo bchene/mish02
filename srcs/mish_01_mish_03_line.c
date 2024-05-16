@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 11:05:19 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/16 17:31:23 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_err_type	mish_line_parse(t_mish *mish)
 	// ajouter function isinquote dans le ft_getnbsplit et plit
 	// mish->nb = ft_getnbsplit(mish->line, '|');
 	*/
-	mish->nb = char_count(mish->line, '|') + 1;
-	mish->splitline = ft_split(mish->line, '|');
+	mish->splitline = mish_split(mish->line, '|');
+	mish->nb = ft_splitsize(mish->splitline);
 	if (mish->splitline == NULL)
 		return (mish_error_add(mish, err_malloc, errno, "splitline == NULL"));
 	if (mish_path_set(mish))
