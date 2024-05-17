@@ -6,20 +6,20 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 12:27:15 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/17 17:52:35 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void	t_process_open_infiles(t_process *p)
+void	t_process_open_infiles(t_process *p, t_tfile_type type)
 {
 	t_file	*tfile;
 
 	tfile = p->infiles;
 	while (tfile && mish_continue(p->mish))
 	{
-		if (tfile->type == tf_ifile_rdonly)
+		if (tfile->type == tf_ifile_rdonly && type == tf_ifile_rdonly)
 		{
 			tfile->fd = open(tfile->path, O_RDONLY);
 			if (tfile->fd == -1)
@@ -27,7 +27,7 @@ void	t_process_open_infiles(t_process *p)
 			else if (tfile->next)
 				close_reset_fd(&(tfile->fd));
 		}
-		else if (tfile->type == tf_ifile_heredoc)
+		else if (tfile->type == tf_ifile_heredoc && type == tf_ifile_heredoc)
 		{
 			if (tfile->next)
 				t_file_heredoc(tfile, 0, p->mish);
@@ -67,6 +67,7 @@ void	t_process_open_outfiles(t_process *p)
 
 void	t_process_open_iofiles(t_process *process)
 {
-	t_process_open_infiles(process);
+	t_process_open_infiles(process, tf_ifile_heredoc);
+	t_process_open_infiles(process, tf_ifile_rdonly);
 	t_process_open_outfiles(process);
 }
