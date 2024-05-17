@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 14:52:22 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/17 17:12:57 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ t_err_type	mish_fork_parent(t_mish *mish)
 	}
 	mish_p_iofiles_close(mish);
 	mish_fds_close(mish);
-	i = -1;
-	while (++i < mish->nb)
+	// i = -1;
+	// while (++i < mish->nb)
+	i = mish->nb;
+	while (--i >= 0)
 		waitpid((mish->pid)[i], &status, 0);
 	mish_exit_status_set(mish, (int)(((status) & 0xff00) >> 8));
 	return (t_error_exist(mish->error));
