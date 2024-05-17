@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:29:31 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 12:14:08 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/16 17:34:57 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ size_t	ft_strlen_while(char *str, int f(char))
 }
 
 // on peut utiliser ft_getnbsplit car utiliser pour le split
+/*
 int	char_count(char *str, char c)
 {
 	int	count;
@@ -46,6 +47,7 @@ int	char_count(char *str, char c)
 	}
 	return (count);
 }
+*/
 
 // equivaux a ft_freesplit ?
 void	strtab_free(char **strtab)

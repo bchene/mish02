@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/15 18:26:04 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/17 14:56:27 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	t_process_open_outfiles(t_process *p);
 void	t_process_close_infile(t_process *p);
 void	t_process_close_outfile(t_process *p);
 void	mish_p_iofiles_close(t_mish *mish);
+void	mish_heredocs_unlink(t_mish *mish);
+
 /*						*/
 /* 63_p_files_heredoc		*/
-int		t_process_heredoc(t_process *process);
+void	t_file_heredoc(t_file *tfile, int openfile, t_mish *mish);
 
 #endif

@@ -6,11 +6,13 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:30:55 by bchene            #+#    #+#             */
-/*   Updated: 2024/04/25 20:03:38 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/17 13:34:56 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+
+#include <stdlib.h>
 
 char	*ft_strcpy(char *dst, const char *src)
 {
@@ -39,4 +41,3 @@ char	*ft_strncpy(char *dst, const char *src, size_t n)
 	dst[i] = '\0';
 	return (dst);
 }
-

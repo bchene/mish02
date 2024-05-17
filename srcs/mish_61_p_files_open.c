@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 12:09:13 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/17 12:27:15 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	t_process_open_infiles(t_process *p)
 	t_file	*tfile;
 
 	tfile = p->infiles;
-	while (tfile)
+	while (tfile && mish_continue(p->mish))
 	{
 		if (tfile->type == tf_ifile_rdonly)
 		{
@@ -29,7 +29,10 @@ void	t_process_open_infiles(t_process *p)
 		}
 		else if (tfile->type == tf_ifile_heredoc)
 		{
-			tfile->fd = t_process_heredoc(p);
+			if (tfile->next)
+				t_file_heredoc(tfile, 0, p->mish);
+			else
+				t_file_heredoc(tfile, 1, p->mish);
 		}
 		tfile = tfile->next;
 	}

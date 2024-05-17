@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:23:07 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/02 17:01:47 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/17 13:35:08 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int				is_in_str(char *str, char c);
 char			*ft_strswitnchr(char *s, char src, char dest);
 char			*ft_strdup(const char *s);
 char			*ft_strndup(char *src, int size);
+char			*ft_strdupfree(char *dest, const char *src);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
+int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 char			*ft_strrchr(const char *s, int c);
