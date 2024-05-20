@@ -6,7 +6,7 @@
 /*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/15 18:17:20 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/20 18:56:50 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define MISH_PROTO_LO_H
 
 /* check_syntaxe_error */
+int		ft_isspace(char c); /////////// lib
 int		mish_check_syntax_error(t_mish *mish);
+//int		mish_check_open_quotes(t_mish *mish);
+
+/* check_open_quotes */
 int		mish_check_open_quotes(t_mish *mish);
 
 /* check_unhandled */

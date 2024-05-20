@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/15 14:00:59 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/20 19:48:13 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int			t_process_cmd_isbuiltin(t_process *process);
 
 /*						*/
 /* 53_process_exec		*/
+t_err_type	mish_exec(t_mish *mish);
 t_err_type	mish_fork_parent(t_mish *mish);
 t_err_type	t_process_fork_child(t_process *p);
-// t_err_type	mish_start_process(t_mish *mish);
 
 /*						*/
 /* 54_process_pipe		*/

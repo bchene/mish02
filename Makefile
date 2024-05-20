@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/05/16 17:01:20 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/20 19:29:24 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LIBS = 		./libs/libft/libft.a
 
 # lister les fichier sous forme de colone a partir de srcs/ : 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
-SRCS =		lo_check_syntax_error.c \
+SRCS =		lo_check_open_quotes.c \
+			lo_check_syntax_error.c \
 			lo_check_unhandled.c \
 			lo_handle_word.c \
 			lo_mish_check_line.c \
@@ -65,6 +66,10 @@ SRCS =		lo_check_syntax_error.c \
 			mish_62_p_files_close.c \
 			mish_63_p_files_heredoc.c \
 			mish_70_builtin.c \
+			mish_71_builtin_nocmd_pmish.c \
+			mish_72_builtin_echo_cd_pwd.c \
+			mish_73_builtin_export.c \
+			mish_74_builtin_env_unset.c \
 			mish_90_ft_strjoin_va.c \
 			mish_91_ft_00.c \
 			mish_91_ft_01.c

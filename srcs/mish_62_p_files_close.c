@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 16:30:19 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/20 17:20:39 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	mish_heredocs_unlink(t_mish *mish)
 	t_file		*tfile;
 	int			i;
 
+
 	i = -1;
 	while( ++i < mish->nb && ((mish->p) + i))
 	{
@@ -41,12 +42,8 @@ void	mish_heredocs_unlink(t_mish *mish)
 		while(tfile && tfile->next)
 			tfile = tfile->next;
 		if (tfile->type == tf_ifile_heredoc)
-		{
 			if(unlink(tfile->path) != 0)
-			{
 				perror("minishell: file deleting error :");
-			}
-		}
 	}
 }
 

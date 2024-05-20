@@ -6,7 +6,7 @@
 /*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:09:30 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/15 17:15:15 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:48:34 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static char	*copy_removing(char *dst, char *src, int start, int end)
 	return (dst);
 }
 
+// add + 1
 t_err_type  mish_remove_quotes(t_mish *mish, char **p_lines)
 {
     char    *new_line;
@@ -62,19 +63,19 @@ t_err_type  mish_remove_quotes(t_mish *mish, char **p_lines)
     int     i;
 
     i = 0;
-    while (p_lines && p_lines[i])
+    while (p_lines && p_lines[i] && p_lines[i + 1])
     {
 		start = 0;
 		end = 0;
-        while (init_range(p_lines[i], &start, &end))
+        while (init_range(p_lines[i + 1], &start, &end))
         {
-            new_line = ft_calloc(ft_strlen(p_lines[i]) - 2 + 1, sizeof(char));
+            new_line = ft_calloc(ft_strlen(p_lines[i + 1]) - 2 + 1, sizeof(char));
 			if (new_line)
-				new_line = copy_removing(new_line, p_lines[i], start, end);
+				new_line = copy_removing(new_line, p_lines[i + 1], start, end);
 			else
 				mish_error_add(mish, err_malloc, errno, "mish_remove_quotes");
-			free(p_lines[i]);
-			p_lines[i] = new_line;
+			free(p_lines[i + 1]);
+			p_lines[i + 1] = new_line;
         }
         i++;
     }

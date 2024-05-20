@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:26:04 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 16:27:20 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/20 19:17:24 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	mish_error_treat(t_mish *mish)
 		if( err_malloc <= error->type && error->type <= err_fork)
 			mish_error_print(error->err_no, error->data);
 		else if( error->type == err_quote_open)
-			write(2, "minishell: syntax error \" not closed\n", 37);
-		else if( error->type == err_dquote_open)
 			write(2, "minishell: syntax error \' not closed\n", 37);
+		else if( error->type == err_dquote_open)
+			write(2, "minishell: syntax error \" not closed\n", 37);
 		else if( error->type == err_access)
 		{
 			write(2, error->data, ft_strlen(error->data));

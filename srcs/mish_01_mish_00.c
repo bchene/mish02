@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 14:57:05 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/20 17:18:10 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ t_err_type	mish_init_bis(t_mish *mish, char **envp)
 	return (t_error_exist(mish->error));
 }
 
-void	mish_free(t_mish *mish)
+void	mish_free(t_mish *mish, int isroot)
 {
-	mish_heredocs_unlink(mish);
+	if (isroot)
+		mish_heredocs_unlink(mish);
 	if (mish->error)
 		t_error_lst_free(&(mish->error));
 	if (mish->prompt)

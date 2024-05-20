@@ -6,52 +6,35 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/16 13:42:21 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/20 19:00:50 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void	builtin_echo(t_process *process)
+void	t_process_builtin(t_process *process)
 {
-	(void) process;
-}
+	char *cmd;
 
-void	builtin_cd(t_process *process)
-{
-	(void) process;
-}
-
-void	builtin_pwd(t_process *process)
-{
-	(void) process;
-}
-
-void	builtin_export(t_process *process)
-{
-	(void) process;
-}
-
-void	builtin_unset(t_process *process)
-{
-	(void) process;
-}
-
-void	builtin_env(t_process *process)
-{
-	t_env_print(process->mish->env);
-	builtin_free(process);
-}
-
-void	builtin_empty_cmd(t_process *process)
-{
-	builtin_free(process);
-}
-
-void	builtin_pmish(t_process *process)
-{
-	mish_print(process->mish);
-	builtin_free(process);
+	cmd = (process->av)[0];
+	if (cmd == NULL) 
+		builtin_no_cmd(process);
+	if (!ft_strcmp(cmd, "echoTEST")) 
+		builtin_echo(process);
+	else if (!ft_strcmp(cmd, "cd"))
+		builtin_cd(process);
+	else if (!ft_strcmp(cmd, "pwd"))
+		builtin_pwd(process);
+	else if (!ft_strcmp(cmd, "exportTEST"))
+		builtin_export(process);
+	else if (!ft_strcmp(cmd, "unsetTEST"))
+		builtin_unset(process);
+	else if (!ft_strcmp(cmd, "env"))
+		builtin_env(process);
+	else if (!ft_strcmp(cmd, "no_access_cmd"))
+		builtin_no_access_cmd(process);
+	else if (!ft_strcmp(cmd, "pmish"))
+		builtin_pmish(process);
 }
 
 void	builtin_free(t_process *process)
@@ -61,35 +44,13 @@ void	builtin_free(t_process *process)
 	mish_error_treat(process->mish);
 	t_error_lst_free(&(process->mish->error));
 	exstat = mish_exit_status_get(process->mish);
-	mish_free(process->mish);
+	mish_free(process->mish, 0);
 	exit (exstat);
 }
 
-void	builtin_no_access(t_process *process)
+void	builtin_error(t_process *p,char *str, int exitstatus)
 {
-	mish_error_add(process->mish, err_access, 13, process->cmd);
-	builtin_free(process);
-}
-
-void	t_process_builtin(t_process *process)
-{
-	char *cmd;
-
-	cmd = (process->av)[0];
-	if (!ft_strncmp(cmd, "echoTEST", ft_strlen(cmd) + 1))
-		builtin_echo(process);
-	else if (!ft_strncmp(cmd, "cdTEST", ft_strlen(cmd) + 1))
-		builtin_cd(process);
-	else if (!ft_strncmp(cmd, "pwdTEST", ft_strlen(cmd) + 1))
-		builtin_pwd(process);
-	else if (!ft_strncmp(cmd, "exportTEST", ft_strlen(cmd) + 1))
-		builtin_export(process);
-	else if (!ft_strncmp(cmd, "unsetTEST", ft_strlen(cmd) + 1))
-		builtin_unset(process);
-	else if (!ft_strncmp(cmd, "env", ft_strlen(cmd) + 1))
-		builtin_env(process);
-	else if (!ft_strncmp(cmd, "empty_cmd", ft_strlen(cmd) + 1))
-		builtin_empty_cmd(process);
-	else if (!ft_strncmp(cmd, "pmish", ft_strlen(cmd) + 1))
-		builtin_pmish(process);
+	write(2, str, ft_strlen(str));
+	if (p->index == p->mish->nb - 1)
+		mish_exit_status_set(p->mish, exitstatus);
 }

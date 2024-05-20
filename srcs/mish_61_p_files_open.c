@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 17:52:35 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/20 16:57:53 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	t_process_open_outfiles(t_process *p)
 		tfile = tfile->next;
 	}
 }
-
+/*
 void	t_process_open_iofiles(t_process *process)
 {
-	t_process_open_infiles(process, tf_ifile_heredoc);
 	t_process_open_infiles(process, tf_ifile_rdonly);
 	t_process_open_outfiles(process);
 }
+*/

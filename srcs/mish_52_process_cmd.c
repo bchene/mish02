@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/15 17:28:12 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/20 19:00:47 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,37 @@ void	t_process_cmd_setempty(t_process *process)
 {
 	if (process->av)
 		process->av = ft_freesplit(process->av);
-	process->av = ft_split("empty_cmd", ' ');
+	process->av = ft_split("no_cmd", ' ');
 	if (process->av == NULL)
-		mish_error_add(process->mish, err_malloc, errno, "empty_cmd");
+		mish_error_add(process->mish, err_malloc, errno, "cmd_setempty");
 	process->ac = 1;
 	t_process_cmd_free(process);	
 }
 
 int	t_process_cmd_isempty(t_process *process)
 {
-	/* gerer le cas chaine vide "" differement */
+	/* gerer le cas chaine vide "" differement  et NULL*/
 	/* fprintf(stderr,"t_process_cmd_isempty av=%p av[0]=%p\n",
 	 process->av, process->av[0]); */
-	if (!process->av || !(process->av)[0] || process->ac == 0)
+	if (process->av == NULL || process->ac == 0)
 	{
-		t_process_cmd_setempty(process);
-		return (1);
+		mish_error_add(process->mish, err_malloc, errno, "process->av == NULL");
+		return(0);
 	}
-	else if (!ft_strncmp((process->av)[0], "\"\"", 3) \
-	|| !ft_strncmp((process->av)[0], "\'\'", 3))
+	else if ((process->av)[0] == NULL)
+		return (1);
+	else if ((process->av)[0][0] == '\0' || !ft_strcmp((process->av)[0], "\"\"") \
+	|| !ft_strcmp((process->av)[0], "\'\'"))
 	{
-		free((process->av)[0]);
-		(process->av)[0] = ft_strdup("\0");
+		if (!ft_strcmp((process->av)[0], "\"\""))
+		{
+			printf("p->av[0] = %s\n", process->av[0]);
+			write(2 ,"\"\": command not found\n" , 23);
+		}
+		else if (!ft_strcmp((process->av)[0], "\'\'"))
+			write(2 ,"\'\': command not found\n" , 23);
 		t_process_cmd_free(process);
-		process->cmd = ft_strdup("\0");
+		return (1);
 	}
 	return (0);
 }
@@ -82,13 +89,10 @@ int	t_process_cmd_isbuiltin(t_process *process)
 	char *cmd;
 
 	cmd = (process->av)[0];
-	if (!ft_strncmp(cmd, "echoTEST", ft_strlen(cmd) + 1) \
-	|| !ft_strncmp(cmd, "cdTEST", ft_strlen(cmd) + 1) \
-	|| !ft_strncmp(cmd, "pwdTEST", ft_strlen(cmd) + 1) \
-	|| !ft_strncmp(cmd, "exportTEST", ft_strlen(cmd) + 1) \
-	|| !ft_strncmp(cmd, "unsetTEST", ft_strlen(cmd) + 1) \
-	|| !ft_strncmp(cmd, "env", ft_strlen(cmd) + 1) \
-	|| !ft_strncmp(cmd, "pmish", ft_strlen(cmd) + 1))
+	if ( (process->av)[0] == NULL || !ft_strcmp(cmd, "echoTEST") \
+	|| !ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "pwd") \
+	|| !ft_strcmp(cmd, "exportTEST") || !ft_strcmp(cmd, "unsetTEST") \
+	|| !ft_strcmp(cmd, "env") || !ft_strcmp(cmd, "pmish"))
 	{
 		t_process_cmd_free(process);
 		return (1);

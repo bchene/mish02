@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 16:30:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/20 17:05:19 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ void	t_file_heredoc(t_file *tfile, int openfile, t_mish *mish)
 {	
 	t_file_line_heredoc(tfile, mish);
 	if (openfile == 0)
+	{
+		tfile->fd = -2;
 		return ;
+	}
 	tfile->path = ft_strdupfree(tfile->path, ".heredoc");
 	while (access(tfile->path, F_OK) == 0)
 	{
