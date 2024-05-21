@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 17:00:25 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/21 16:44:39 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@
 t_file	*t_file_new(t_mish *mish, char *path, t_tfile_type type);
 void	t_file_free(t_file **tf);
 void	t_file_del(t_file **tf);
-void	t_process_iofiles_error(t_process *p, int en, char *path);
+void	t_process_iofiles_error(t_process *p, int en, char *path, int *err);
 
 /*						*/
 /* 61_p_files_open		*/
-//void	t_process_open_iofiles(t_process *process);
-void	t_process_open_infiles(t_process *p, t_tfile_type type);
-void	t_process_open_outfiles(t_process *p);
+// void	t_process_open_infiles(t_process *p, t_tfile_type type);
+// void	t_process_open_outfiles(t_process *p);
+void	mish_open_iofiles(t_mish *mish);
+void	t_process_open_heredoc(t_process *p, int openfile);
+void	t_process_open_iofiles(t_process *p, int *err);
+
 /*						*/
 /* 62_p_files_close		*/
-void	t_process_close_infile(t_process *p);
-void	t_process_close_outfile(t_process *p);
+void	t_process_close_iofile(t_process *p);
 void	mish_p_iofiles_close(t_mish *mish);
 void	mish_heredocs_unlink(t_mish *mish);
 

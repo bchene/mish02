@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:17:07 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 15:02:51 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/21 16:30:22 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_err_type	t_process_pipe_fds(t_process *process)
 
 t_err_type	t_process_dup_io(t_process *p)
 {
-	if (t_process_iofile_get(p, 0) < 3)
+	if (t_process_iofile_getfd(p, 0) < 3)
 	{
 		if (p->index != 0)
 			if (dup2((p->mish->fds)[p->index][0], STDIN_FILENO) == -1)
@@ -54,10 +54,10 @@ t_err_type	t_process_dup_io(t_process *p)
 	}
 	else
 	{
-		if (dup2(t_process_iofile_get(p, 0), STDIN_FILENO) == -1)
+		if (dup2(t_process_iofile_getfd(p, 0), STDIN_FILENO) == -1)
 			mish_error_add(p->mish, err_dup2, errno, "dup2 fd_in");
 	}
-	if (t_process_iofile_get(p, 1) < 3)
+	if (t_process_iofile_getfd(p, 1) < 3)
 	{
 		if (p->index != p->mish->nb - 1)
 			if (dup2((p->mish->fds)[p->index + 1][1], STDOUT_FILENO) == -1)
@@ -65,7 +65,7 @@ t_err_type	t_process_dup_io(t_process *p)
 	}
 	else
 	{
-		if (dup2(t_process_iofile_get(p, 1), STDOUT_FILENO) == -1)
+		if (dup2(t_process_iofile_getfd(p, 1), STDOUT_FILENO) == -1)
 			mish_error_add(p->mish, err_dup2, errno, "dup2 fd_out");
 	}
 	mish_p_iofiles_close(p->mish);

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:10:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 16:35:52 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/21 15:49:24 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef enum e_err_type
 typedef enum e_tfile_type
 {
 	tf_none,
-	tf_ifile_rdonly,
 	tf_ifile_heredoc,
+	tf_ifile_rdonly,
 	tf_ofile_creat,
 	tf_ofile_append
 }	t_tfile_type;

@@ -6,17 +6,17 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 17:20:39 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/21 16:44:01 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void	t_process_close_infile(t_process *p)
+void	t_process_close_iofile(t_process *p)
 {
 	t_file	*tfile;
 
-	tfile = p->infiles;
+	tfile = p->iofiles;
 	while (tfile)
 	{
 		if (tfile->fd > 2)
@@ -31,50 +31,21 @@ void	mish_heredocs_unlink(t_mish *mish)
 	t_file		*tfile;
 	int			i;
 
-
 	i = -1;
 	while( ++i < mish->nb && ((mish->p) + i))
 	{
 		p = (mish->p) + i;
-		tfile = p->infiles;
-		if(tfile == NULL)
-			break;
-		while(tfile && tfile->next)
-			tfile = tfile->next;
-		if (tfile->type == tf_ifile_heredoc)
-			if(unlink(tfile->path) != 0)
-				perror("minishell: file deleting error :");
-	}
-}
-
-void	t_process_close_outfile(t_process *p)
-{
-	t_file	*tfile;
-
-	tfile = p->outfiles;
-	while (tfile)
-	{
-		if (tfile->fd > 2)
-			close_reset_fd(&(tfile->fd));
-		tfile = tfile->next;
-	}
-}
-/*
-void	t_process_iofiles_closeother(t_process *p)
-{
-	int	i;
-
-	i = -1;
-	while (++i < p->mish->nb)
-	{
-		if (i != p->index)
+		tfile = p->iofiles;
+		while(tfile)
 		{
-			t_process_close_infile((p->mish->p) + i);
-			t_process_close_outfile((p->mish->p) + i);
+			if (tfile->type == tf_ifile_heredoc && \
+			tfile == t_process_iofile_get(p, 0))
+				if(unlink(tfile->path) != 0)
+					perror("minishell: file deleting error :");
+			tfile = tfile->next;
 		}
 	}
 }
-*/
 
 void	mish_p_iofiles_close(t_mish *mish)
 {
@@ -83,7 +54,6 @@ void	mish_p_iofiles_close(t_mish *mish)
 	i = -1;
 	while (++i < mish->nb)
 	{
-		t_process_close_infile((mish->p) + i);
-		t_process_close_outfile((mish->p) + i);
+		t_process_close_iofile((mish->p) + i);
 	}
 }

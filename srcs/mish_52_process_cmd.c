@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 19:00:47 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/21 17:24:42 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,28 @@ void	t_process_cmd_setempty(t_process *process)
 
 int	t_process_cmd_isempty(t_process *process)
 {
-	/* gerer le cas chaine vide "" differement  et NULL*/
-	/* fprintf(stderr,"t_process_cmd_isempty av=%p av[0]=%p\n",
-	 process->av, process->av[0]); */
-	if (process->av == NULL || process->ac == 0)
+	if (process->av == NULL)
 	{
 		mish_error_add(process->mish, err_malloc, errno, "process->av == NULL");
 		return(0);
 	}
-	else if ((process->av)[0] == NULL)
+	else if ((process->av)[0] == NULL || (process->av)[0][0] == '\0')
+	{
+		t_process_cmd_setempty(process);
 		return (1);
-	else if ((process->av)[0][0] == '\0' || !ft_strcmp((process->av)[0], "\"\"") \
+	}
+	// A TESTER
+	/*
+	else if (!ft_strcmp((process->av)[0], "\"\"") \
 	|| !ft_strcmp((process->av)[0], "\'\'"))
 	{
 		if (!ft_strcmp((process->av)[0], "\"\""))
-		{
-			printf("p->av[0] = %s\n", process->av[0]);
 			write(2 ,"\"\": command not found\n" , 23);
-		}
 		else if (!ft_strcmp((process->av)[0], "\'\'"))
 			write(2 ,"\'\': command not found\n" , 23);
-		t_process_cmd_free(process);
-		return (1);
+		return (0);
 	}
+	*/
 	return (0);
 }
 

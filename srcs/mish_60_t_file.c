@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 09:41:50 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/21 14:47:58 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,15 @@ void	t_file_del(t_file	**tf)
 	}
 }
 
-void	t_process_iofiles_error(t_process *p, int en, char *path)
+void	t_process_iofiles_error(t_process *p, int en, char *path, int *err)
 {
-	if (p->av || (p->av)[0])
+	mish_error_print(en, path);	
+	if (p)
 		t_process_cmd_setempty(p);
-	mish_error_print(en, path);
+	// mish_p_iofiles_close(p->mish);
+	// ou
+	t_process_iofile_add(p, "error", tf_ifile_rdonly);
+	t_process_iofile_add(p, "error", tf_ofile_creat);
+	*err = en;
+	// set exit var
 }

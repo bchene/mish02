@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 19:48:13 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/21 16:03:46 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ void		t_process_print(t_process *p);
 /*						*/
 /* 51_process_iofiles	*/
 t_file		*t_process_iofile_add(t_process *p, char *path, t_tfile_type type);
-int			t_process_iofile_get(t_process *process, int inorout);
+t_file      *t_process_iofile_get(t_process *process, int inorout);
+int         t_process_iofile_getfd(t_process *process, int inorout);
 void		t_process_iofile_print(t_process *process);
+
 t_file		*t_process_line_to_file(t_process *p, char *line);
 void		t_file_add_back_rec(t_file **lst, t_file *new);
-t_file		*t_process_add_file(t_process *p, char *path, t_tfile_type type);
 
 /*					*/
 /* 52_process_cmd	*/

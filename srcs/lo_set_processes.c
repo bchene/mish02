@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_set_processes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:54:13 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/15 17:47:56 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:26:58 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ void    t_process_t_file_set(t_process *p, char **io_files)
 			tmp = t_process_line_to_file(p, io_files[i]);
 			if (tmp)
 			{
-				if (tmp->type == tf_ifile_rdonly || tmp->type == tf_ifile_heredoc)
-					t_file_add_back_rec(&(p)->infiles, tmp);
-				else if (tmp->type != tf_none)
-					t_file_add_back_rec(&(p)->outfiles, tmp);
+				if (tmp->type != tf_none)
+					t_file_add_back_rec(&(p)->iofiles, tmp);
 				else
 				{
 					free(tmp);

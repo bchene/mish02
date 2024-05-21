@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 16:57:41 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/21 16:25:44 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ t_err_type	mish_p_init(t_mish *mish, int index, char *line)
 	process->ac = 0;
 	process->av = NULL;
 	process->cmd = NULL;
-	process->infiles = NULL;
-	process->outfiles = NULL;
+	process->iofiles = NULL;
 	return (0);
 }
 
@@ -79,14 +78,8 @@ t_err_type	mish_p_parse(t_mish *mish)
 		if (!t_process_cmd_isempty((mish->p) + i))
 			if (!t_process_cmd_isbuiltin((mish->p) + i))
 				t_process_cmd_get((mish->p) + i);
-		t_process_open_infiles((mish->p) + i, tf_ifile_heredoc);
 	}
-	i = -1;
-	while (++i < mish->nb)
-	{
-		t_process_open_infiles((mish->p) + i, tf_ifile_rdonly);
-		t_process_open_outfiles((mish->p) + i);
-	}
+	mish_open_iofiles(mish);
 	return (0);
 }
 
