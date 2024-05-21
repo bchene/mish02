@@ -6,11 +6,20 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 16:57:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/20 20:48:08 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
+
+/*
+revoir l ouverture
+faire l ensemble des here docs
+puis
+faire l enseble des ouverture tant que ca marche sinon exit.
+faire la boucle des ouverture dans iofileopen et traiter les sorties
+
+*/
 
 void	t_process_open_infiles(t_process *p, t_tfile_type type)
 {
