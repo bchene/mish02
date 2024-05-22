@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 13:17:45 by bchene            #+#    #+#              #
-#    Updated: 2024/05/22 12:58:24 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/22 21:34:21 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS_LIBFT =	ft_atoi.c		ft_itoa.c \
 				ft_isalnum.c	ft_isalpha.c 	ft_isascii.c	ft_isdigit.c \
-				ft_isprint.c \
+				ft_isprint.c	ft_isstr.c \
 				ft_memchr.c		ft_memcmp.c		ft_memcpy.c		ft_memmove.c \
 				ft_memset.c		ft_bzero.c		ft_calloc.c \
 				ft_strchr.c		ft_strdup.c		ft_strlcat.c 	ft_strlcpy.c \

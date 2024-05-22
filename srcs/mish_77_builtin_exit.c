@@ -6,15 +6,113 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 16:14:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 21:41:53 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
+/*
+si ac == 1
+	fontionnne et retourne 0
+
+sinon si arg 1 est un entier
+
+	si ac == 2
+	on prend sa valeur %256 de > 0 a 256
+	si n negatif ret = 256 - n % 256)
+	fontionnne et retourne le bon n
+
+	si ac > 2
+	bash: exit: too many arguments
+	ne fonctionne pas
+
+sinon si arg 1 n est pas un entier
+
+	bash: exit: a: numeric argument required
+	fonctionnne qd meme
+	exstat = 2
+
+		si arg 1 entier 
+		si 1 argument n est pas un chiffre alors ne marche pas
+		bash: exit: too many arguments
+*/
+
+/*
+int	ft_isstr_number(const char *str)
+{
+	if(str == NULL || *str == '\0')
+		return (0);
+	while(ft_isspace(*str))
+		str++;
+	if(*str == '+' || *str == '-')
+		str++;
+	while(*str)
+	{
+		if(!ft_isdigit(*str))
+			return(0);
+		str++;
+	}
+	return (1);
+}
+
+long long	ft_isstr_longlong(const char *nptr)
+{
+	long long	num;
+	int			i;
+
+	if (ft_strcmp(nptr, "-9223372036854775808") == 0)
+		return (1);
+	if (ft_is_strnumber(nptr) == 0)
+		return (0);
+	i = 0;
+	while ((9 <= nptr[i] && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+		i++;
+	num = 0;
+	while ('0' <= nptr[i] && nptr[i] <= '9')
+	{
+		if (num > (nptr[i] - '0') + num * 10)
+			return (0);
+		num = (nptr[i] - '0') + num * 10;
+		i++;
+	}
+	return (1);
+}
+*/
+
+void static	mish_error_add_exit(t_mish *mish)
+{
+	if(mish->nb == 1)
+	{
+		write (1, "exit\n", ft_strlen("exit\n"));
+		mish_error_add(mish, err_exit, 0, "exit");
+	}
+}
+
 /* exit with no options */
 void	builtin_exit(t_process *process)
 {
-	(void) process;
-	//mish_exit_status_set(process->mish ,0);
+	if (process->ac == 1) // exit
+	{
+		mish_exit_status_set(process->mish ,0);
+		mish_error_add_exit(process->mish);
+	}
+	else if(ft_isstr_longlong(process->av[1]))
+	{
+		if (process->ac == 2) // exit 42
+		{
+			mish_exit_status_set(process->mish ,ft_atoll(process->av[1]) % 256);
+			mish_error_add_exit(process->mish);
+		}
+		else // exit 42 1 ou // exit 42 a
+			builtin_error(process, "bash: exit: too many arguments\n", 1);
+	}
+	else
+	{
+		write(2, "bash: exit: numeric argument required\n", 39);
+		mish_exit_status_set(process->mish ,2);
+		mish_error_add_exit(process->mish);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 16:15:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 18:04:51 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ void	builtin_no_cmd(t_process *process)
 void	builtin_no_access_cmd(t_process *process)
 {
 	char	*str;
-	
-	str = ft_strjoin(process->cmd, ": command not found\n");
+
+	str = ft_strjoin(process->av[0], ": command not found\n");
 	if (str)
 	{
 		builtin_error(process, str, 127);
 		free(str);
 	}
-	// mish_error_add(process->mish, err_access, 13, process->cmd);
 }

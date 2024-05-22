@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:26:04 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 14:58:06 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 20:01:36 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ void	mish_error_treat(t_mish *mish)
 			write(2, "minishell: syntax error \' not closed\n", 37);
 		else if( error->type == err_dquote_open)
 			write(2, "minishell: syntax error \" not closed\n", 37);
-		else if( error->type == err_access)
-		{
-			write(2, error->data, ft_strlen(error->data));
-			write(2, ": command not found\n", 21);
-		}
 		else if( error->type == err_token_unexpected)
 		{
 			write(2, "minishell: err_token_unexpected `", 34);
@@ -67,11 +62,9 @@ void	mish_error_treat_exit(t_mish *mish)
 	while (error)
 	{
 		// if PID==parent...
-		if( error->type == err_exit && mish->nb == 1)
-		{
-			write(2, "exit\n", 6);
+		// if( error->type == err_exit && mish->nb == 1)
+		if( error->type == err_exit)
 			return;
-		}
 		error = error->next;
 	}
 	t_error_lst_free(&(mish->error));

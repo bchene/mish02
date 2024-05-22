@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 14:34:05 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 20:01:53 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ char	*t_process_cmd_get(t_process *process)
 		free(str);
 		i++;
 	}
-	str = ft_strdup((process->av)[0]);
-	process->cmd = str;
+	process->cmd = NULL;
+	//free ((process->av)[0]);
+	//(process->av)[0] = ft_strdup("no_access_cmd");
+	// str = ft_strdup((process->av)[0]);
+	// process->cmd = str;
 	return (str);
 }
 
@@ -88,21 +91,21 @@ int	t_process_cmd_isbuiltin(t_process *process)
 	char *cmd;
 
 	cmd = (process->av)[0];
-	if ( (process->av)[0] == NULL || !ft_strcmp(cmd, "echoTEST") \
+	if ( (process->av)[0] == NULL || !ft_strcmp(cmd, "echo") \
 	|| !ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "pwd") \
-	|| !ft_strcmp(cmd, "exportTEST") || !ft_strcmp(cmd, "unsetTEST") \
-	|| !ft_strcmp(cmd, "env") || !ft_strcmp(cmd, "pmish") || \
-	!ft_strcmp(cmd, "pes"))
+	|| !ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset") \
+	|| !ft_strcmp(cmd, "env") || !ft_strcmp(cmd, "exit") \
+	|| !ft_strcmp(cmd, "pmish") || !ft_strcmp(cmd, "pes"))
 	{
 		t_process_cmd_free(process);
 		return (1);
 	}
-	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd) + 1))
-	{
-		if (process->mish->nb == 1)
-			mish_error_add(process->mish, err_exit, 0, "exit");
-		t_process_cmd_setempty(process);
-		return (2);
-	}
+	// else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd) + 1))
+	// {
+	// 	if (process->mish->nb == 1)
+	// 		mish_error_add(process->mish, err_exit, 0, "exit");
+	// 	t_process_cmd_setempty(process);
+	// 	return (2);
+	// }
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:10:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/21 15:49:24 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 18:01:58 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef enum e_err_type
 	err_dup2,
 	err_pipe,
 	err_fork,
-	err_access,
 	err_execve,
 	err_quote_open,
 	err_dquote_open,

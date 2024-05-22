@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:23:07 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 13:35:08 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 21:38:53 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_list
 }	t_list;
 
 int				ft_atoi(const char *nptr);
+long long		ft_atoll(const char *nptr);
 char			*ft_itoa(int n);
 
 int				ft_isalnum(int c);
@@ -29,6 +30,10 @@ int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
+
+int				ft_isstr_number(const char *str);
+int				ft_isstr_int(const char *nptr);
+int				ft_isstr_longlong(const char *nptr);
 
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);

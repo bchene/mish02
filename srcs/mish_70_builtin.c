@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 16:19:39 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 19:57:14 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,28 @@
 
 void	t_process_builtin(t_process *process)
 {
-	char *cmd;
-
-	cmd = (process->av)[0];
-	if (cmd == NULL) 
+	if ((process->av)[0] == NULL) 
 		builtin_no_cmd(process);
-	if (!ft_strcmp(cmd, "echoTEST")) 
+	if (!ft_strcmp((process->av)[0], "echo")) 
 		builtin_echo(process);
-	else if (!ft_strcmp(cmd, "cd"))
+	else if (!ft_strcmp((process->av)[0], "cd"))
 		builtin_cd(process);
-	else if (!ft_strcmp(cmd, "pwd"))
+	else if (!ft_strcmp((process->av)[0], "pwd"))
 		builtin_pwd(process);
-	else if (!ft_strcmp(cmd, "exportTEST"))
+	else if (!ft_strcmp((process->av)[0], "export"))
 		builtin_export(process);
-	else if (!ft_strcmp(cmd, "unsetTEST"))
+	else if (!ft_strcmp((process->av)[0], "unset"))
 		builtin_unset(process);
-	else if (!ft_strcmp(cmd, "env"))
+	else if (!ft_strcmp((process->av)[0], "env"))
 		builtin_env(process);
-	else if (!ft_strcmp(cmd, "no_access_cmd"))
-		builtin_no_access_cmd(process);
-	else if (!ft_strcmp(cmd, "pmish"))
+	else if (!ft_strcmp((process->av)[0], "exit"))
+		builtin_exit(process);
+	else if (!ft_strcmp((process->av)[0], "pmish"))
 		builtin_pmish(process);
-	else if (!ft_strcmp(cmd, "pes"))
+	else if (!ft_strcmp((process->av)[0], "pes"))
 		builtin_pes(process);
+	else
+		builtin_no_access_cmd(process);
 	builtin_free(process);
 }
 
@@ -50,7 +49,6 @@ void	builtin_free(t_process *process)
 		t_error_lst_free(&(process->mish->error));
 		exstat = mish_exit_status_get(process->mish);
 		mish_free(process->mish, 0);
-		fprintf(stderr, "exit(%i)\n", exstat);
 		exit (exstat);
 	}
 }
