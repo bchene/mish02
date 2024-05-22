@@ -6,7 +6,7 @@
 /*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 18:56:50 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:06:51 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,20 @@ char    **mish_substitute_strtab(t_mish *mish, int f(char *, int), char **strtab
 /* lo_set_processes */
 t_tfile_type	t_file_line_get_type(char *line);
 char			*t_file_line_get_path(char *line);
-void			t_process_t_file_set(t_process *p, char **io_files);
-void			t_process_arg_set(t_process *p, char **args);
+//void			t_process_t_file_set(t_process *p, char **iofiles);
+//void			t_process_args_set(t_process *p, char **args);
+//void          t_process_iofiles_args_set(t_process *p, char **iofiles, char **args);
 void			t_process_set(t_process *p);
 
 /* lo_strtab_if */
 // int  strtab_count_if(char **split, t_tfile_type f(char *), int b);
 // int  strtab_set_if(char **dst, char **src, t_tfile_type f(char *), int b);
 char    **strtab_dup_if(char **src, t_tfile_type f(char *), int b);
+
+/* ft_strjoin_tab */
+size_t  ft_strlen_tab(char **strtab);
+char    *ft_strcpy_tab(char *dst, char **srcs, char sep);
+char    *ft_strjoin_tab(char **strtab, char sep);
 
 /* lo_mish_parse_line.c */
 t_err_type  mish_first_substitution(t_mish *mish);

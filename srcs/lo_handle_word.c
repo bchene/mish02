@@ -6,7 +6,7 @@
 /*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:12:38 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/14 16:13:42 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:27:21 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ int	handle_word(char *str, char *sep, int i)
 		j = handle_specials(str, i);
 	while (str[i + j] && !is_in_str(sep, str[i + j]) // else (avant)
 			&& !is_in_str(SPECIAL_SEP, str[i + j]))
-		j++;
+	{
+		if (is_in_str("\'\"", str[i + j]))
+			j += handle_quotes(str, i + j, str[i + j]); //////
+		else
+			j++;
+	}
 	return (j);
 }

@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 13:17:45 by bchene            #+#    #+#              #
-#    Updated: 2024/04/24 15:49:11 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/22 12:58:24 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ OBJS = ${SRCS:.c=.o}
 all : ${NAME}
 
 $(NAME) : ${OBJS}
+	@echo "\001\e[1;32m\002Compiling libft.a \001\e[0m\002"
 	ar -rcs ${NAME} ${OBJS}
 
 clean :

@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_75_builtin_nocmd_pmish.c                      :+:      :+:    :+:   */
+/*   mish_76_builtin_env.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 18:06:06 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 16:14:08 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void	builtin_no_cmd(t_process *process)
+/* env with no options or arguments */
+void	builtin_env(t_process *process)
 {
-	builtin_free(process);
-}
-
-void	builtin_no_access_cmd(t_process *process)
-{
-	mish_error_add(process->mish, err_access, 13, process->cmd);
-	builtin_free(process);
-}
-
-void	builtin_pmish(t_process *process)
-{
-	mish_print(process->mish);
-	builtin_free(process);
+	t_env_print(process->mish->env);
+	mish_exit_status_set(process->mish ,0);
 }

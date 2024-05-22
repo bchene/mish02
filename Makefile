@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/05/20 19:29:24 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/22 17:01:59 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ CFLAGS = 	-Wall -Wextra -Werror -g
 HEADERS = 	-I ./includes -I ./libs/libft
 LIBS = 		./libs/libft/libft.a
 
-# lister les fichier sous forme de colone a partir de srcs/ : 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
 SRCS =		lo_check_open_quotes.c \
 			lo_check_syntax_error.c \
@@ -32,6 +31,7 @@ SRCS =		lo_check_open_quotes.c \
 			lo_remove_quotes.c \
 			lo_set_processes.c \
 			lo_signals.c \
+			lo_ft_strjoin_tab.c \
 			lo_strtab_if.c \
 			lo_substitute_2.c \
 			lo_substitute.c \
@@ -66,10 +66,15 @@ SRCS =		lo_check_open_quotes.c \
 			mish_62_p_files_close.c \
 			mish_63_p_files_heredoc.c \
 			mish_70_builtin.c \
-			mish_71_builtin_nocmd_pmish.c \
-			mish_72_builtin_echo_cd_pwd.c \
-			mish_73_builtin_export.c \
-			mish_74_builtin_env_unset.c \
+			mish_71_builtin_echo.c \
+			mish_72_builtin_cd.c \
+			mish_73_builtin_pwd.c \
+			mish_74_builtin_export.c \
+			mish_75_builtin_unset.c \
+			mish_76_builtin_env.c \
+			mish_77_builtin_exit.c \
+			mish_78_builtin_nocmd_noaccess.c \
+			mish_79_builtin_pmish_pes.c \
 			mish_90_ft_strjoin_va.c \
 			mish_91_ft_00.c \
 			mish_91_ft_01.c
@@ -77,36 +82,44 @@ SRCS =		lo_check_open_quotes.c \
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 all: libft $(NAME)
+	@echo "\001\e[1;32m\002Compilation OK \001\e[0m\002"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	test -d $(OBJS_DIR) || mkdir $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
+	@test -d $(OBJS_DIR) || mkdir $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) -lreadline
-	
+	@echo "\001\e[1;32m\002Compiling minishell \001\e[0m\002"
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) -lreadline
+
+# make libft.a	
 libft:
-	make --no-print-directory -C ./libs/libft
+	@make --no-print-directory -C ./libs/libft -s
 
+# make and gdb
 gdb: all
-	gdb -tui $(NAME)
+	@gdb -tui $(NAME)
 
+# make and vallgrind
 valgrind: all
-	clear
-	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --track-fds=yes --suppressions=vsupp ./$(NAME)
+	@clear
+	@valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --track-fds=yes --suppressions=vsupp ./$(NAME)
 
+# make and run
 run: all
-	clear
-	./$(NAME)
+	@clear
+	@./$(NAME)
 
+# clean libs and objects
 clean:
-	rm -rf $(OBJS_DIR)
-	make --no-print-directory -C ./libs/libft clean
+	@rm -rf $(OBJS_DIR)
+	@make --no-print-directory -C ./libs/libft clean -s
 
+# clean everythings done
 fclean: clean
-	rm -rf $(NAME)
-	make --no-print-directory -C ./libs/libft fclean
+	@rm -rf $(NAME)
 
+# clean then make
 re: clean all
 
 .PHONY: all, clean, fclean, re, libft, gdb, valgrind, run

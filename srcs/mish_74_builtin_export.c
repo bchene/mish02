@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_74_builtin_env_unset.c                        :+:      :+:    :+:   */
+/*   mish_74_builtin_export.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 18:14:49 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 16:16:05 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void	builtin_unset(t_process *process)
+/* export with no options */
+void	builtin_export(t_process *process)
 {
 	(void) process;
-}
-
-void	builtin_env(t_process *process)
-{
-	t_env_print(process->mish->env);
-	builtin_free(process);
+	mish_exit_status_set(process->mish ,0);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 14:54:13 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/21 16:26:58 by bchene           ###   ########.fr       */
+/*   Created: 2024/05/22 14:18:33 by locharve          #+#    #+#             */
+/*   Updated: 2024/05/22 17:15:04 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,66 +38,81 @@ char	*t_file_line_get_path(char *line)
 	return (&line[i]);
 }
 
-void    t_process_t_file_set(t_process *p, char **io_files)
+static void	t_process_t_file_set(t_process *p, char **strtab)
 {
 	t_file	*tmp;
-	int	i;
+	int		i;
 
-	if (io_files)
+	i = 0;
+	while (p && strtab && strtab[i] && !t_error_exist(p->mish->error))
 	{
-		i = 0;
-		while (io_files[i])
+		if (t_file_line_get_type(strtab[i]) != tf_ifile_heredoc)
+			strtab[i] = mish_substitute_str(p->mish, NULL, strtab[i]);
+		if (!mish_remove_quotes(p->mish, strtab))
 		{
-			tmp = t_process_line_to_file(p, io_files[i]);
+			tmp = t_process_line_to_file(p, strtab[i]);
+			if (tmp)
+				t_file_add_back_rec(&p->iofiles, tmp);
+		}
+		i++;
+	}
+	return ;
+}
+
+static void	t_process_args_set(t_process *p, char **strtab)
+{
+	char	*tmp;
+	if (p && strtab)
+	{
+		strtab = mish_substitute_strtab(p->mish, &is_between_quotes, strtab);
+		if (strtab)
+		{
+			tmp = ft_strjoin_tab(strtab, ' ');
 			if (tmp)
 			{
-				if (tmp->type != tf_none)
-					t_file_add_back_rec(&(p)->iofiles, tmp);
-				else
+				ft_freesplit(strtab);
+				strtab = mish_split(tmp, ' ');
+				if (strtab && !mish_remove_quotes(p->mish, strtab))
 				{
-					free(tmp);
-					return ;
+					p->av = strtab;
+					p->ac = ft_splitsize(strtab);
 				}
+				free(tmp);
 			}
-			i++;
 		}
 	}
+	return ;
 }
-
-void	t_process_arg_set(t_process *p, char **args)
+static void	t_process_iofiles_args_set(t_process *p, char **iofiles, char **args)
 {
-	if (args)
+	if (iofiles)
 	{
-		p->av = args;
-		p->ac = ft_splitsize(args);
+		t_process_t_file_set(p, iofiles);
+		ft_freesplit(iofiles);
 	}
+	else
+		mish_error_add(p->mish, err_malloc, errno, "t_process_set");
+	if (args)
+		t_process_args_set(p, args);
+	else
+		mish_error_add(p->mish, err_malloc, errno, "t_process_set");
 }
 
-void	t_process_set(t_process *p)
+void    t_process_set(t_process *p)
 {
-	char	**split;
-	char	**io_files;
+    char    **split;
+    char    **iofiles;
 	char	**args;
 
-	split = t_process_split(p, WHITESPACES); // substitution ??
+	split = t_process_split(p, WHITESPACES);
 	if (split)
 	{
-		//mish_substitute_vars(p->mish, split);
-		mish_substitute_strtab(p->mish, is_between_quotes, split);
-		mish_remove_quotes(p->mish, split);
-		io_files = strtab_dup_if(split, t_file_line_get_type, 1);
-		if (io_files)
-			t_process_t_file_set(p, io_files);
-		else
-			mish_error_add(p->mish, err_malloc, errno, "t_process_set malloc io_files");
+		iofiles = strtab_dup_if(split, t_file_line_get_type, 1);
 		args = strtab_dup_if(split, t_file_line_get_type, 0);
-		if (args)
-			t_process_arg_set(p, args);
-		else
-			mish_error_add(p->mish, err_malloc, errno, "t_process_set malloc args");
-		ft_freesplit(io_files);
+		t_process_iofiles_args_set(p, iofiles, args);
 		free(split);
 	}
 	else
-		mish_error_add(p->mish, err_malloc, errno, "t_process_set malloc split");
+		mish_error_add(p->mish, err_malloc, errno, "t_process_set");
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:21:00 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 19:46:54 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 15:55:35 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ int	g_signal;
 
 int	mish_continue(t_mish *mish)
 {
-	if (mish_exit_status_get(mish) == 42)
-	{
-		return (0);
-	}
-	else if (t_error_exist(mish->error))
+	if (t_error_exist(mish->error))
 	{
 		return (0);
 	}

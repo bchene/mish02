@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/21 17:24:42 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 14:34:05 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int	t_process_cmd_isbuiltin(t_process *process)
 	if ( (process->av)[0] == NULL || !ft_strcmp(cmd, "echoTEST") \
 	|| !ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "pwd") \
 	|| !ft_strcmp(cmd, "exportTEST") || !ft_strcmp(cmd, "unsetTEST") \
-	|| !ft_strcmp(cmd, "env") || !ft_strcmp(cmd, "pmish"))
+	|| !ft_strcmp(cmd, "env") || !ft_strcmp(cmd, "pmish") || \
+	!ft_strcmp(cmd, "pes"))
 	{
 		t_process_cmd_free(process);
 		return (1);

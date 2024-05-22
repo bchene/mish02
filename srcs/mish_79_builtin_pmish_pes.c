@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_72_builtin_echo_cd_pwd.c                      :+:      :+:    :+:   */
+/*   mish_79_builtin_pmish_pes.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 20:17:39 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/22 16:15:57 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-#include "limits.h"
 
-void	builtin_echo(t_process *process)
+/* debug cmd : Command qui affiche mish_print */
+void	builtin_pmish(t_process *process)
 {
-	(void) process;
+	mish_print(process->mish);
+	mish_exit_status_set(process->mish ,0);
 }
 
-void	builtin_cd(t_process *p)
+/* debug cmd : Command qui affiche exit_stat */
+void	builtin_pes(t_process *process)
 {
-	if (p->ac != 1 && p->ac != 2)
-		builtin_error(p, "minishell: cd: too many arguments\n", 2);
-	builtin_no_cmd(p);
-}
-
-void	builtin_pwd(t_process *process)
-{
-	char *pwd;
-
-	if (process->ac == 1)
-	{
-		pwd = mish_env_get(process->mish, "PWD");
-		if (pwd)
-			printf("%s\n", pwd);
-	}
-	else
-		builtin_error(process, "minishell: pwd: too many arguments\n", 2);
+	printf("exit status = %i\n", mish_exit_status_get(process->mish));
+	mish_exit_status_set(process->mish ,0);
 }

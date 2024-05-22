@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_01_mish_11_exit_status.c                      :+:      :+:    :+:   */
+/*   mish_78_builtin_nocmd_noaccess.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 16:10:45 by bchene           ###   ########.fr       */
+/*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
+/*   Updated: 2024/05/22 16:15:53 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void	mish_exit_status_set(t_mish *mish, int value)
+/* empty cmd with no args */
+void	builtin_no_cmd(t_process *process)
 {
-	char	*str;
-
-	str = ft_itoa(value);
-	mish_unset_set(mish, "?", str);
-	free (str);
+	//(void) process;
+	mish_exit_status_set(process->mish ,0);
 }
 
-int	mish_exit_status_get(t_mish *mish)
+/* minishell: Command 'p->cmd' not found */
+void	builtin_no_access_cmd(t_process *process)
 {
-	char	*s;
-	int		ret;
-
-	s = mish_unset_get(mish, "?");
-	if (s == NULL || ft_strlen(s) == 0)
+	char	*str;
+	
+	str = ft_strjoin(process->cmd, ": command not found\n");
+	if (str)
 	{
-		mish_exit_status_set(mish, 0);
-		return (0);
+		builtin_error(process, str, 127);
+		free(str);
 	}
-	ret = ft_atoi(s);
-	return (ret);
+	// mish_error_add(process->mish, err_access, 13, process->cmd);
 }
