@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 21:41:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/23 13:45:49 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,50 +38,6 @@ sinon si arg 1 n est pas un entier
 		bash: exit: too many arguments
 */
 
-/*
-int	ft_isstr_number(const char *str)
-{
-	if(str == NULL || *str == '\0')
-		return (0);
-	while(ft_isspace(*str))
-		str++;
-	if(*str == '+' || *str == '-')
-		str++;
-	while(*str)
-	{
-		if(!ft_isdigit(*str))
-			return(0);
-		str++;
-	}
-	return (1);
-}
-
-long long	ft_isstr_longlong(const char *nptr)
-{
-	long long	num;
-	int			i;
-
-	if (ft_strcmp(nptr, "-9223372036854775808") == 0)
-		return (1);
-	if (ft_is_strnumber(nptr) == 0)
-		return (0);
-	i = 0;
-	while ((9 <= nptr[i] && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
-		i++;
-	num = 0;
-	while ('0' <= nptr[i] && nptr[i] <= '9')
-	{
-		if (num > (nptr[i] - '0') + num * 10)
-			return (0);
-		num = (nptr[i] - '0') + num * 10;
-		i++;
-	}
-	return (1);
-}
-*/
-
 void static	mish_error_add_exit(t_mish *mish)
 {
 	if(mish->nb == 1)
@@ -95,10 +51,7 @@ void static	mish_error_add_exit(t_mish *mish)
 void	builtin_exit(t_process *process)
 {
 	if (process->ac == 1) // exit
-	{
-		mish_exit_status_set(process->mish ,0);
 		mish_error_add_exit(process->mish);
-	}
 	else if(ft_isstr_longlong(process->av[1]))
 	{
 		if (process->ac == 2) // exit 42
