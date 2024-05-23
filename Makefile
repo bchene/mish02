@@ -6,7 +6,7 @@
 #    By: bchene <bchene@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/25 16:18:12 by bchene            #+#    #+#              #
-#    Updated: 2024/05/22 17:01:59 by bchene           ###   ########.fr        #
+#    Updated: 2024/05/23 13:55:34 by bchene           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS =		lo_check_open_quotes.c \
 			lo_set_processes.c \
 			lo_signals.c \
 			lo_ft_strjoin_tab.c \
+			lo_strtab.c \
 			lo_strtab_if.c \
 			lo_substitute_2.c \
 			lo_substitute.c \

@@ -6,37 +6,11 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 13:45:49 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/23 14:51:22 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-
-/*
-si ac == 1
-	fontionnne et retourne 0
-
-sinon si arg 1 est un entier
-
-	si ac == 2
-	on prend sa valeur %256 de > 0 a 256
-	si n negatif ret = 256 - n % 256)
-	fontionnne et retourne le bon n
-
-	si ac > 2
-	bash: exit: too many arguments
-	ne fonctionne pas
-
-sinon si arg 1 n est pas un entier
-
-	bash: exit: a: numeric argument required
-	fonctionnne qd meme
-	exstat = 2
-
-		si arg 1 entier 
-		si 1 argument n est pas un chiffre alors ne marche pas
-		bash: exit: too many arguments
-*/
 
 void static	mish_error_add_exit(t_mish *mish)
 {
@@ -69,3 +43,29 @@ void	builtin_exit(t_process *process)
 		mish_error_add_exit(process->mish);
 	}
 }
+
+/*
+si ac == 1
+	fontionnne et retourne 0
+
+sinon si arg 1 est un entier
+
+	si ac == 2
+	on prend sa valeur %256 de > 0 a 256
+	si n negatif ret = 256 - n % 256)
+	fontionnne et retourne le bon n
+
+	si ac > 2
+	bash: exit: too many arguments
+	ne fonctionne pas
+
+sinon si arg 1 n est pas un entier
+
+	bash: exit: a: numeric argument required
+	fonctionnne qd meme
+	exstat = 2
+
+		si arg 1 entier 
+		si 1 argument n est pas un chiffre alors ne marche pas
+		bash: exit: too many arguments
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mish_proto_lo.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 16:06:51 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:55:01 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@ char    *ft_strjoin_tab(char **strtab, char sep);
 t_err_type  mish_first_substitution(t_mish *mish);
 t_err_type  mish_check_line(t_mish *mish);
 // t_err_type  mish_parse_process_line(t_mish *mish);
+
+/* lo_strtab.c */
+char	**strtab_addstr(char **strtab, char *str);
+void	strtab_print(char **strtab, char *sep);
 
 //////////////////////////
 /*			zz			*/
