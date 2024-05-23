@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 16:10:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/23 17:02:08 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	mish_exit_status_set(t_mish *mish, int value)
 	char	*str;
 
 	str = ft_itoa(value);
-	mish_unset_set(mish, "?", str);
+	t_env_setstr(mish->unset, "?", str);
+	//mish_unset_set(mish, "?", str);
 	free (str);
 }
 
@@ -26,7 +27,7 @@ int	mish_exit_status_get(t_mish *mish)
 	char	*s;
 	int		ret;
 
-	s = mish_unset_get(mish, "?");
+	s = t_env_getdata(mish->unset, "?");
 	if (s == NULL || ft_strlen(s) == 0)
 	{
 		mish_exit_status_set(mish, 0);

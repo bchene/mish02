@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 15:28:38 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/23 16:40:49 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char		*mish_unset_get(t_mish *mish, char *var);
 int			mish_unset_set(t_mish *mish, char *var, char *value);
 int			mish_unset_remove(t_mish *mish, char *var);
 int			mish_unset_export(t_mish *mish, char *var, char *value);
-int			mish_unset_valid_name(char *str);
 /* 01-10	mish_env_unset */
 void		mish_env_unset_init(t_mish *mish, char **envp);
 void		mish_env_unset_free(t_mish *mish);
@@ -91,9 +90,11 @@ t_env		*t_env_add(t_env **env, char *str);
 void		t_env_del(t_env **env);
 void		t_env_free(t_env **env);
 int			t_env_remove(t_env **env, t_env *to_remove);
+
 t_env		*t_env_getvar(t_env *env, char *var);
 char		*t_env_getdata(t_env *env, char *var);
 int			t_env_setstr(t_env *env, char *var, char *value);
 void		t_env_print(t_env *tenv);
+int			bashvar_name_isvalid(const char *varname);
 
 #endif

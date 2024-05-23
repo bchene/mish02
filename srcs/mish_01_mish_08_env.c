@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 11:12:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/23 17:49:44 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,53 @@ char	*mish_env_get(t_mish *mish, char *var)
 {
 	char	*str;
 
-	str = t_env_getdata(mish->env, var);
-	return (str);
+	if (bashvar_name_isvalid(var))
+	{
+		str = t_env_getdata(mish->env, var);
+		return (str);
+	}
+	return (NULL);
 }
 
 int	mish_env_set(t_mish *mish, char *var, char *value)
 {
 	int	ret;
 
-	if (t_env_getvar(mish->env, var))
-		ret = t_env_setstr(mish->env, var, value);
-	else
-		ret = -1;
-	return (ret);
+	if (bashvar_name_isvalid(var))
+	{
+		if (t_env_getvar(mish->env, var))
+			ret = t_env_setstr(mish->env, var, value);
+		else
+			ret = 0;
+		return (ret);
+	}
+	return (0);
 }
 
 int	mish_env_add(t_mish *mish, char *var, char *value)
 {
 	int	ret;
-
-	// ajouter verification nom var is ok si var n existe pas deja
+	
+	if (bashvar_name_isvalid(var) == 0)
+		return (0);
+	if (t_env_getvar(mish->env, var) == NULL)
+		return (0);
 	ret = t_env_setstr(mish->env, var, value);
-	return (ret);
+		return (ret);
 }
 
 int	mish_env_remove(t_mish *mish, char *var)
 {
+	int		ret;
 	t_env	*tenv;
 
+	if (bashvar_name_isvalid(var) == 0)
+		return (0);
 	tenv = t_env_getvar(mish->env, var);
 	if (tenv)
 	{
-		t_env_remove(&(mish->env), tenv);
-		return (1);
+		ret = t_env_remove(&(mish->env), tenv);
+		return (ret);
 	}
 	return (0);
 }
