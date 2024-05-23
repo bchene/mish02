@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 14:51:22 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/23 15:24:30 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void static	mish_error_add_exit(t_mish *mish)
 /* exit with no options */
 void	builtin_exit(t_process *process)
 {
+	char *str;
+
 	if (process->ac == 1) // exit
 		mish_error_add_exit(process->mish);
 	else if(ft_isstr_longlong(process->av[1]))
@@ -38,9 +40,15 @@ void	builtin_exit(t_process *process)
 	}
 	else
 	{
-		write(2, "bash: exit: numeric argument required\n", 39);
-		mish_exit_status_set(process->mish ,2);
 		mish_error_add_exit(process->mish);
+		str = ft_strjoinva("minishell: exit: ", process->av[1], ": numeric argument required\n", NULL);
+		if (str)
+		{
+			builtin_error(process, str, 2);
+			free (str);
+		}
+		// write(2, "bash: exit: numeric argument required\n", 39);
+		// mish_exit_status_set(process->mish ,2);
 	}
 }
 

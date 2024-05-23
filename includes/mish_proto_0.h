@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 17:18:27 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/23 15:28:38 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void		mish_error_print(int en, char *str);
 void		mish_prompt(t_mish *mish);
 void		mish_prompt_set(t_mish *mish);
 void		mish_prompt_start(t_mish *mish);
-void		mish_prompt_start2(t_mish *mish);
 /* 01-03	mish_line */
 t_err_type	mish_line_parse(t_mish *mish);
 /* 01-04	mish_splitline */

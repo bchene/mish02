@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/09 15:34:34 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/23 15:10:16 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int		is_alphanum_underscore(char c);
 size_t	ft_strlen_while(char *str, int f(char));
 int		char_count(char *str, char c);
 void	strtab_free(char **strtab);
+char	*ft_strjoinva(char *str, ...);
 
 #endif

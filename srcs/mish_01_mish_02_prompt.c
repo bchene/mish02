@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 18:22:52 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/23 15:28:27 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	mish_prompt(t_mish *mish)
 {
 	if (mish->prompt == NULL)
 	{
-		mish_prompt_start2(mish);
+		mish_prompt_start(mish);
 		mish->prompt = ft_strempty(mish->prompt);
 		mish_prompt(mish);
 		return ;
@@ -74,31 +74,7 @@ void	mish_prompt_start(t_mish *mish)
 {
 	char	*str;
 
-	str = ft_strjoin_va("", \
-	"\001\e[0;32m\002", \
-	"        .__       .__       .__           .__  .__   \n", \
-	"  _____ |__| ____ |__| _____|  |__   ____ |  | |  |  \n", \
-	" /     \\|  |/    \\|  |/  ___/  |  \\_/ __ \\|  | |  |  \n", \
-	"|  Y Y  \\  |   |  \\  |\\___ \\|   Y  \\  ___/|  |_|  |__\n", \
-	"|__|_|  /__|___|  /__/____  >___|  /\\___  >____/____/\n", \
-	"      \\/        \\/        \\/     \\/     \\/           \n", \
-	"\001\e[0;32m\002", \
-	"                       Louis Charvet & Benjamin Chêne\n\n\n", \
-	NULL);
-	if (str)
-	{
-		printf("%s", str);
-		free(str);
-	}
-	else
-		mish_error_add(mish, err_malloc, errno, "malloc mish_prompt_start");
-}
-
-void	mish_prompt_start2(t_mish *mish)
-{
-	char	*str;
-
-	str = ft_strjoin_va("", \
+	str = ft_strjoinva("", \
 "\001\e[0;32m\002", \
 "              d8b          d8b          888               888 888\n", \
 "              Y8P          Y8P          888               888 888\n", \
