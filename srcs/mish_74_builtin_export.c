@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 12:42:39 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 16:26:38 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,81 @@ exsta =1
 
 #include "mish.h"
 
+int	t_env_size(t_env *tenv)
+{
+	int	i;
+	
+	i = 0;
+	while(tenv)
+	{
+		i ++;
+		tenv = tenv->next;
+	}
+	return (i);
+}
+
+void	ft_strswap(char **str1, char **str2)
+{
+	char *buf;
+
+	buf = *str1;
+	*str1 = *str2;
+	*str2 = buf;
+}
+
+void	ft_sort_split(char **split)
+{
+	int		i;
+	int		size;
+
+	size = ft_splitsize(split);
+	while (size > 1)
+	{
+		i = 0;
+		while (++i < size)
+		{
+			if (ft_strcmp(split[i], split[i - 1]) < 0)
+				ft_strswap(split + i, split + i - 1);
+		}
+		size--;
+	}
+}
+
+char	**t_env_splitenv_get(t_env *env)
+{
+	char **splitenv;
+	int i;
+
+	i = t_env_size(env);
+	splitenv = malloc((i + 1) * sizeof(char *));
+	splitenv[i] = NULL;
+	while(env)
+	{
+		i--;
+		if(env->data)
+			splitenv[i] = \
+			ft_strjoinva(env->var, "=\"",env->data, "\"\n", NULL);
+		else
+			splitenv[i] = ft_strdup(env->var);
+		env = env->next;
+	}
+	return (splitenv);
+}
+
 static void	builtin_export_print(t_process *process)
 {
-	(void) process;
+	char	**splitenv;
+	int		i;
+
+	splitenv = t_env_splitenv_get(process->mish->env);
+	ft_sort_split(splitenv);
+	i = 0;
+	while(splitenv[i])
+	{
+		printf("declare -x %s\n", splitenv[i]);
+		i++;
+	}
+	ft_freesplit(splitenv);
 }
 
 static void	env_export_str(t_mish *mish, char *str)

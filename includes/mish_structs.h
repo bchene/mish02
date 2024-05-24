@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:12:03 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/21 15:23:20 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 14:35:02 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ typedef struct s_error
 
 typedef struct s_env
 {
-	char	*str;
+	char	*var;
+	char	*data;
 	t_env	*next;
 }	t_env;
 

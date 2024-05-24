@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 17:24:50 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 13:44:03 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	mish_unset_set(t_mish *mish, char *var, char *value)
 	if (bashvar_name_isvalid(var))
 	{
 		if (t_env_getvar(mish->unset, var))
-			ret = t_env_setstr(mish->unset, var, value);
+			ret = t_env_setdata(mish->unset, var, value);
 		else
 			ret = 0;
 		return (ret);

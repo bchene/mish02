@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:20:10 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 10:48:35 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 17:49:13 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,30 @@ static char	*t_process_cd_home_add(t_process *p)
 
 void	mish_cd(t_process *p)
 {
-	char		*pwd;
+	char	*pwd;
+	char	*old;
 
-	if (p->av[1][0] != '/')
+	pwd = malloc(1024 * sizeof(char));
+	getcwd(pwd, 1024);
+	if (pwd && p->av[1][0] != '/')
 	{
 		p->av[1] = ft_strjointoleft(p->av[1], "/");
-		p->av[1] = \
-		ft_strjointoleft(p->av[1], mish_env_get(p->mish, "PWD"));
+		p->av[1] = ft_strjointoleft(p->av[1],pwd);
 	}
-	if (chdir(p->av[1]))
+	if (pwd && chdir(p->av[1]))
 		builtin_perror(p, errno, p->av[1], 1);
-	else
+	else if (pwd)
 	{
+		old = ft_strdup(pwd);
+		ft_strfree(&pwd);
 		pwd = malloc(1024 * sizeof(char));
 		getcwd(pwd, 1024);
-		mish_env_set(p->mish, "OLDPWD", mish_env_get(p->mish, "PWD"));
-		mish_env_set(p->mish, "PWD", pwd);
-		free(pwd);
+		mish_env_add(p->mish, "OLDPWD", old);
+		mish_env_add(p->mish, "PWD", pwd);
 		mish_exit_status_set(p->mish, 0);
+		ft_strfree(&old);
 	}
+	ft_strfree(&pwd);
 }
 
 /* cd with only a relative or absolute path */

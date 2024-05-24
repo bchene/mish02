@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 11:49:08 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 17:54:47 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	mish_env_set(t_mish *mish, char *var, char *value)
 	if (bashvar_name_isvalid(var))
 	{
 		if (t_env_getvar(mish->env, var))
-			ret = t_env_setstr(mish->env, var, value);
+			ret = t_env_setdata(mish->env, var, value);
 		else
 			ret = 0;
 		return (ret);
@@ -46,7 +46,7 @@ int	mish_env_add(t_mish *mish, char *var, char *value)
 	if (bashvar_name_isvalid(var) == 0)
 		return (0);
 	else
-		ret = t_env_setstr(mish->env, var, value);
+		ret = t_env_setdata(mish->env, var, value);
 	return (ret);
 }
 
@@ -83,38 +83,11 @@ char	**mish_env_to_envp(t_mish *mish)
 	ret = ft_calloc(nb + 1, sizeof(char *));
 	i = -1;
 	tmp = mish->env;
-	while (++i < nb)
+	while (++i < nb && tmp)
 	{
-		ret[i] = tmp->str;
+		if (tmp->var && tmp->data)
+			ret[i] = ft_strjoinva(tmp->var, "=", tmp->data, NULL);
 		tmp = tmp->next;
 	}
 	return (ret);
 }
-
-/*
-int	mish_env_change_value(t_mish *mish, t_env *env_or_u, char *var, char *value)
-{
-	t_env	*to_change;
-	char	*str;
-	size_t	len_var;
-
-	to_change = t_env_getvar(env_or_u, var);
-	if (to_change)
-	{
-		len_var = ft_strlen(var);
-		str = ft_calloc(len_var + 1 + ft_strlen(value) + 1, sizeof(char));
-		if (str)
-		{
-			ft_strcpy(str, var);
-			str[len_var] = '=';
-			ft_strcpy(&str[len_var + 1], value);
-			free(to_change->str);
-			to_change->str = str;
-		}
-		else
-			return (mish_error_add(mish, err_malloc,
-					errno, "mish_env_change_value"));
-	}
-	return (0);
-}
-*/

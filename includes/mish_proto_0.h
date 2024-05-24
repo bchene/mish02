@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 16:40:49 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 13:30:36 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,15 @@ void		t_error_print(t_error *err);
 
 /*						*/
 /* 03_t_env 			*/
-t_env		*t_env_new(char *str);
-t_env		*t_env_add(t_env **env, char *str);
+t_env		*t_env_new(char *var, char *data);
+t_env		*t_env_add(t_env **env, char *var, char *data);
 void		t_env_del(t_env **env);
 void		t_env_free(t_env **env);
 int			t_env_remove(t_env **env, t_env *to_remove);
 
 t_env		*t_env_getvar(t_env *env, char *var);
 char		*t_env_getdata(t_env *env, char *var);
-int			t_env_setstr(t_env *env, char *var, char *value);
+int			t_env_setdata(t_env *env, char *var, char *data);
 void		t_env_print(t_env *tenv);
 int			bashvar_name_isvalid(const char *varname);
 

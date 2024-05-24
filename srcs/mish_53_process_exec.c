@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 20:01:55 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 14:37:35 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ t_err_type	t_process_fork_child(t_process *process)
 		"malloc envp"));
 	execve(process->cmd, process->av, envp);
 	mish_error_add(process->mish, err_execve, errno, "execve");
-	free (envp);
+	ft_freesplit (envp);
 	return (err_execve);
 }
