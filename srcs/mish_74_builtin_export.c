@@ -6,9 +6,15 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 12:11:07 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 12:42:39 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+bash: export: `bloup2'1ceci= est un texte1'2': not a valid identifier
+exsta =1
+
+*/
 
 #include "mish.h"
 
@@ -31,7 +37,7 @@ static void	env_export_str(t_mish *mish, char *str)
 		if (i > 2 && str[i - 2] == '+')
 		{
 			var = ft_strndup(str, i - 2);
-			data = ft_strjoin(mish_env_get(mish, var) ,str + i);
+			data = ft_strjointo(mish_env_get(mish, var) ,str + i);
 		}
 		else if(i > 1 && str[0] != '+')
 		{
