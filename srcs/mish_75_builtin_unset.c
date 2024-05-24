@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 17:48:22 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 10:06:52 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,10 @@
 /* export with no options */
 void	builtin_unset(t_process *p)
 {
-	char	*str;
 	int		i;
 
-	if ((p->ac > 1) && p->av[1][0] == '-')
-	{
-		str = ft_strjoinva("minishell: unset: ", p->av[1], ": invalid option\n", NULL);
-		builtin_error(p, str, 2);
-		if (str)
-			free (str);
-		return ;
-	}
+	if (t_process_is_invalid_option(p))
+		return;
 	i = 0;
 	while(++i < p->ac)
 		mish_env_remove(p->mish, p->av[i]);

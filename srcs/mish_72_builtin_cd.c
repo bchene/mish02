@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:20:10 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 17:36:55 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 10:48:35 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,14 @@ void	mish_cd(t_process *p)
 /* cd with only a relative or absolute path */
 void	builtin_cd(t_process *p)
 {
-	char *str;
-
 	if (p->ac == 1)
 	{
 		ft_freesplit(p->av);
 		p->av = ft_split("cd ~", ' ');
 		p->ac = 2;
 	}
-	if ((p->ac > 1) && p->av[1][0] == '-')
-	{
-		str = ft_strjoinva("minishell: pwd: ", p->av[1], ": invalid option\n", NULL);
-		builtin_error(p, str, 2);
-		if (str)
-			free (str);
-		return ;
-	}
+	if (t_process_is_invalid_option(p))
+		return;
 	if (p->ac == 2)
 	{
 		if (t_process_cd_home_add(p))

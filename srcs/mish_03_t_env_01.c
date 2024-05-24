@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:07:17 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 17:09:17 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 12:17:15 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	t_env_print(t_env *tenv)
 {
 	while (tenv)
 	{
-		printf("%s\n", tenv->str);
+		if (ft_ischarinstr(tenv->str, '='))
+			printf("%s\n", tenv->str);
 		tenv = tenv->next;
 	}
 }

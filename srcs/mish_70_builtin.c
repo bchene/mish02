@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 19:57:14 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 10:53:48 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	builtin_free(t_process *process)
 
 void	builtin_error(t_process *p,char *str, int exitstatus)
 {
-	write(2, str, ft_strlen(str));
+	if (str)
+		write(2, str, ft_strlen(str));
 	mish_exit_status_set(p->mish, exitstatus);
 }
 
@@ -63,7 +64,6 @@ void	builtin_perror(t_process *p,int err ,char *str, int exitstatus)
 {
 	char	*s;
 
-	//s = ft_strjoin_va("minishell :", p->av + 0, " :", str, " :", strerror(err));
 	s = ft_strjoin("minishell :", p->av[0]);
 	if (s)
 	{
@@ -84,3 +84,25 @@ void	builtin_perror(t_process *p,int err ,char *str, int exitstatus)
 	mish_exit_status_set(p->mish, exitstatus);
 }
 
+int	t_process_is_invalid_option(t_process *p)
+{
+	int ret = 0;
+	char *str;
+
+	ret = 0;
+	if ((p->ac > 1) && ft_strlen(p->av[1]) > 1 \
+	&& p->av[1][0] == '-' && ft_isalnum(p->av[1][1]))
+	{
+		ret = 1;
+		str = ft_strjoinva(\
+		"minishell: ", p->av[0], ": ", p->av[1], ": invalid option\n", NULL);
+		if (str == NULL)
+		{
+			mish_error_add(p->mish, err_malloc, errno, "malloc invalid_opt");
+			return (1);
+		}
+		builtin_error(p, str, 2);
+		free (str);
+	}
+	return (ret);
+}

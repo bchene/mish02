@@ -6,11 +6,12 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:31:34 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/02 15:17:10 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 12:08:01 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdarg.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -92,4 +93,27 @@ char	*ft_strjointoleft(char *s1, char const *s2)
 	if (s1)
 		free(s1);
 	return (buf);
+}
+
+/* ft_strjoinva penser a mettre NULL a la fin */
+char	*ft_strjoinva(char *str, ...)
+{
+	va_list	param;
+	char	*dest;
+	char	*bufstr;
+
+	dest = NULL;
+	if (str)
+	{
+		va_start(param, str);
+		bufstr = str;
+		while (bufstr)
+		{
+			dest = ft_strjointo(dest, bufstr);
+			bufstr = va_arg(param, char *);
+		}
+		va_end(param);
+		return (dest);
+	}
+	return (NULL);
 }

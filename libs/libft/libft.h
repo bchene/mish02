@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:23:07 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 21:38:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/24 11:59:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strjointo(char *s1, char const *s2);
 char			*ft_strjointoleft(char *s1, char const *s2);
+char			*ft_strjoinva(char *str, ...);
+
 char			*ft_strtrim(char const *s1, char const *set);
 
 char			*ft_strcpy(char *dst, const char *src);
