@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 18:16:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 21:47:56 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,19 @@ char	*t_process_cmd_get(t_process *process)
 {
 	int		i;
 	char	*str;
-	char	**path;
 
-	path = (process->mish)->pathlist;
-	i = 0;
-	while (path && path[i])
+	if (ft_strchr(process->av[0], '/'))
 	{
-		str = ft_strjoin(path[i], (process->av)[0]);
-		if (access(str, X_OK) == 0)
+		process->cmd = ft_strdup(process->av[0]);
+		return (process->cmd);
+	}	
+	i = 0;
+	while ((process->mish)->pathlist && ((process->mish)->pathlist)[i])
+	{
+		str = ft_strjoin(((process->mish)->pathlist)[i], (process->av)[0]);
+		if (t_process_cmd_isdir(process, str, (process->av)[0]))
+			return (NULL);
+		else if (access(str, X_OK) == 0)
 		{
 			process->cmd = str;
 			return (str);
@@ -40,7 +45,6 @@ char	*t_process_cmd_get(t_process *process)
 		free(str);
 		i++;
 	}
-	process->cmd = NULL;
 	return (str);
 }
 
@@ -103,5 +107,28 @@ int	t_process_cmd_isbuiltin(t_process *process)
 	// 	t_process_cmd_setempty(process);
 	// 	return (2);
 	// }
+	return (0);
+}
+
+int t_process_cmd_isdir(t_process *process, char *path, char *cmd) 
+{
+	struct stat stats;
+
+	if (stat(path, &stats) == 0)
+	{ 
+		if (S_ISDIR(stats.st_mode))
+		{
+			if (process->exitstatus == 0)
+			{
+				write(2, "minishell :", 12);
+				write(2, cmd, ft_strlen(cmd));
+				write(2, " : is a directory\n", 19);
+				process->exitstatus = 127;
+			}
+			if (path)
+				free(path);
+			return (1);
+		}
+	}
 	return (0);
 }

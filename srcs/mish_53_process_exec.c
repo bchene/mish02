@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 17:07:11 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 20:14:42 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_err_type	mish_fork_parent(t_mish *mish)
 t_err_type	t_process_fork_child(t_process *process)
 {
 	char	**envp;
+	int		exitstatus;
 
 	if (t_process_dup_io(process))
 		return (t_error_exist(process->mish->error));
@@ -92,7 +93,15 @@ t_err_type	t_process_fork_child(t_process *process)
 		return (mish_error_add(process->mish, err_malloc, errno, \
 		"malloc envp"));
 	execve(process->cmd, process->av, envp);
-	mish_error_add(process->mish, err_execve, errno, "execve");
+	if (process->exitstatus == 0)
+	{
+		if (errno == EACCES)
+			builtin_perror(process, errno, NULL, 126);
+		else
+			builtin_perror(process, errno, NULL, 127);
+	}
 	ft_freesplit (envp);
-	return (err_execve);
+	exitstatus = process->exitstatus;
+	mish_free(process->mish, 0);
+	exit(exitstatus);
 }

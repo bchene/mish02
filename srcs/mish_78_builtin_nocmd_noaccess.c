@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 17:36:59 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 20:12:36 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,9 @@ void	builtin_no_access_cmd(t_process *process)
 		return;
 	if (access((process->av)[0], X_OK))
 	{
-		if (process->exitstatus)
-			process->exitstatus = 127;
+		process->exitstatus = 127;
 		write(2, "Command '", 10);
 		write(2, (process->av)[0], ft_strlen((process->av)[0]));
 		write(2, "' not found\n", 13);
 	}
-	// builtin_error(process, , 127);
-	// str = ft_strjoin(process->av[0], ": command not found\n");
-	// if (str)
-	// {
-	// 	builtin_error(process, str, 127);
-	// 	free(str);
-	// }
 }

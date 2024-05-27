@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 17:05:01 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 20:25:49 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	builtin_pwd(t_process *process)
 		return;
 	//pwd = mish_env_get(process->mish, "PWD");
 	pwd = malloc(1024 * sizeof(char));
-	getcwd(pwd, 1024);	
+	getcwd(pwd, 1024);
 	if (pwd)
 	{
 		printf("%s\n", pwd);
