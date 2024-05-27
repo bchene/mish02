@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:20:10 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 17:05:00 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 22:15:11 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*t_process_cd_home_add(t_process *p)
 void	mish_cd(t_process *p)
 {
 	char	*pwd;
-	char	*old;
+	//char	*old;
 
 	pwd = malloc(1024 * sizeof(char));
 	getcwd(pwd, 1024);
@@ -51,15 +51,14 @@ void	mish_cd(t_process *p)
 		builtin_perror(p, errno, p->av[1], 1);
 	else if (pwd)
 	{
-		old = ft_strdup(pwd);
+		//old = ft_strdup(pwd);
 		ft_strfree(&pwd);
 		pwd = malloc(1024 * sizeof(char));
 		getcwd(pwd, 1024);
-		mish_env_add(p->mish, "OLDPWD", old);
+		mish_env_add(p->mish, "OLDPWD", mish_env_get(p->mish, "PWD"));
 		mish_env_add(p->mish, "PWD", pwd);
 		p->exitstatus = 0;
-		//mish_exit_status_set(p->mish, 0);
-		ft_strfree(&old);
+		//ft_strfree(&old);
 	}
 	ft_strfree(&pwd);
 }

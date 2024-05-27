@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 21:47:56 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 21:52:48 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,6 @@ int	t_process_cmd_isempty(t_process *process)
 		t_process_cmd_setempty(process, "no_cmd");
 		return (1);
 	}
-	// A TESTER
-	/*
-	else if (!ft_strcmp((process->av)[0], "\"\"") \
-	|| !ft_strcmp((process->av)[0], "\'\'"))
-	{
-		if (!ft_strcmp((process->av)[0], "\"\""))
-			write(2 ,"\"\": command not found\n" , 23);
-		else if (!ft_strcmp((process->av)[0], "\'\'"))
-			write(2 ,"\'\': command not found\n" , 23);
-		return (0);
-	}
-	*/
 	return (0);
 }
 
@@ -100,17 +88,10 @@ int	t_process_cmd_isbuiltin(t_process *process)
 		t_process_cmd_free(process);
 		return (1);
 	}
-	// else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd) + 1))
-	// {
-	// 	if (process->mish->nb == 1)
-	// 		mish_error_add(process->mish, err_exit, 0, "exit");
-	// 	t_process_cmd_setempty(process);
-	// 	return (2);
-	// }
 	return (0);
 }
 
-int t_process_cmd_isdir(t_process *process, char *path, char *cmd) 
+int	t_process_cmd_isdir(t_process *process, char *path, char *cmd) 
 {
 	struct stat stats;
 

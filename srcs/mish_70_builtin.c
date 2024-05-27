@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 19:47:31 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 21:57:54 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	builtin_free(t_process *process)
 	{
 		mish_error_treat(process->mish);
 		t_error_lst_free(&(process->mish->error));
-		exstat = mish_exit_status_get(process->mish);
+		exstat = process->exitstatus;
 		mish_free(process->mish, 0);
 		exit (exstat);
 	}

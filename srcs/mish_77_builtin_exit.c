@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 15:24:30 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 22:26:26 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ void	builtin_exit(t_process *process)
 	char *str;
 
 	if (process->ac == 1) // exit
+	{
+		process->exitstatus = 0;
 		mish_error_add_exit(process->mish);
+	}
 	else if(ft_isstr_longlong(process->av[1]))
 	{
 		if (process->ac == 2) // exit 42
 		{
-			mish_exit_status_set(process->mish ,ft_atoll(process->av[1]) % 256);
+			process->exitstatus = ft_atoll(process->av[1]) % 256;
+			//mish_exit_status_set(process->mish ,ft_atoll(process->av[1]) % 256);
 			mish_error_add_exit(process->mish);
 		}
 		else // exit 42 1 ou // exit 42 a
