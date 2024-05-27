@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 12:12:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 16:12:54 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void	builtin_echo(t_process *process)
 			free(endl);
 		}
 	}
+	//	process->exitstatus = 0;
 	mish_exit_status_set(process->mish ,0);
 }

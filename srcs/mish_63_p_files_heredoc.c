@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/20 17:05:19 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 16:10:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ static void	t_file_line_heredoc(t_file *tfile, t_mish *mish)
 		mish_error_add(mish, err_malloc, errno, "malloc in t_file_heredoc");
 }
 
-void	t_file_heredoc(t_file *tfile, int openfile, t_mish *mish)
+int	t_file_heredoc(t_file *tfile, int openfile, t_process *p)
 {	
-	t_file_line_heredoc(tfile, mish);
+	t_file_line_heredoc(tfile, p->mish);
 	if (openfile == 0)
 	{
-		tfile->fd = -2;
-		return ;
+		tfile->fd = -1;
+		return (0);
 	}
 	tfile->path = ft_strdupfree(tfile->path, ".heredoc");
 	while (access(tfile->path, F_OK) == 0)
@@ -72,18 +72,16 @@ void	t_file_heredoc(t_file *tfile, int openfile, t_mish *mish)
 	}
 	tfile->fd = open(tfile->path, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (tfile->fd == -1)
-		mish_error_print(2, tfile->path);
+			return (t_process_iofiles_error(p, errno, tfile->path));
 	else
 	{
 		if (write(tfile->fd, tfile->line, ft_strlen(tfile->line)) == -1)
-		{
-			mish_error_print(errno, tfile->path);
-			close_reset_fd(&(tfile->fd));
-		}
+			return (t_process_iofiles_error(p, errno, tfile->path));
 		else
 		{
 			close(tfile->fd);
 			tfile->fd = open(tfile->path, O_RDONLY | O_CREAT | O_APPEND, 0644);
 		}
 	}
+	return (0);
 }

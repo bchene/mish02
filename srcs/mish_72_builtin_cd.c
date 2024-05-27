@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:20:10 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 17:49:13 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 16:14:36 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	mish_cd(t_process *p)
 		getcwd(pwd, 1024);
 		mish_env_add(p->mish, "OLDPWD", old);
 		mish_env_add(p->mish, "PWD", pwd);
+		//p->exitstatus = 0;
 		mish_exit_status_set(p->mish, 0);
 		ft_strfree(&old);
 	}

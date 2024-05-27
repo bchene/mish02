@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 10:53:48 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 16:12:13 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,19 @@ void	builtin_error(t_process *p,char *str, int exitstatus)
 	if (str)
 		write(2, str, ft_strlen(str));
 	mish_exit_status_set(p->mish, exitstatus);
+	// if (p->exitstatus)
+	// 	return;
+	// if (str)
+	// 	write(2, str, ft_strlen(str));
+	// p->exitstatus = exitstatus;
 }
 
 void	builtin_perror(t_process *p,int err ,char *str, int exitstatus)
 {
 	char	*s;
 
+	// if (p->exitstatus)
+	// 	return;
 	s = ft_strjoin("minishell :", p->av[0]);
 	if (s)
 	{
@@ -81,6 +88,7 @@ void	builtin_perror(t_process *p,int err ,char *str, int exitstatus)
 		write(2, s, ft_strlen(s));
 		free(s);
 	}
+	// p->exitstatus = exitstatus;
 	mish_exit_status_set(p->mish, exitstatus);
 }
 

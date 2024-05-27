@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 20:01:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:57:26 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ char	*t_process_cmd_get(t_process *process)
 		i++;
 	}
 	process->cmd = NULL;
-	//free ((process->av)[0]);
-	//(process->av)[0] = ft_strdup("no_access_cmd");
-	// str = ft_strdup((process->av)[0]);
-	// process->cmd = str;
+	// no access
+	builtin_error(process, process->av[0], 127);
 	return (str);
 }
 

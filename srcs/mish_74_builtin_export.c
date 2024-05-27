@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 16:26:38 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 16:15:13 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,6 @@ void	builtin_export(t_process *process)
 			if (process->av[i])
 				env_export_str(process->mish, process->av[i]);
 	}
+	//process->exitstatus = 0;
 	mish_exit_status_set(process->mish ,0);
 }

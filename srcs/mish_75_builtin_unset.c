@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 10:06:52 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 16:15:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	builtin_unset(t_process *p)
 	i = 0;
 	while(++i < p->ac)
 		mish_env_remove(p->mish, p->av[i]);
+	//p->exitstatus = 0;
 	mish_exit_status_set(p->mish ,0);
 }

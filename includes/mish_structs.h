@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:12:03 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 14:35:02 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:39:22 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ typedef struct s_process
 	char		**av;
 	char		*cmd;
 	t_file		*iofiles;
-//	t_file		*infiles;
-//	t_file		*outfiles;
+	t_file		*infile;
+	t_file		*outfile;
+	int			fdinbkp;
+	int			fdoutbkp;
+	int			exitstatus;
 }	t_process;
 
 typedef struct s_file

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 17:00:58 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:42:19 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ void		t_process_print(t_process *p);
 
 /*						*/
 /* 51_process_iofiles	*/
-t_file		*t_process_iofile_add(t_process *p, char *path, t_tfile_type type);
-t_file      *t_process_iofile_get(t_process *process, int inorout);
-int         t_process_iofile_getfd(t_process *process, int inorout);
+void		t_process_iofile_free(t_process *process);
+t_file		*t_process_iofile_add(t_process *p, char *path, t_tfile_type t);
+void		t_process_inoutfile_get(t_process *process);
+void		t_process_iofile_close_unused_fds(t_process *process);
+//t_file	*t_process_iofile_get(t_process *process, int inorout);
+//int		t_process_iofile_getfd(t_process *process, int inorout);
 void		t_process_iofile_print(t_process *process);
 
 t_file		*t_process_line_to_file(t_process *p, char *line);
@@ -48,5 +51,6 @@ t_err_type	t_process_fork_child(t_process *p);
 void		close_reset_fd(int *fd);
 t_err_type	t_process_pipe_fds(t_process *process);
 t_err_type	t_process_dup_io(t_process *p);
+t_err_type	t_process_dup_io_builtin(t_process *p);
 
 #endif
