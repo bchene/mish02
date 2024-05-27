@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 15:57:26 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 18:16:45 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,18 @@ char	*t_process_cmd_get(t_process *process)
 		i++;
 	}
 	process->cmd = NULL;
-	// no access
-	builtin_error(process, process->av[0], 127);
 	return (str);
 }
 
-void	t_process_cmd_setempty(t_process *process)
+void	t_process_cmd_setempty(t_process *process, char *cmd)
 {
 	if (process->av)
 		process->av = ft_freesplit(process->av);
-	process->av = ft_split("no_cmd", ' ');
+	process->av = ft_split(cmd, ' ');
 	if (process->av == NULL)
 		mish_error_add(process->mish, err_malloc, errno, "cmd_setempty");
 	process->ac = 1;
-	t_process_cmd_free(process);	
+	t_process_cmd_free(process);
 }
 
 int	t_process_cmd_isempty(t_process *process)
@@ -66,7 +64,7 @@ int	t_process_cmd_isempty(t_process *process)
 	}
 	else if ((process->av)[0] == NULL || (process->av)[0][0] == '\0')
 	{
-		t_process_cmd_setempty(process);
+		t_process_cmd_setempty(process, "no_cmd");
 		return (1);
 	}
 	// A TESTER

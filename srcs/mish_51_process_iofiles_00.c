@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 15:52:59 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 18:11:20 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	t_process_iofile_print(t_process *process)
 	// 		tf = tf->next;
 	// 	}
 	// }
-	printf("p%i : ", process->index);
+	// printf("p%i : ", process->index);
 	tf = process->infile;
 	if(tf)
 		printf("infile(\"%s\", %s, %i) ", tf->path, ttype[tf->type], tf->fd);

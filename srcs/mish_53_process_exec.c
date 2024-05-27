@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 16:20:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:07:11 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_err_type	t_process_exec_builtin(t_process *p)
 			return (mish_error_add(p->mish, err_dup2, errno, "dup fdoutbkp"));	
 		close_reset_fd(&(p->fdoutbkp));
 	}
+	mish_exit_status_set(p->mish, p->exitstatus);
 	return (t_error_exist(p->mish->error));
 }
 

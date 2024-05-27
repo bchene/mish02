@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 16:23:22 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 18:11:13 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,20 @@ void	t_file_del(t_file	**tf)
 
 int t_process_iofiles_error(t_process *p, int en, char *path)
 {
-	builtin_perror(p, en, path, 1);
-	// mish_error_print(en, path);	
+	char *str;
+	
+	if(p->exitstatus == 0)
+	{
+		p->exitstatus = 1;
+		//bash: a: No such file or directory
+		str = ft_strjoinva("minishell :", path, ": ", strerror(en), "\n", NULL);
+		write(2, str, ft_strlen(str));
+		free(str);
+	}
 	if (p)
-		t_process_cmd_setempty(p);
+		t_process_cmd_setempty(p, "iofile_error");
 	p->infile = t_process_iofile_add(p, "error", tf_ifile_rdonly);
 	p->outfile = t_process_iofile_add(p, "error", tf_ofile_creat);
-	// t_process_iofile_add(p, "error", tf_ifile_rdonly);
-	// t_process_iofile_add(p, "error", tf_ofile_creat);
 	return (p->exitstatus); // a test
 }
 

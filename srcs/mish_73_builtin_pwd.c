@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 16:14:55 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:05:01 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	builtin_pwd(t_process *process)
 	{
 		printf("%s\n", pwd);
 		free(pwd);
-		//process->exitstatus = 0;
-		mish_exit_status_set(process->mish ,0);
+		process->exitstatus = 0;
+		//mish_exit_status_set(process->mish ,0);
 	}
 	else
 		mish_error_add(process->mish, err_malloc, errno, "builtin_pwd");
