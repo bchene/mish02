@@ -7,3 +7,5 @@ vsupp
 
 # ignore directory named temp
 objs/
+tester_minishell/
+

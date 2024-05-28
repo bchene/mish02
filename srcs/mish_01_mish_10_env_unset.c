@@ -6,42 +6,11 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 14:26:37 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/28 14:03:53 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-
-/*
-static void	env_export_str(t_mish *mish, char *str)
-{
-	int i;
-	char *var;
-	char *data;
-
-	var = NULL;
-	data = NULL;
-	i = ft_ischarinstr(str, '=');
-	if (i)
-	{
-		if (i > 2 && str[i - 2] == '+')
-		{
-			var = ft_strndup(str, i - 2);
-			data = ft_strjointo(mish_env_get(mish, var) ,str + i);
-		}
-		else if(i > 1 && str[0] != '+')
-		{
-			var = ft_strndup(str, i - 1);
-			data = ft_strdup(str + i);
-		}
-		mish_env_add(mish, var, data);
-		ft_strfree(&var);
-		ft_strfree(&data);
-	}
-	else
-		mish_env_add(mish, str, NULL);
-}
-*/
 
 char	*envstr_var_get(char *str)
 {
@@ -111,7 +80,7 @@ void	mish_env_unset_init(t_mish *mish, char **envp)
 		value = ft_itoa(i);
 		if (value)
 		{
-			mish_env_set(mish, "SHLVL", value);
+			t_env_setdata(mish->env, "SHLVL", value);
 			free(value);
 		}
 		else
@@ -138,16 +107,16 @@ char	*mish_env_unset_get(t_mish *mish, char *var)
 	return (NULL);
 }
 
-int	mish_env_unset_unset(t_mish *mish, char *var)
+int	t_process_env_unset_unset(t_process *process, char *var)
 {
-	if (mish_unset_get(mish, var))
+	if (mish_unset_get(process->mish, var))
 	{
-		mish_unset_remove(mish, var);
+		t_process_unset_remove(process, var);
 		return (2);
 	}
-	if (mish_env_get(mish, var))
+	if (mish_env_get(process->mish, var))
 	{
-		mish_env_remove(mish, var);
+		t_process_env_remove(process, var);
 		return (1);
 	}
 	return (0);

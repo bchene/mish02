@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 17:54:47 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/28 13:50:51 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*mish_env_get(t_mish *mish, char *var)
 {
 	char	*str;
 
-	if (bashvar_name_isvalid(var))
+	if (bashvar_name_isvalid(var, NULL))
 	{
 		str = t_env_getdata(mish->env, var);
 		return (str);
@@ -24,14 +24,14 @@ char	*mish_env_get(t_mish *mish, char *var)
 	return (NULL);
 }
 
-int	mish_env_set(t_mish *mish, char *var, char *value)
+int	t_process_env_set(t_process *process, char *var, char *value)
 {
 	int	ret;
 
-	if (bashvar_name_isvalid(var))
+	if (bashvar_name_isvalid(var, process))
 	{
-		if (t_env_getvar(mish->env, var))
-			ret = t_env_setdata(mish->env, var, value);
+		if (t_env_getvar(process->mish->env, var))
+			ret = t_env_setdata(process->mish->env, var, value);
 		else
 			ret = 0;
 		return (ret);
@@ -39,28 +39,28 @@ int	mish_env_set(t_mish *mish, char *var, char *value)
 	return (0);
 }
 
-int	mish_env_add(t_mish *mish, char *var, char *value)
+int	t_process_env_add(t_process *process, char *var, char *value)
 {
 	int	ret;
 
-	if (bashvar_name_isvalid(var) == 0)
+	if (bashvar_name_isvalid(var, process) == 0)
 		return (0);
 	else
-		ret = t_env_setdata(mish->env, var, value);
+		ret = t_env_setdata(process->mish->env, var, value);
 	return (ret);
 }
 
-int	mish_env_remove(t_mish *mish, char *var)
+int	t_process_env_remove(t_process *process, char *var)
 {
 	int		ret;
 	t_env	*tenv;
 
-	if (bashvar_name_isvalid(var) == 0)
+	if (bashvar_name_isvalid(var, process) == 0)
 		return (0);
-	tenv = t_env_getvar(mish->env, var);
+	tenv = t_env_getvar(process->mish->env, var);
 	if (tenv)
 	{
-		ret = t_env_remove(&(mish->env), tenv);
+		ret = t_env_remove(&(process->mish->env), tenv);
 		return (ret);
 	}
 	return (0);

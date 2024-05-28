@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 17:05:01 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/28 14:54:37 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ char	**t_env_splitenv_get(t_env *env)
 			splitenv[i] = \
 			ft_strjoinva(env->var, "=\"",env->data, "\"\n", NULL);
 		else
-			splitenv[i] = ft_strdup(env->var);
+			splitenv[i] = ft_strjoinva(env->var, "\n", NULL);
+			//splitenv[i] = ft_strdup(env->var);
 		env = env->next;
 	}
 	return (splitenv);
@@ -95,7 +96,7 @@ static void	builtin_export_print(t_process *process)
 	ft_freesplit(splitenv);
 }
 
-static void	env_export_str(t_mish *mish, char *str)
+static void	env_export_str(t_process *p, char *str)
 {
 	int i;
 	char *var;
@@ -109,19 +110,19 @@ static void	env_export_str(t_mish *mish, char *str)
 		if (i > 2 && str[i - 2] == '+')
 		{
 			var = ft_strndup(str, i - 2);
-			data = ft_strjointo(mish_env_get(mish, var) ,str + i);
+			data = ft_strjoin(mish_env_get(p->mish, var) ,str + i);
 		}
-		else if(i > 1 && str[0] != '+')
+		else if(i > 1)
 		{
 			var = ft_strndup(str, i - 1);
 			data = ft_strdup(str + i);
 		}
-		mish_env_add(mish, var, data);
+		t_process_env_add(p, var, data);
 		ft_strfree(&var);
 		ft_strfree(&data);
 	}
 	else
-		mish_env_add(mish, str, NULL);
+		t_process_env_add(p, str, NULL);
 }
 
 /* export with no options */
@@ -138,8 +139,7 @@ void	builtin_export(t_process *process)
 		i = 0;
 		while(++i < process->ac)
 			if (process->av[i])
-				env_export_str(process->mish, process->av[i]);
+				env_export_str(process, process->av[i]);
 	}
-	process->exitstatus = 0;
-	//mish_exit_status_set(process->mish ,0);
+	//process->exitstatus = 0;
 }

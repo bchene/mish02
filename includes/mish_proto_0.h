@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 13:30:36 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/28 13:24:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,20 @@ t_err_type	mish_pid_malloc(t_mish *mish);
 void		mish_pid_print(t_mish *mish);
 /* 01-08	mish_env */
 char		*mish_env_get(t_mish *mish, char *var);
-int			mish_env_set(t_mish *mish, char *var, char *value);
-int			mish_env_add(t_mish *mish, char *var, char *value);
-int			mish_env_remove(t_mish *mish, char *var);
+int			t_process_env_set(t_process *process, char *var, char *value);
+int			t_process_env_add(t_process *process, char *var, char *value);
+int			t_process_env_remove(t_process *process, char *var);
 char		**mish_env_to_envp(t_mish *mish);
 /* 01-09	mish_unset */
 char		*mish_unset_get(t_mish *mish, char *var);
-int			mish_unset_set(t_mish *mish, char *var, char *value);
-int			mish_unset_remove(t_mish *mish, char *var);
-int			mish_unset_export(t_mish *mish, char *var, char *value);
+int			t_process_unset_set(t_process *process, char *var, char *value);
+int			t_process_unset_remove(t_process *process, char *var);
+int			t_process_unset_export(t_process *process, char *var, char *value);
 /* 01-10	mish_env_unset */
 void		mish_env_unset_init(t_mish *mish, char **envp);
 void		mish_env_unset_free(t_mish *mish);
 char		*mish_env_unset_get(t_mish *mish, char *var);
-int			mish_env_unset_unset(t_mish *mish, char *var);
+int			t_process_env_unset_unset(t_process *process, char *var);
 void		mish_env_unset_print(t_mish *mish);
 /* 01-11	mish_exit_status */
 void		mish_exit_status_set(t_mish *mish, int value);
@@ -95,6 +95,6 @@ t_env		*t_env_getvar(t_env *env, char *var);
 char		*t_env_getdata(t_env *env, char *var);
 int			t_env_setdata(t_env *env, char *var, char *data);
 void		t_env_print(t_env *tenv);
-int			bashvar_name_isvalid(const char *varname);
+int			bashvar_name_isvalid(const char *varname, t_process *process);
 
 #endif

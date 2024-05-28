@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:07:17 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 16:19:14 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/28 14:30:00 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,87 +70,31 @@ void	t_env_print(t_env *tenv)
 	}
 }
 
-int	bashvar_name_isvalid(const char *varname)
+int	bashvar_name_isvalid(const char *varname, t_process *process)
 {
-	if (varname == NULL || *varname == '\0')
-		return 0;
-	if (!ft_isalpha(*varname) && *varname != '_')
-		return 0;
-	varname++;	
-	while (*varname)
-	{
-		if (!ft_isalnum(*varname) && *varname != '_')
-			return 0;
-		varname++;
-	}	
-    return 1;
-}
+	int ret;
+	int i;
 
-/*
-t_env	*t_env_getvar(t_env *tenv, char *var)
-{
-	t_env	*env;
-
-	env = tenv;
-	if (env == NULL || var == NULL)
-		return (NULL);
-	while (env)
+	i = 0;
+	ret = 1;
+	if (varname == NULL || varname[i] == '\0')
+		ret = 0;
+	if (!ft_isalpha(varname[0]) && varname[0] != '_')
+		ret = 0;
+	i++;
+	while (ret && varname[i])
 	{
-		if ((ft_strncmp(env->str, var, ft_strlen(var)) == 0 && \
-		env->str[ft_strlen(var)] == '=' )|| \
-		(ft_strncmp(env->str, var, ft_strlen(var)) == 0 && \
-		env->str[ft_strlen(var)] == 0 ))
-			return (env);
-		env = env->next;
+		if (!ft_isalnum(varname[i]) && varname[i] != '_')
+			ret = 0;
+		i++;
 	}
-	return (NULL);
-}
-
-char	*t_env_getdata(t_env *env, char *var)
-{
-	t_env	*varenv;
-
-	if (env == NULL || var == NULL)
-		return (NULL);
-	varenv = t_env_getvar(env, var);
-	if (varenv && varenv->str[ft_strlen(var)] == '=')
-			return (varenv->str + ft_strlen(var) + 1);
-	return (NULL);
-}
-
-int	t_env_setstr(t_env *env, char *var, char *value)
-{
-	t_env	*varenv;
-	char	*str;
-
-	if (var == NULL)
-		return (-1);
-	str = ft_strempty(NULL);
-	str = ft_strjointo(str, var);
-	if (value)
-	{
-		str = ft_strjointo(str, "=");
-		str = ft_strjointo(str, value);
-	}
-	varenv = t_env_getvar(env, var);
-	if (varenv && varenv->str)
-	{
-		free(varenv->str);
-		varenv->str = strdup(str);
-	}
-	else
-		t_env_add(&env, str);
-	free(str);
+	if (ret)
+		return (1);
+    if (process == NULL || process->exitstatus)
+		return (0);
+	process->exitstatus = 1;
+	write(2,"minishell: ",12);
+	write(2,varname,ft_strlen(varname));
+	write(2,": not a valid identifier\n",26);
 	return (0);
 }
-
-void	t_env_print(t_env *tenv)
-{
-	while (tenv)
-	{
-		if (ft_ischarinstr(tenv->str, '='))
-			printf("%s\n", tenv->str);
-		tenv = tenv->next;
-	}
-}
-*/
