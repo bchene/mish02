@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 14:54:37 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/28 15:35:18 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,17 +102,16 @@ static void	env_export_str(t_process *p, char *str)
 	char *var;
 	char *data;
 
-	var = NULL;
-	data = NULL;
 	i = ft_ischarinstr(str, '=');
 	if (i)
 	{
 		if (i > 2 && str[i - 2] == '+')
 		{
 			var = ft_strndup(str, i - 2);
-			data = ft_strjoin(mish_env_get(p->mish, var) ,str + i);
+			data = ft_strdup(mish_env_get(p->mish, var));
+			data = ft_strjointo(data ,str + i);
 		}
-		else if(i > 1)
+		else
 		{
 			var = ft_strndup(str, i - 1);
 			data = ft_strdup(str + i);
