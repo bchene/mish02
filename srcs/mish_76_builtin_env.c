@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 17:04:57 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/28 15:53:57 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,17 @@
 void	builtin_env(t_process *process)
 {
 	if (t_process_is_invalid_option(process))
+	{
+		if (process->exitstatus == 2)
+			process->exitstatus = 125;
 		return;
+	}
+	else if(process->ac > 1)
+	{
+		if (process->exitstatus == 0)
+			builtin_error(process, "minishell: env: too many arguments\n", 127);
+		return;
+	}
 	t_env_print(process->mish->env);
-	process->exitstatus = 0;
-	//mish_exit_status_set(process->mish ,0);
+	//process->exitstatus = 0;
 }

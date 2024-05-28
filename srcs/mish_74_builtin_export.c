@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 15:35:18 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/28 15:39:15 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static void	env_export_str(t_process *p, char *str)
 		ft_strfree(&var);
 		ft_strfree(&data);
 	}
-	else
+	else if(mish_env_get(p->mish, str) == NULL)
 		t_process_env_add(p, str, NULL);
 }
 
