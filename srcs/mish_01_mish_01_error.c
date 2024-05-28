@@ -6,13 +6,12 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:26:04 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 15:43:34 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/28 16:35:19 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-// si erreur de malloc dans erreur comment sortir
 t_err_type	mish_error_add(t_mish *mish, t_err_type t, int en, char *d)
 {
 	t_error	*new;
@@ -69,19 +68,3 @@ void	mish_error_treat_exit(t_mish *mish)
 	}
 	t_error_lst_free(&(mish->error));
 }
-
-/*
-void	mish_error_print(int en, char *str)
-{
-	write(2, "minishell: ", 11);
-	if (str)
-	{
-		write(2, str, ft_strlen(str));
-		if (ft_strlen(strerror(en)))
-			write(2, " :", 2);
-	}
-	if (ft_strlen(strerror(en)))
-		write(2, strerror(en), ft_strlen(strerror(en)));
-	write(2, "\n", 1);
-}
-*/
