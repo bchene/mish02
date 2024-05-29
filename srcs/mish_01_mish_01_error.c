@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:26:04 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 16:35:19 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/29 14:46:03 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,28 @@ void	mish_error_treat(t_mish *mish)
 		if( err_malloc <= error->type && error->type <= err_fork)
 			mish_error_print(error->err_no, error->data);
 		else if( error->type == err_quote_open)
+		{
 			write(2, "minishell: syntax error \' not closed\n", 37);
+			mish_exit_status_set(mish, 2);
+		}
 		else if( error->type == err_dquote_open)
+		{
 			write(2, "minishell: syntax error \" not closed\n", 37);
+			mish_exit_status_set(mish, 2);
+		}
 		else if( error->type == err_token_unexpected)
 		{
 			write(2, "minishell: err_token_unexpected `", 34);
 			write(2, error->data, ft_strlen(error->data));
 			write(2, "\'\n", 3);
+			mish_exit_status_set(mish, 2);
 		}
 		else if( error->type == err_unhandled)
 		{
 			write(2, "minishell: err_unhandled `", 27);
 			write(2, error->data, ft_strlen(error->data));
 			write(2, "\'\n", 3);
+			mish_exit_status_set(mish, 2);
 		}
 		error = error->next;
 	}

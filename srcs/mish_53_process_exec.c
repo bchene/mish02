@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 16:38:33 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/29 16:59:23 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_err_type	mish_exec(t_mish *mish)
 	int	i;
 	int	status;
 
+	status = 0;
 	if (mish->nb == 1 && (mish->p + 0)->cmd == NULL)
 		t_process_exec_builtin(mish->p + 0);
 	else
@@ -29,6 +30,30 @@ t_err_type	mish_exec(t_mish *mish)
 			waitpid((mish->pid)[i], &status, 0);
 			if((mish->p + i)->exitstatus == 0)
 				mish_exit_status_set(mish, (int)(((status) & 0xff00) >> 8));
+			if (WTERMSIG(status) == SIGINT)
+			{
+				// CTRLC
+				// if (g_signal == SIGINT)
+				//		mettre exit stat a 128 + SIGINT = 130
+				// 		mettre g_dignal = 0
+				//		PAS DE MESSAGE
+				(mish->p + i)->exitstatus = 130; // WTERMSIG(status) + 128
+				g_signal = 0;
+			}
+			if (WTERMSIG(status) == SIGQUIT)
+			{
+				// CTRL BACKSLASH
+				// if (g_signal == SIGQUIT)	
+				// 		mettre exit stat a 128 + SIGQUIT = 131
+				// 		mettre g_dignal = 0
+				//		si derniere process non termine
+				//			"^\Quit (core dumped)\n"
+				// 		sinon
+				//			affchie "^" a priori rien a jouter.
+				(mish->p + i)->exitstatus = 131; // WTERMSIG(status) + 128
+				g_signal = 0;
+				write(2, "^\\Quit (core dumped)\n", 22);
+			}
 			else
 				mish_exit_status_set(mish, (mish->p + i)->exitstatus);
 			while (--i >= 0)

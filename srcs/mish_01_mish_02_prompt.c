@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 16:10:39 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/29 16:01:22 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,13 @@ void	mish_prompt(t_mish *mish)
 	{
 		mish->line = readline(mish->prompt);
 		if (mish->line == NULL)
-			mish->line = ft_strdup("exit");
+			mish->line = ft_strjoinva("exit", " ", "$?", NULL);
 	}
+	// CTRLC
+	// if (g_signal == SIGINT)
+	//		mettre exit stat a 128 + SIGINT = 130
+	// 		mettre g_dignal = 0
+	//		affchie "^C\n" a priori rien a ajouter.
 }
 
 void	mish_prompt_set(t_mish *mi)
@@ -68,7 +73,7 @@ void	mish_prompt_set(t_mish *mi)
 		ft_strnrchr(mish_env_get(mi, "PWD"), 1, '/') + 1);
 		mi->prompt = ft_strjointo(mi->prompt, "/");
 	}
-	mi->prompt = ft_strjointo(mi->prompt, "\001\e[0m\002 $>");
+	mi->prompt = ft_strjointo(mi->prompt, "\001\e[0m\002 $ ");
 }
 
 /* https://patorjk.com/software/taag/#p=display&f=Graffiti&t=minishell */

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 22:26:26 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/29 16:37:27 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void static	mish_error_add_exit(t_mish *mish)
 {
 	if(mish->nb == 1)
 	{
-		write (1, "exit\n", ft_strlen("exit\n"));
+		write (2, "exit\n", ft_strlen("exit\n"));
+		//write (2, "\n", ft_strlen("\n")); //TESTER
 		mish_error_add(mish, err_exit, 0, "exit");
 	}
 }
