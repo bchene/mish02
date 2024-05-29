@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mish_proto_lo.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/23 13:55:01 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/29 12:40:50 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ t_err_type  mish_check_line(t_mish *mish);
 /* lo_strtab.c */
 char	**strtab_addstr(char **strtab, char *str);
 void	strtab_print(char **strtab, char *sep);
+
+/* lo_signals.c */
+void    init_sa(t_sa *sa, void handler(int, siginfo_t *, void *));
+// void sigint_action(int pid);
+void	handle_signal(int sig, siginfo_t *info, void *ucontext);
 
 //////////////////////////
 /*			zz			*/

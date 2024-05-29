@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mish_71_builtin_echo.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 17:04:59 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/29 17:06:36 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,15 @@ static char	*set_endl(char *str)
 static char	**set_to_print(char **av, char *endl)
 {
 	char			**dst;
+	unsigned int	i;
 
 	if (!*endl)
-		dst = strtab_addstr(&av[2], endl);
+	{
+		i = 1;
+		while (is_flag(av[i]))
+			i++;
+		dst = strtab_addstr(&av[i], endl);
+	}
 	else
 		dst = strtab_addstr(&av[1], endl);
 	return (dst);

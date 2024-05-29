@@ -6,13 +6,11 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 16:21:00 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 15:44:49 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/29 17:18:51 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-
-int	g_signal;
 
 int	mish_continue(t_mish *mish)
 {

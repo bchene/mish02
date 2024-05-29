@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:12:03 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 15:39:22 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/29 17:20:09 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@ typedef struct s_process	t_process;
 typedef struct s_file		t_file;
 typedef struct s_error		t_error;
 typedef struct s_env		t_env;
-
-/*
-env -i bash
-recuperer les varialble envirenement au denbut et emuler les unset et set
-*/
+typedef struct sigaction	t_sa;
 
 typedef struct s_mish
 {
@@ -37,6 +33,7 @@ typedef struct s_mish
 	t_env		*env;
 	t_env		*unset;
 	char		**pathlist;
+	t_sa		sa;
 }	t_mish;
 
 typedef struct s_process
