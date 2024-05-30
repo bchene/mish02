@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 14:03:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:40:54 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,56 @@ void	mish_env_init(t_mish *mish, char **envp)
 		ft_strfree(&data);
 		i++;
 	}
+	if (mish_env_get(mish, "SHLVL"))
+	{
+		data = ft_itoa(ft_atoi(mish_env_get(mish, "SHLVL")) + 1);
+		if (data)
+		{
+			t_env_setdata(mish->env, "SHLVL", data);
+			free(data);
+		}
+		else
+			mish_error_add(mish, err_malloc, errno, "SHLVL env init");
+	}
+}
+
+void	mish_unset_init(t_mish *mish)
+{
+	int		i;
+	char	**split;
+
+	split = ft_split("$, ,0,minishell,1, ,2, ,3, ,4, ,5, ,6, ,7, ,8, ,9, ,?,0", ',');
+	if (split)
+	{
+		free(split[1]);
+		split[1] = ft_itoa(getpid());
+			if(split[1] == NULL)
+			{
+				split[1] = ft_strempty(NULL);
+				ft_freesplit(split);
+			}
+	}
+	i = 0;
+	while(split && split[i])
+	{
+		t_env_add(&(mish->unset), split[i], split[i+1]);
+		i+=2;
+	}
+	if(split == NULL)
+		mish_error_add(mish, err_malloc, errno, "SHLVL env init");
+	ft_freesplit(split);
 }
 
 void	mish_env_unset_init(t_mish *mish, char **envp)
 {
-	int		i;
-	char	*value;
-
 	mish_env_init(mish, envp);
+	mish_unset_init(mish);
+}
+/*
 	t_env_add(&(mish->unset), "?", "0");
 	t_env_add(&(mish->unset), "0", "minishell");
+	while (++i < 10)
+		t_env_add(&(mish->unset), "0", "minishell");
 	if (mish_env_get(mish, "SHLVL"))
 	{
 		i = ft_atoi(mish_env_get(mish, "SHLVL")) + 1;
@@ -85,8 +125,8 @@ void	mish_env_unset_init(t_mish *mish, char **envp)
 		}
 		else
 			mish_error_add(mish, err_malloc, errno, "SHLVL env init");
-	}
-}
+	}	
+*/
 
 void	mish_env_unset_free(t_mish *mish)
 {

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 14:53:53 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:47:04 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	builtin_unset(t_process *p)
 {
 	int		i;
 
-	if (t_process_is_invalid_option(p))
-		return;
+	if (p->exitstatus == 0)
+		p->exitstatus = -1;
 	i = 0;
 	while(++i < p->ac)
 		t_process_env_remove(p, p->av[i]);
-	//p->exitstatus = 0;
-	//mish_exit_status_set(p->mish ,0);
+	if (p->exitstatus == -1)
+		p->exitstatus = 0;
 }

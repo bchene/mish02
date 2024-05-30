@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:20:10 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 14:09:23 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:47:20 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,12 @@ void	mish_cd(t_process *p)
 		builtin_perror(p, errno, p->av[1], 1);
 	else if (pwd)
 	{
-		//old = ft_strdup(pwd);
 		ft_strfree(&pwd);
 		pwd = malloc(1024 * sizeof(char));
 		getcwd(pwd, 1024);
 		t_process_env_add(p, "OLDPWD", mish_env_get(p->mish, "PWD"));
 		t_process_env_add(p, "PWD", pwd);
 		p->exitstatus = 0;
-		//ft_strfree(&old);
 	}
 	ft_strfree(&pwd);
 }
@@ -80,7 +78,7 @@ void	builtin_cd(t_process *p)
 			mish_cd(p);
 	}
 	else
-		builtin_error(p, "minishell: cd: too many arguments\n", 2);
+		builtin_error(p, "minishell: cd: too many arguments\n", 1);
 }
 
 /*
