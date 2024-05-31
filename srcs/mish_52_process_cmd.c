@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 21:52:48 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 13:30:48 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*t_process_cmd_get(t_process *process)
 	{
 		process->cmd = ft_strdup(process->av[0]);
 		return (process->cmd);
-	}	
+	}
 	i = 0;
 	while ((process->mish)->pathlist && ((process->mish)->pathlist)[i])
 	{
@@ -64,7 +64,7 @@ int	t_process_cmd_isempty(t_process *process)
 	if (process->av == NULL)
 	{
 		mish_error_add(process->mish, err_malloc, errno, "process->av == NULL");
-		return(0);
+		return (0);
 	}
 	else if ((process->av)[0] == NULL || (process->av)[0][0] == '\0')
 	{
@@ -76,10 +76,10 @@ int	t_process_cmd_isempty(t_process *process)
 
 int	t_process_cmd_isbuiltin(t_process *process)
 {
-	char *cmd;
+	char	*cmd;
 
 	cmd = (process->av)[0];
-	if ( (process->av)[0] == NULL || !ft_strcmp(cmd, "echo") \
+	if ((process->av)[0] == NULL || !ft_strcmp(cmd, "echo") \
 	|| !ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "pwd") \
 	|| !ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset") \
 	|| !ft_strcmp(cmd, "env") || !ft_strcmp(cmd, "exit") \
@@ -87,29 +87,6 @@ int	t_process_cmd_isbuiltin(t_process *process)
 	{
 		t_process_cmd_free(process);
 		return (1);
-	}
-	return (0);
-}
-
-int	t_process_cmd_isdir(t_process *process, char *path, char *cmd) 
-{
-	struct stat stats;
-
-	if (stat(path, &stats) == 0)
-	{ 
-		if (S_ISDIR(stats.st_mode))
-		{
-			if (process->exitstatus == 0)
-			{
-				write(2, "minishell :", 12);
-				write(2, cmd, ft_strlen(cmd));
-				write(2, " : is a directory\n", 19);
-				process->exitstatus = 127;
-			}
-			if (path)
-				free(path);
-			return (1);
-		}
 	}
 	return (0);
 }

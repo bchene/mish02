@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 13:50:51 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 14:48:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@ char	*mish_env_get(t_mish *mish, char *var)
 {
 	char	*str;
 
-	if (bashvar_name_isvalid(var, NULL))
-	{
-		str = t_env_getdata(mish->env, var);
-		return (str);
-	}
-	return (NULL);
+	str = t_env_getdata(mish->env, var);
+	return (str);
 }
 
 int	t_process_env_set(t_process *process, char *var, char *value)

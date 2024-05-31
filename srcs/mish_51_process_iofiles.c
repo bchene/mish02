@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_51_process_iofiles_00.c                       :+:      :+:    :+:   */
+/*   mish_51_process_iofiles.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 18:11:20 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 13:30:23 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	t_process_inoutfile_get(t_process *process)
 		t_process_iofile_add(process, "stdin", tf_ifile_rdonly);
 	if (process->outfile == NULL)
 		process->outfile = \
-		t_process_iofile_add(process, "stdout", tf_ofile_creat);	
+		t_process_iofile_add(process, "stdout", tf_ofile_creat);
 }
 
 void	t_process_iofile_close_unused_fds(t_process *process)
@@ -65,7 +65,7 @@ void	t_process_iofile_close_unused_fds(t_process *process)
 	t_file	*tf;
 
 	tf = process->iofiles;
-	while(tf)
+	while (tf)
 	{
 		if (tf != process->infile && tf != process->outfile)
 			close_reset_fd(&(tf->fd));
@@ -82,59 +82,12 @@ void	t_process_iofile_print(t_process *process)
 	if (ttype == NULL)
 		return ;
 	tf = process->iofiles;
-	// printf("iofiles = ");
-	// if (tf == NULL)
-	// 	printf("(null)");
-	// else
-	// {
-	// 	while (tf)
-	// 	{
-	// 		printf("(\"%s\", %s, %i) ", tf->path, ttype[tf->type], tf->fd);
-	// 		tf = tf->next;
-	// 	}
-	// }
-	// printf("p%i : ", process->index);
 	tf = process->infile;
-	if(tf)
+	if (tf)
 		printf("infile(\"%s\", %s, %i) ", tf->path, ttype[tf->type], tf->fd);
 	tf = process->outfile;
-	if(tf)
+	if (tf)
 		printf("/ outfile(\"%s\", %s, %i) ", tf->path, ttype[tf->type], tf->fd);
 	printf("\n");
 	ft_freesplit(ttype);
 }
-
-/* inorout : ==0 IN - ==1 OUT */
-/*
-t_file	*t_process_iofile_get(t_process *process, int inorout)
-{
-	t_file	*tf;
-	t_file	*ret;
-
-	tf = process->iofiles;
-	ret = NULL;
-	while (tf)
-	{
-		if (inorout == 0 && (tf->type == tf_ifile_rdonly || tf->type == tf_ifile_heredoc))
-			ret = tf;
-		else if (inorout == 1 && (tf->type == tf_ofile_creat || tf->type == tf_ofile_append))
-			ret = tf;
-		tf = tf->next;
-	}
-	return (ret);
-}
-*/
-
-/*
-int	t_process_iofile_getfd(t_process *process, int inorout)
-{
-	int		ret;
-	t_file	*tf;
-
-	tf = t_process_iofile_get(process, inorout);
-	if (tf == NULL)
-		return (-1);
-	ret = tf->fd;
-	return (ret);
-}
-*/

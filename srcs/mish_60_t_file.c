@@ -6,13 +6,12 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 18:11:13 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 14:15:48 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-// tf->line est peut etre inutile
 t_file	*t_file_new(t_mish *mish, char *path, t_tfile_type type)
 {
 	t_file	*tf;
@@ -27,7 +26,7 @@ t_file	*t_file_new(t_mish *mish, char *path, t_tfile_type type)
 	tf->path = ft_strdup(path);
 	tf->type = type;
 	tf->next = NULL;
-	tf->line = ft_strempty(NULL); // a enlever ?
+	tf->line = ft_strempty(NULL);
 	return (tf);
 }
 
@@ -50,18 +49,17 @@ void	t_file_del(t_file	**tf)
 		if ((*tf)->line)
 			free((*tf)->line);
 		free(*tf);
-		*tf = NULL; //a tester
+		*tf = NULL;
 	}
 }
 
-int t_process_iofiles_error(t_process *p, int en, char *path)
+int	t_process_iofiles_error(t_process *p, int en, char *path)
 {
-	char *str;
-	
-	if(p->exitstatus == 0)
+	char	*str;
+
+	if (p->exitstatus == 0)
 	{
 		p->exitstatus = 1;
-		//bash: a: No such file or directory
 		str = ft_strjoinva("minishell :", path, ": ", strerror(en), "\n", NULL);
 		write(2, str, ft_strlen(str));
 		free(str);
@@ -70,7 +68,7 @@ int t_process_iofiles_error(t_process *p, int en, char *path)
 		t_process_cmd_setempty(p, "iofile_error");
 	p->infile = t_process_iofile_add(p, "error", tf_ifile_rdonly);
 	p->outfile = t_process_iofile_add(p, "error", tf_ofile_creat);
-	return (p->exitstatus); // a test
+	return (p->exitstatus);
 }
 
 void	mish_error_print(int en, char *str)

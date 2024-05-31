@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 16:10:25 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:54:21 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	heredoc_ctrld_message(int i, char *path)
 
 	str = ft_itoa(i);
 	if (str == NULL)
-		return;
+		return ;
 	write(2, "minishell: warning: here-document at line ", 43);
 	write(2, str, ft_strlen(str));
 	write(2, " delimited by EOF (wanted '", 28);
@@ -39,12 +39,12 @@ static void	t_file_line_heredoc(t_file *tfile, t_mish *mish)
 		if (!line)
 		{
 			heredoc_ctrld_message(i, tfile->path);
-			break;
+			break ;
 		}
-		if (!ft_strcmp(line, tfile->path)) //|| ft_strcmp(line, "^C"))
+		if (!ft_strcmp(line, tfile->path))
 		{
 			free(line);
-			break;
+			break ;
 		}
 		line = mish_substitute_str(mish, NULL, line);
 		tfile->line = ft_strjointo(tfile->line, line);
@@ -57,7 +57,7 @@ static void	t_file_line_heredoc(t_file *tfile, t_mish *mish)
 }
 
 int	t_file_heredoc(t_file *tfile, int openfile, t_process *p)
-{	
+{
 	t_file_line_heredoc(tfile, p->mish);
 	if (openfile == 0)
 	{
@@ -72,7 +72,7 @@ int	t_file_heredoc(t_file *tfile, int openfile, t_process *p)
 	}
 	tfile->fd = open(tfile->path, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (tfile->fd == -1)
-			return (t_process_iofiles_error(p, errno, tfile->path));
+		return (t_process_iofiles_error(p, errno, tfile->path));
 	else
 	{
 		if (write(tfile->fd, tfile->line, ft_strlen(tfile->line)) == -1)

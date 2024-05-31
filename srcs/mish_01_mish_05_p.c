@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 15:47:33 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 12:58:27 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 t_err_type	mish_p_malloc(t_mish *mish)
 {
-	// gerer erreur vide
-	if (mish == NULL && mish->nb < 1)
-		return (-1);
+	if (mish == NULL || mish->nb < 1)
+	{
+		mish_error_add(mish, err_malloc, errno, "mish->nb == 0");
+		return (t_error_exist(mish->error));
+	}
 	mish->p = ft_calloc(mish->nb, sizeof(t_process));
 	if (mish->p == NULL)
 	{
@@ -76,14 +78,17 @@ t_err_type	mish_p_parse(t_mish *mish)
 	{
 		if (mish_p_init(mish, i, mish->splitline[i]))
 			return (t_error_exist(mish->error));
-		// pas de gestion d erreur? rempli iofiles ac et av
 		t_process_set((mish->p) + i);
-		if (!t_process_cmd_isempty((mish->p) + i))
-			if (!t_process_cmd_isbuiltin((mish->p) + i))
-				t_process_cmd_get((mish->p) + i);
+		if (mish_continue(mish))
+			if (!t_process_cmd_isempty((mish->p) + i))
+				if (!t_process_cmd_isbuiltin((mish->p) + i))
+					t_process_cmd_get((mish->p) + i);
 	}
-	mish_open_iofiles(mish);
-	return (0);
+	if (mish_continue(mish))
+		mish_open_iofiles(mish);
+	if (mish_continue(mish) == 0)
+		return (0);
+	return (t_error_exist(mish->error));
 }
 
 void	mish_p_print(t_mish *mish)

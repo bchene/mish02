@@ -3,24 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   mish_71_builtin_echo.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/29 17:06:36 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:58:15 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 #include "limits.h"
 
-/* "-n nnnnn" -> 1 string (av[0]) */
 static int	is_flag(char *str)
 {
 	int	i;
 
 	i = 1;
-	while (str && str[0] == '-'
-			&& str[i] == 'n')
+	while (str && str[0] == '-' && str[i] == 'n')
 		i++;
 	return (i > 1 && !str[i]);
 }
@@ -74,5 +72,4 @@ void	builtin_echo(t_process *process)
 		}
 	}
 	process->exitstatus = 0;
-	//mish_exit_status_set(process->mish ,0);
 }

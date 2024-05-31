@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_75_builtin_unset.c                            :+:      :+:    :+:   */
+/*   mish_52_process_cmd2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 16:09:13 by bchene           ###   ########.fr       */
+/*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
+/*   Updated: 2024/05/31 13:47:39 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-/*
-	si va[1][0] == '-'
-		bash: unset: -a: invalid option
-	
-	unset "invalid-variable-name"  # Cela provoquera une erreur
 
-*/
-
-/* export with no options */
-void	builtin_unset(t_process *p)
+int	t_process_cmd_isdir(t_process *process, char *path, char *cmd)
 {
-	int		i;
+	struct stat	stats;
 
-	if (p->exitstatus == 0)
-		p->exitstatus = -1;
-	i = 0;
-	while (++i < p->ac)
-		t_process_env_remove(p, p->av[i]);
-	if (p->exitstatus == -1)
-		p->exitstatus = 0;
+	if (stat(path, &stats) == 0)
+	{
+		if (S_ISDIR(stats.st_mode))
+		{
+			if (process->exitstatus == 0)
+			{
+				write(2, "minishell :", 12);
+				write(2, cmd, ft_strlen(cmd));
+				write(2, " : is a directory\n", 19);
+				process->exitstatus = 127;
+			}
+			if (path)
+				free(path);
+			return (1);
+		}
+	}
+	return (0);
 }

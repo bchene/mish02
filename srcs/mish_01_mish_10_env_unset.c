@@ -6,49 +6,13 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/30 15:40:54 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:04:45 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-char	*envstr_var_get(char *str)
-{
-	int i;
-	char *var;
-
-	if (str == NULL)
-		return (NULL);
-	var = NULL;
-	i = ft_ischarinstr(str, '=');
-	if (i)
-		if(i > 1 && str[0] != '+')
-			var = ft_strndup(str, i - 1);
-		else
-			var = ft_strndup(str, i);
-	else
-		var = strdup(str);
-	return (var);
-}
-
-/* var=45 ou var+=45 */
-char	*envstr_data_get(char *str)
-{
-	int i;
-	char *data;
-
-	if (str == NULL)
-		return (NULL);
-	data = NULL;
-	i = ft_ischarinstr(str, '=');
-	if (i)
-		data = ft_strdup(str + i);
-	else
-		return (NULL);
-	return (data);	
-}
-
-void	mish_env_init(t_mish *mish, char **envp)
+static void	mish_env_init(t_mish *mish, char **envp)
 {
 	int		i;
 	char	*var;
@@ -77,29 +41,30 @@ void	mish_env_init(t_mish *mish, char **envp)
 	}
 }
 
-void	mish_unset_init(t_mish *mish)
+static void	mish_unset_init(t_mish *mish)
 {
 	int		i;
 	char	**split;
 
-	split = ft_split("$, ,0,minishell,1, ,2, ,3, ,4, ,5, ,6, ,7, ,8, ,9, ,?,0", ',');
+	split = \
+	ft_split("$, ,0,minishell,1, ,2, ,3, ,4, ,5, ,6, ,7, ,8, ,9, ,?,0", ',');
 	if (split)
 	{
 		free(split[1]);
 		split[1] = ft_itoa(getpid());
-			if(split[1] == NULL)
-			{
-				split[1] = ft_strempty(NULL);
-				ft_freesplit(split);
-			}
+		if (split[1] == NULL)
+		{
+			split[1] = ft_strempty(NULL);
+			ft_freesplit(split);
+		}
 	}
 	i = 0;
-	while(split && split[i])
+	while (split && split[i])
 	{
-		t_env_add(&(mish->unset), split[i], split[i+1]);
-		i+=2;
+		t_env_add(&(mish->unset), split[i], split[i + 1]);
+		i += 2;
 	}
-	if(split == NULL)
+	if (split == NULL)
 		mish_error_add(mish, err_malloc, errno, "SHLVL env init");
 	ft_freesplit(split);
 }
@@ -109,57 +74,11 @@ void	mish_env_unset_init(t_mish *mish, char **envp)
 	mish_env_init(mish, envp);
 	mish_unset_init(mish);
 }
-/*
-	t_env_add(&(mish->unset), "?", "0");
-	t_env_add(&(mish->unset), "0", "minishell");
-	while (++i < 10)
-		t_env_add(&(mish->unset), "0", "minishell");
-	if (mish_env_get(mish, "SHLVL"))
-	{
-		i = ft_atoi(mish_env_get(mish, "SHLVL")) + 1;
-		value = ft_itoa(i);
-		if (value)
-		{
-			t_env_setdata(mish->env, "SHLVL", value);
-			free(value);
-		}
-		else
-			mish_error_add(mish, err_malloc, errno, "SHLVL env init");
-	}	
-*/
 
 void	mish_env_unset_free(t_mish *mish)
 {
 	t_env_free(&(mish->env));
 	t_env_free(&(mish->unset));
-}
-
-char	*mish_env_unset_get(t_mish *mish, char *var)
-{
-	char *ret;
-
-	ret = mish_env_get(mish, var);
-	if(ret)
-		return (ret);
-	ret = mish_unset_get(mish, var);
-	if(ret)
-		return (ret);
-	return (NULL);
-}
-
-int	t_process_env_unset_unset(t_process *process, char *var)
-{
-	if (mish_unset_get(process->mish, var))
-	{
-		t_process_unset_remove(process, var);
-		return (2);
-	}
-	if (mish_env_get(process->mish, var))
-	{
-		t_process_env_remove(process, var);
-		return (1);
-	}
-	return (0);
 }
 
 void	mish_env_unset_print(t_mish *mish)

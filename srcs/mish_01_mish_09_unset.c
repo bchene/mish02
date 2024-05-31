@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 14:00:45 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 16:42:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@ char	*mish_unset_get(t_mish *mish, char *var)
 {
 	char	*str;
 
-	if (bashvar_name_isvalid(var, NULL))
-	{
-		str = t_env_getdata(mish->unset, var);
-		return (str);
-	}
-	return (NULL);
+	str = t_env_getdata(mish->unset, var);
+	return (str);
 }
 
 int	t_process_unset_set(t_process *process, char *var, char *value)
@@ -36,7 +32,7 @@ int	t_process_unset_set(t_process *process, char *var, char *value)
 			ret = 0;
 		return (ret);
 	}
-	return (0);	
+	return (0);
 }
 
 int	t_process_unset_remove(t_process *process, char *var)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_91_ft_01.c                                    :+:      :+:    :+:   */
+/*   mish_90_ft2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:29:31 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/24 11:56:06 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 16:37:47 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ int	ft_ischarinstr(char *str, char c)
 {
 	int	i;
 
-	if(str == NULL)
+	if (str == NULL)
 		return (0);
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
-		if(str[i] == c)
+		if (str[i] == c)
 			return (i + 1);
 		i++;
 	}
@@ -63,4 +63,13 @@ void	strtab_free(char **strtab)
 		free(strtab);
 	}
 	return ;
+}
+
+void	ft_strswap(char **str1, char **str2)
+{
+	char	*buf;
+
+	buf = *str1;
+	*str1 = *str2;
+	*str2 = buf;
 }

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:07:17 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/28 14:30:00 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:39:19 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,24 @@ int	t_env_setdata(t_env *env, char *var, char *data)
 
 void	t_env_print(t_env *tenv)
 {
+	char	*str;
+
 	while (tenv)
 	{
 		if (tenv->var && tenv->data)
-			printf("%s=%s\n", tenv->var, tenv->data);
+		{
+			str = ft_strjoinva(tenv->var, "=", tenv->data, "\n", NULL);
+			write(1, str, ft_strlen(str));
+			free(str);
+		}
 		tenv = tenv->next;
 	}
 }
 
 int	bashvar_name_isvalid(const char *varname, t_process *process)
 {
-	int ret;
-	int i;
+	int	ret;
+	int	i;
 
 	i = 0;
 	ret = 1;
@@ -90,11 +96,11 @@ int	bashvar_name_isvalid(const char *varname, t_process *process)
 	}
 	if (ret)
 		return (1);
-    if (process == NULL || process->exitstatus)
+	if (process == NULL || process->exitstatus)
 		return (0);
 	process->exitstatus = 1;
-	write(2,"minishell: ",12);
-	write(2,varname,ft_strlen(varname));
-	write(2,": not a valid identifier\n",26);
+	write(2, "minishell: ", 12);
+	write(2, varname, ft_strlen(varname));
+	write(2, ": not a valid identifier\n", 26);
 	return (0);
 }

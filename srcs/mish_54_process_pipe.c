@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:17:07 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 16:01:58 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:36:32 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	close_reset_fd(int *fd)
 {
 	if (fd && *fd > 2)
 	{
-		//fprintf(stderr, "close_reset_fd %i\n", *fd); //TEST
 		close(*fd);
 		*fd = -1;
 	}
@@ -56,7 +55,6 @@ t_err_type	t_process_dup_io(t_process *p)
 	{
 		if (dup2(p->infile->fd, STDIN_FILENO) == -1)
 			mish_error_add(p->mish, err_dup2, errno, "dup2 fd_in");
-		//p->infile->fd = -1;
 		close_reset_fd(&(p->infile->fd));
 	}
 	if (p->outfile->fd < 3)
@@ -69,17 +67,14 @@ t_err_type	t_process_dup_io(t_process *p)
 	{
 		if (dup2(p->outfile->fd, STDOUT_FILENO) == -1)
 			mish_error_add(p->mish, err_dup2, errno, "dup2 fd_out");
-		//p->outfile->fd = -1;
 		close_reset_fd(&(p->outfile->fd));
 	}
-	mish_p_iofiles_close(p->mish);
-	mish_fds_close(p->mish);
 	return (0);
 }
 
 t_err_type	t_process_dup_io_builtin(t_process *p)
 {
-	int tmp;
+	int	tmp;
 
 	if (p->infile->fd > 2)
 	{
@@ -90,7 +85,7 @@ t_err_type	t_process_dup_io_builtin(t_process *p)
 		if (tmp == -1)
 			return (mish_error_add(p->mish, err_dup2, errno, "dup2 fd_in"));
 		close_reset_fd(&(p->infile->fd));
-	}	
+	}
 	if (p->outfile->fd > 2)
 	{
 		p->fdoutbkp = dup(STDOUT_FILENO);
@@ -101,6 +96,5 @@ t_err_type	t_process_dup_io_builtin(t_process *p)
 			return (mish_error_add(p->mish, err_dup2, errno, "dup2 fd_out"));
 		close_reset_fd(&(p->outfile->fd));
 	}
-	mish_p_iofiles_close(p->mish);
 	return (0);
 }

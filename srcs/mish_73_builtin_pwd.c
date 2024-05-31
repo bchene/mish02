@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 20:25:49 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:59:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 /* pwd with no options */
 void	builtin_pwd(t_process *process)
 {
-	char *pwd;
+	char	*pwd;
 
 	if (t_process_is_invalid_option(process))
-		return;
-	//pwd = mish_env_get(process->mish, "PWD");
+		return ;
 	pwd = malloc(1024 * sizeof(char));
 	getcwd(pwd, 1024);
 	if (pwd)
@@ -28,7 +27,6 @@ void	builtin_pwd(t_process *process)
 		printf("%s\n", pwd);
 		free(pwd);
 		process->exitstatus = 0;
-		//mish_exit_status_set(process->mish ,0);
 	}
 	else
 		mish_error_add(process->mish, err_malloc, errno, "builtin_pwd");

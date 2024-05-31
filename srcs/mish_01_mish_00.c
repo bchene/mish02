@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 11:37:24 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:39:07 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,6 @@ t_err_type	mish_init(t_mish *mish, char **envp)
 	ft_bzero(mish, sizeof(t_mish));
 	mish_env_unset_init(mish, envp);
 	init_sa(&mish->sa, handle_signal);
-	return (t_error_exist(mish->error));
-}
-
-t_err_type	mish_init_bis(t_mish *mish, char **envp)
-{
-	mish->error = NULL;
-	mish->prompt = NULL;
-	mish->line = NULL;
-	mish->splitline = NULL;
-	mish->nb = 0;
-	mish->p = NULL;
-	mish->fds = NULL;
-	mish->pid = NULL;
-	mish_env_unset_init(mish, envp);
-	mish->pathlist = NULL;
 	return (t_error_exist(mish->error));
 }
 
@@ -81,7 +66,7 @@ void	mish_reset(t_mish *mish)
 }
 
 	/*	//printf("///   env :\n");
-		//t_env_print(mish->env); */
+		//t_env_print(mish->env, 1); */
 void	mish_print(t_mish *mish)
 {
 	printf("\n////////////////////////// \n");

@@ -6,18 +6,19 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/29 16:37:27 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 16:33:18 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-void static	mish_error_add_exit(t_mish *mish)
+void static	mish_error_add_exit(t_mish *mish, t_process *p, int es)
 {
-	if(mish->nb == 1)
+	if (p->exitstatus == 0)
+		p->exitstatus = es;
+	if (mish->nb == 1)
 	{
 		write (2, "exit\n", ft_strlen("exit\n"));
-		//write (2, "\n", ft_strlen("\n")); //TESTER
 		mish_error_add(mish, err_exit, 0, "exit");
 	}
 }
@@ -25,35 +26,29 @@ void static	mish_error_add_exit(t_mish *mish)
 /* exit with no options */
 void	builtin_exit(t_process *process)
 {
-	char *str;
+	char	*str;
+	int		n;
 
-	if (process->ac == 1) // exit
+	if (process->ac == 1)
+		mish_error_add_exit(process->mish, process, 0);
+	else if (ft_isstr_longlong(process->av[1]))
 	{
-		process->exitstatus = 0;
-		mish_error_add_exit(process->mish);
-	}
-	else if(ft_isstr_longlong(process->av[1]))
-	{
-		if (process->ac == 2) // exit 42
-		{
-			process->exitstatus = ft_atoll(process->av[1]) % 256;
-			//mish_exit_status_set(process->mish ,ft_atoll(process->av[1]) % 256);
-			mish_error_add_exit(process->mish);
-		}
-		else // exit 42 1 ou // exit 42 a
+		n = ft_atoll(process->av[1]) % 256;
+		if (process->ac == 2)
+			mish_error_add_exit(process->mish, process, n);
+		else
 			builtin_error(process, "bash: exit: too many arguments\n", 1);
 	}
 	else
 	{
-		mish_error_add_exit(process->mish);
-		str = ft_strjoinva("minishell: exit: ", process->av[1], ": numeric argument required\n", NULL);
+		str = ft_strjoinva("minishell: exit: ", process->av[1], \
+		": numeric argument required\n", NULL);
 		if (str)
 		{
 			builtin_error(process, str, 2);
 			free (str);
 		}
-		// write(2, "bash: exit: numeric argument required\n", 39);
-		// mish_exit_status_set(process->mish ,2);
+		mish_error_add_exit(process->mish, process, 2);
 	}
 }
 

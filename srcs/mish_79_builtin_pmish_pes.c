@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 17:05:14 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 16:34:13 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	builtin_pmish(t_process *process)
 {
 	mish_print(process->mish);
 	process->exitstatus = 0;
-	//mish_exit_status_set(process->mish ,0);
 }
 
 /* debug cmd : Command qui affiche exit_stat */
@@ -25,5 +24,4 @@ void	builtin_pes(t_process *process)
 {
 	printf("exit status = %i\n", mish_exit_status_get(process->mish));
 	process->exitstatus = 0;
-	//mish_exit_status_set(process->mish ,0);
 }

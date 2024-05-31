@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mish_90_ft_strjoin_va.c                            :+:      :+:    :+:   */
+/*   mish_90_ft3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 14:53:34 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/24 12:09:03 by bchene           ###   ########.fr       */
+/*   Created: 2024/04/03 13:29:31 by bchene            #+#    #+#             */
+/*   Updated: 2024/05/31 16:37:07 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-/* ft_strjoinva penser a mettre NULL a la fin */
-/*
-char	*ft_strjoinva(char *str, ...)
+void	ft_sort_split(char **split)
 {
-	va_list	param;
-	char	*dest;
-	char	*bufstr;
+	int		i;
+	int		size;
 
-	dest = NULL;
-	if (str)
+	size = ft_splitsize(split);
+	while (size > 1)
 	{
-		va_start(param, str);
-		bufstr = str;
-		while (bufstr)
+		i = 0;
+		while (++i < size)
 		{
-			dest = ft_strjointo(dest, bufstr);
-			bufstr = va_arg(param, char *);
+			if (ft_strcmp(split[i], split[i - 1]) < 0)
+				ft_strswap(split + i, split + i - 1);
 		}
-		va_end(param);
-		return (dest);
+		size--;
 	}
-	return (NULL);
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 21:54:00 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 13:23:03 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_err_type	mish_path_set(t_mish *mish)
 		pathstr = ft_strjoinva(pwd, NULL);
 	else
 		pathstr = ft_strjoinva(pwd, ":", tmpstr, NULL);
-	if(tmpstr)
+	if (tmpstr)
 		free(tmpstr);
-	if(pwd)
+	if (pwd)
 		free(pwd);
 	mish->pathlist = ft_split(pathstr, ':');
 	i = -1;
