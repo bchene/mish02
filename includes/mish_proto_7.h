@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 17:52:36 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 11:22:24 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 /*						*/
 /* 70_builtin			*/
-void    t_process_builtin(t_process *process);
-void    builtin_free(t_process *process);
-void	builtin_error(t_process *p,char *str, int exitstatus);
-void	builtin_perror(t_process *p,int err ,char *str, int exitstatus);
+void	t_process_builtin(t_process *process);
+void	builtin_free(t_process *process);
+void	builtin_error(t_process *p, char *str, int exitstatus);
+void	builtin_perror(t_process *p, int err, char *str, int exitstatus);
 int		t_process_is_invalid_option(t_process *p);
 
 /*						*/

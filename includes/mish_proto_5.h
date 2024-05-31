@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/27 21:41:21 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 11:20:59 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		t_file_add_back_rec(t_file **lst, t_file *new);
 /* 52_process_cmd	*/
 void		t_process_cmd_free(t_process *process);
 char		*t_process_cmd_get(t_process *process);
-void        t_process_cmd_setempty(t_process *process, char *cmd);
+void		t_process_cmd_setempty(t_process *process, char *cmd);
 int			t_process_cmd_isempty(t_process *process);
 int			t_process_cmd_isbuiltin(t_process *process);
 int			t_process_cmd_isdir(t_process *process, char *path, char *cmd);

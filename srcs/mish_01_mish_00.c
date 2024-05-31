@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/29 17:14:14 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 11:37:24 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	mish_reset(t_mish *mish)
 	mish->nb = 0;
 }
 
+	/*	//printf("///   env :\n");
+		//t_env_print(mish->env); */
 void	mish_print(t_mish *mish)
 {
 	printf("\n////////////////////////// \n");
@@ -97,8 +99,6 @@ void	mish_print(t_mish *mish)
 	mish_fds_print(mish);
 	printf("///   pid = ");
 	mish_pid_print(mish);
-	/*	//printf("///   env :\n");
-		//t_env_print(mish->env); */
 	printf("///   unset :\n");
 	t_env_print(mish->unset);
 	printf("///   pathlist : \n");
