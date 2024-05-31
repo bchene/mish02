@@ -6,7 +6,7 @@
 /*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 12:51:15 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/15 18:14:26 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:36:50 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ int	is_there_a_var(char *str)
 	int	i;
 
 	i = 0;
-	while (str && str[i] && str[i] != '$')
+	while (str && str[i] && (str[i] != '$' || is_between_quotes(str, i) == 1))
 		i++;
-	if (str && str[i] && (ft_isalpha(str[i + 1])
-			|| str[i + 1] == '_'
-			|| str[i + 1] == '0'
-			|| str[i + 1] == '?'))
+/* 	if (str && str[i] && !is_alphanum_underscore(str[i + 1])
+			&& is_between_quotes(str, i))
+		return (-1); */
+	if (is_between_quotes(str, i) && is_in_str("\'\"", str[i + 1]))
+		return (-1);
+	if (str && str[i] && str[i + 1]
+			&& (str[i + 1] == '?' || str[i + 1] == '$'
+			|| is_alphanum_underscore(str[i + 1])
+			|| is_in_str("\'\"", str[i + 1]))) /////
 		return (i);
 	else
 		return (-1);
@@ -35,9 +40,11 @@ char	*get_var_value(t_mish *mish, char *var)
 {
 	char	*sub;
 
-	sub = mish_env_get(mish, &var[1]);
+/* 	sub = mish_env_get(mish, &var[1]);
 	if (!sub)
-		sub = mish_unset_get(mish, &var[1]);
+		sub = mish_unset_get(mish, &var[1]); */
+	sub = mish_env_unset_get(mish, &var[1]); //
+	// printf("var = %s\tsub = %s\n", var, sub); /////
 	if (sub)
 	{
 		sub = ft_strdup(sub);
@@ -49,7 +56,7 @@ char	*get_var_value(t_mish *mish, char *var)
 	return (sub);
 }
 
-char	*substitute_hub(t_mish *mish, char *src, char *var)
+/* char	*substitute_hub(t_mish *mish, char *src, char *var)
 {
 	char	*dst;
 
@@ -60,11 +67,11 @@ char	*substitute_hub(t_mish *mish, char *src, char *var)
 	else
 		dst = substitute_var(mish, src, var);
 	return (dst);
-}
+} */
 
-void	mish_var_dup(t_mish *mish, char **line, char *var)
+/* void	mish_var_dup(t_mish *mish, char **line, char *var)
 {
-	if (var[1] == '0' || var[1] == '?')
+	if (ft_isdigit(var[1]) || var[1] == '?' || var[1] == '$')
 		var = ft_strndup(var, 2);
 	else
 		var = ft_strndup(var, ft_strlen_while(&var[1],
@@ -77,9 +84,9 @@ void	mish_var_dup(t_mish *mish, char **line, char *var)
 	*line = substitute_hub(mish, *line, var);
 	free(var);
 	return ;
-}
-
-void	mish_substitute_vars(t_mish *mish, char **p_lines)
+} */
+/* 
+void	mish_substitute_vars(t_mish *mish, char **p_lines) // plus utilisé
 {
 	int		i;
 	int		v;
@@ -96,4 +103,4 @@ void	mish_substitute_vars(t_mish *mish, char **p_lines)
 		}
 	}
 	return ;
-}
+} */

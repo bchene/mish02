@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_check_syntax_error.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:54:13 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/20 19:10:46 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:48:26 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@ static char	*token_dup(char *str)
 	return (dst);
 }
 
+static int	is_first_tkn(char *line, char *tkn_addr)
+{
+	size_t	i;
+
+	i = 0;
+	while (line + i < tkn_addr && ft_isspace(line[i]))
+		i++;
+	return (line + i == tkn_addr);
+}
+
 static void	mish_set_unexpected_error(t_mish *mish, char *curr_t, char *next_t)
 {
 	if (!ft_strcmp(curr_t, "|"))
@@ -58,7 +68,12 @@ static void	mish_set_unexpected_error(t_mish *mish, char *curr_t, char *next_t)
 			mish_error_add(mish, err_token_unexpected, errno, "newline");
 	}
 	else if (is_in_str("<>", *curr_t))
-		mish_error_add(mish, err_token_unexpected, errno, next_t);
+	{
+		if (!*next_t)
+			mish_error_add(mish, err_token_unexpected, errno, "newline");
+		else
+			mish_error_add(mish, err_token_unexpected, errno, next_t);
+	}
 	return ;
 }
 
@@ -68,6 +83,11 @@ static int	mish_check_unexpected(t_mish *mish, char *str, char *curr_t)
 
 	if (mish && str && curr_t)
 	{
+		if (curr_t[0] == '|' && is_first_tkn(mish->line, str))
+		{
+			mish_set_unexpected_error(mish, curr_t, "|"); /////
+			return (t_error_exist(mish->error));
+		}
 		next_t = token_dup(&str[ft_strlen(curr_t) +
 				ft_strlen_while(&str[ft_strlen(curr_t)], ft_isspace)]);
 		if (next_t)

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 13:30:25 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 18:16:56 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,20 @@ t_file	*t_process_line_to_file(t_process *p, char *line)
 {
 	t_file			*file;
 	char			*path;
+	char			**tmp;
 	t_tfile_type	file_type;
 
+	file = NULL;
 	path = t_file_line_get_path(line);
-	file_type = t_file_line_get_type(line);
-	file = t_file_new(p->mish, path, file_type);
+	tmp = ft_calloc(2, sizeof(char *));
+	tmp[0] = ft_strdup(path);
+	if (tmp && !mish_remove_quotes(p->mish, tmp))
+	{
+		file_type = t_file_line_get_type(line);
+		file = t_file_new(p->mish, tmp[0], file_type);
+		//file = t_process_iofile_add(p, path, file_type);
+		ft_freesplit(tmp);
+	}
 	return (file);
 }
 

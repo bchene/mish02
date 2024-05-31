@@ -6,7 +6,7 @@
 /*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 12:45:56 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/13 18:27:52 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:33:57 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ char	*copy_sub(char *dst, char *src, char *var, char *sub)
 	size_t	len_var;
 	size_t	step;
 
-	var_addr = src;
+	var_addr = ft_strchr(src, '$');
+	// printf("src = %s\nvar = %s\tsub = %s\nvar_addr = %s\n",
+	// 		src, var, sub, var_addr); ////
 	len_var = ft_strlen(var);
-	while (ft_strncmp(var_addr, var, len_var))
-		var_addr = ft_strchr(src, '$');
+	while (is_between_quotes(src, var_addr - src) == 1
+			|| ft_strncmp(var_addr, var, len_var))
+		var_addr = ft_strchr(var_addr + 1, '$');
 	tmp = ft_strdup(&var_addr[len_var]);
 	if (tmp)
 	{
@@ -49,7 +52,7 @@ char	*dup_substituting(char *src, char *var, char *sub)
 	}
 	return (dst);
 }
-
+/* 
 char	*substitute_0(t_mish *mish, char *src, char *var)
 {
 	char	*dst;
@@ -90,7 +93,7 @@ char	*substitute_exit_status(t_mish *mish, char *src, char *var)
 		mish_error_add(mish, err_malloc, errno, "substitute_exit_status");
 	return (dst);
 }
-
+ */
 char	*substitute_var(t_mish *mish, char *src, char *var)
 {
 	char	*dst;
@@ -98,7 +101,10 @@ char	*substitute_var(t_mish *mish, char *src, char *var)
 
 	dst = NULL;
 	sub = get_var_value(mish, var);
-	if (sub)
+	// dst = mish_env_unset_get(mish, var);
+	// if (!dst)
+	// 	dst = ft_calloc(1, sizeof(char));
+ 	if (sub)
 	{
 		dst = dup_substituting(src, var, sub);
 		if (!dst)

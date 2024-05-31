@@ -21,7 +21,8 @@ int	handle_quotes(char *str, int i, char q)
 	j = 1;
 	while (str[i + j] && str[i + j] != q)
 		j++;
-	j++;
+	if (str[i + j])
+		j++;
 	while (str[i + j] && ((!is_in_str(WHITESPACES, str[i + j])
 			&& !is_in_str(SPECIAL_SEP, str[i + j]))
 			|| is_between_quotes(str, i + j)))
@@ -38,8 +39,9 @@ int	handle_redirections(char *str, int i, char r)
 		j++;
 	while (is_in_str(WHITESPACES, str[i + j]))
 		j++;
-	while (str[i + j] && !is_in_str(WHITESPACES, str[i + j])
+	while (str[i + j] && ((!is_in_str(WHITESPACES, str[i + j])
 			&& !is_in_str(SPECIAL_SEP, str[i + j]))
+			|| is_between_quotes(str, i + j)))
 		j++;
 	return (j);
 }

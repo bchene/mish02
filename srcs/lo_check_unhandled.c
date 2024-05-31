@@ -6,7 +6,7 @@
 /*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:54:20 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/15 18:13:35 by locharve         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:14:38 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	is_between_quotes(char *str, int i)
 			q = -1;;
 		j++;
 	}
+	//printf("str = %s\tq = %d\n", &str[i], q); ////
 	if (q >= 0)
 	{
 		j++;

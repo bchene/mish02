@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:42:16 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/29 17:51:02 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 17:09:58 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	init_sa(t_sa *sa, void handler(int, siginfo_t *, void *))
 {
 	sa->sa_sigaction = handler;
 	sa->sa_flags = SA_SIGINFO;
-	signal(SIGINT, SIG_IGN); // test
-	//sigaction(SIGINT, sa, NULL);
+	//signal(SIGINT, SIG_IGN); // test
+	sigaction(SIGINT, sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
 	//sigaction(SIGQUIT, sa, NULL);
 }

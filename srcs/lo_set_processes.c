@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_set_processes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:18:33 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/22 17:15:04 by bchene           ###   ########.fr       */
+/*   Updated: 2024/05/31 18:11:37 by locharve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static void	t_process_t_file_set(t_process *p, char **strtab)
 	{
 		if (t_file_line_get_type(strtab[i]) != tf_ifile_heredoc)
 			strtab[i] = mish_substitute_str(p->mish, NULL, strtab[i]);
-		if (!mish_remove_quotes(p->mish, strtab))
-		{
-			tmp = t_process_line_to_file(p, strtab[i]);
-			if (tmp)
-				t_file_add_back_rec(&p->iofiles, tmp);
-		}
+		/* if (!mish_remove_quotes(p->mish, strtab))
+		{ */
+		tmp = t_process_line_to_file(p, strtab[i]);
+		if (tmp)
+			t_file_add_back_rec(&p->iofiles, tmp);
+		/* } */
 		i++;
 	}
 	return ;
@@ -64,6 +64,7 @@ static void	t_process_args_set(t_process *p, char **strtab)
 	char	*tmp;
 	if (p && strtab)
 	{
+		// si '' ou "" -> space ?
 		strtab = mish_substitute_strtab(p->mish, &is_between_quotes, strtab);
 		if (strtab)
 		{
