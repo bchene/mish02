@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 12:58:27 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/03 17:24:58 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ t_err_type	mish_p_init(t_mish *mish, int index, char *line)
 	process->av = NULL;
 	process->cmd = NULL;
 	process->iofiles = NULL;
+	process->infile = NULL;
+	process->outfile = NULL;
 	process->fdinbkp = -1;
 	process->fdoutbkp = -1;
 	process->exitstatus = 0;

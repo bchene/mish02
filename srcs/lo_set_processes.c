@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_set_processes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:18:33 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/31 18:11:37 by locharve         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:36:12 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	t_process_t_file_set(t_process *p, char **strtab)
 	int		i;
 
 	i = 0;
+	p->iofiles = NULL; ///////// TEST
 	while (p && strtab && strtab[i] && !t_error_exist(p->mish->error))
 	{
 		if (t_file_line_get_type(strtab[i]) != tf_ifile_heredoc)
@@ -51,8 +52,8 @@ static void	t_process_t_file_set(t_process *p, char **strtab)
 		/* if (!mish_remove_quotes(p->mish, strtab))
 		{ */
 		tmp = t_process_line_to_file(p, strtab[i]);
-		if (tmp)
-			t_file_add_back_rec(&p->iofiles, tmp);
+		//if (tmp) //TEST
+		//	t_file_add_back_rec(&(p->iofiles), tmp); //TEST
 		/* } */
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mish_proto_lo.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/29 12:40:50 by locharve         ###   ########.fr       */
+/*   Updated: 2024/06/03 21:38:42 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,15 @@ char	**strtab_addstr(char **strtab, char *str);
 void	strtab_print(char **strtab, char *sep);
 
 /* lo_signals.c */
-void    init_sa(t_sa *sa, void handler(int, siginfo_t *, void *));
+// void    init_sa(t_sa *sa, void handler(int, siginfo_t *, void *));
 // void sigint_action(int pid);
-void	handle_signal(int sig, siginfo_t *info, void *ucontext);
+// void	handle_signal(int sig, siginfo_t *info, void *ucontext);
+// void	heredoc_handler(int sig, siginfo_t *info, void *ucontext);
+// void	no_handler(int sig, siginfo_t *info, void *ucontext);
+
+// void	handle_prompt(int signal);
+// void	handle_heredoc(int signal);
+void	handler_set_type(t_handeler_type type);
 
 //////////////////////////
 /*			zz			*/

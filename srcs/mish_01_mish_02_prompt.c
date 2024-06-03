@@ -6,13 +6,14 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 12:45:22 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/03 21:40:43 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
 /* https://patorjk.com/software/taag/#p=display&f=Graffiti&t=minishell */
+/*
 static void	mish_prompt_start(t_mish *mish)
 {
 	char	*str;
@@ -39,6 +40,7 @@ static void	mish_prompt_start(t_mish *mish)
 	else
 		mish_error_add(mish, err_malloc, errno, "malloc mish_prompt_start");
 }
+*/
 
 static void	mish_prompt_set(t_mish *mi)
 {
@@ -76,31 +78,38 @@ static void	mish_prompt_set(t_mish *mi)
 		mettre g_dignal = 0
 		affchie "^C\n" a priori rien a ajouter.
 */
-void	mish_prompt(t_mish *mish)
-{
+/*
 	if (NULL && mish->prompt == NULL)
 	{
 		mish_prompt_start(mish);
 		mish_prompt(mish);
 		return ;
 	}
-	else
+*/
+
+void	mish_prompt(t_mish *mish)
+{
+	if (mish->line)
 	{
-		if (mish->line)
-		{
+		if (ft_strlen(mish->line) > 0)
 			add_history(mish->line);
-			if (mish->line)
-				ft_strfree(&(mish->line));
-		}
-		free(mish->prompt);
-		mish_prompt_set(mish);
+		ft_strfree(&(mish->line));
 	}
+	free(mish->prompt);
+	mish_prompt_set(mish);
 	if (mish->prompt == NULL)
 		mish_error_add(mish, err_malloc, errno, "mish->prompt is NULL");
 	else
 	{
+		handler_set_type(handler_prompt);
 		mish->line = readline(mish->prompt);
+		if(g_signal == SIGINT)
+		{
+			mish_exit_status_set(mish, 130);
+			g_signal = 0;
+		}
 		if (mish->line == NULL)
 			mish->line = ft_strjoinva("exit", " ", "$?", NULL);
+		handler_set_type(handler_ignore);
 	}
 }

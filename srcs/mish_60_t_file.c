@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 14:15:48 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/03 17:20:01 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_file	*t_file_new(t_mish *mish, char *path, t_tfile_type type)
 	tf->type = type;
 	tf->next = NULL;
 	tf->line = ft_strempty(NULL);
+	tf->limitstr = NULL;
 	return (tf);
 }
 
@@ -48,6 +49,10 @@ void	t_file_del(t_file	**tf)
 			free((*tf)->path);
 		if ((*tf)->line)
 			free((*tf)->line);
+		if ((*tf)->limitstr)
+			free((*tf)->limitstr);
+		if ((*tf)->fd > 2) //test
+			close_reset_fd(&(*tf)->fd); //test
 		free(*tf);
 		*tf = NULL;
 	}

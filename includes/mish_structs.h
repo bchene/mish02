@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:12:03 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/29 17:20:09 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/03 21:38:49 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_file
 	int				fd;
 	char			*line;
 	char			*path;
+	char			*limitstr;
 	t_tfile_type	type;
 	t_file			*next;
 }	t_file;

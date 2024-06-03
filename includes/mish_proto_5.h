@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 11:20:59 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/03 15:16:07 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int			t_process_cmd_isdir(t_process *process, char *path, char *cmd);
 
 /*						*/
 /* 53_process_exec		*/
+void		mish_exec_signal(t_mish *mish, int status);
 t_err_type	mish_exec(t_mish *mish);
 t_err_type	t_process_exec_builtin(t_process *process);
 t_err_type	mish_fork_parent(t_mish *mish);

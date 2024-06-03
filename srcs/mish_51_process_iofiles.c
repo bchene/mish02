@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 13:30:23 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/03 17:16:37 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ t_file	*t_process_iofile_add(t_process *p, char *path, t_tfile_type type)
 
 	new = t_file_new(p->mish, path, type);
 	if (p->iofiles == NULL)
+	{
 		p->iofiles = new;
+	}
 	else
 	{
 		current = p->iofiles;

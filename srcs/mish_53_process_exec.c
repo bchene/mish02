@@ -6,13 +6,13 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 15:36:38 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/03 21:23:26 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-static void	mish_exec_signal(t_mish *mish, int status)
+void	mish_exec_signal(t_mish *mish, int status)
 {
 	if (WTERMSIG(status) == SIGINT)
 	{
@@ -92,8 +92,9 @@ t_err_type	mish_fork_parent(t_mish *mish)
 			return (mish_error_add(mish, err_fork, errno, "fork() == -1"));
 		if (mish->pid[i] == 0)
 		{
-			signal(SIGINT, SIG_DFL);
-			signal(SIGQUIT, SIG_DFL);
+			handler_set_type(handler_default);
+			//signal(SIGINT, SIG_DFL); a recommenter
+			//signal(SIGQUIT, SIG_DFL); 
 			t_process_fork_child((mish->p) + i);
 			return (mish_continue(mish));
 		}

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:10:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 18:01:58 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/03 19:55:13 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum e_err_type
 	err_dquote_open,
 	err_unhandled,
 	err_token_unexpected,
+	err_hd_ctrlc,
 	err_exit
 }	t_err_type;
 
@@ -37,5 +38,13 @@ typedef enum e_tfile_type
 	tf_ofile_creat,
 	tf_ofile_append
 }	t_tfile_type;
+
+typedef enum e_handler_type
+{
+	handler_default,
+	handler_prompt,
+	handler_heredoc,
+	handler_ignore
+}	t_handeler_type;
 
 #endif

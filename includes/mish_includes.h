@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:08:57 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/14 10:47:28 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:06:48 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 /* wait4, isatty, ttyname, ttyslot, ioctl */
 # include <unistd.h>
 # include <fcntl.h>
+# include <sys/ioctl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 /* Pour signal, sigaction, sigemptyset, sigaddset, kill */
