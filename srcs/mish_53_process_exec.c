@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/03 21:23:26 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 13:28:32 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	mish_exec_signal(t_mish *mish, int status)
 	{
 		mish_exit_status_set(mish, 130);
 		g_signal = 0;
+		write(2, "\n", 1);
 	}
 	if (WTERMSIG(status) == SIGQUIT)
 	{
@@ -93,8 +94,6 @@ t_err_type	mish_fork_parent(t_mish *mish)
 		if (mish->pid[i] == 0)
 		{
 			handler_set_type(handler_default);
-			//signal(SIGINT, SIG_DFL); a recommenter
-			//signal(SIGQUIT, SIG_DFL); 
 			t_process_fork_child((mish->p) + i);
 			return (mish_continue(mish));
 		}

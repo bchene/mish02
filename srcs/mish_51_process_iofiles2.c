@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/03 17:48:39 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 13:28:00 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ t_file	*t_process_line_to_file(t_process *p, char *line)
 	if (tmp && !mish_remove_quotes(p->mish, tmp))
 	{
 		file_type = t_file_line_get_type(line);
-		//file = t_file_new(p->mish, tmp[0], file_type); //TEST
-		file = t_process_iofile_add(p, tmp[0], file_type); //TEST
+		file = t_process_iofile_add(p, tmp[0], file_type);
 		ft_freesplit(tmp);
 	}
 	return (file);

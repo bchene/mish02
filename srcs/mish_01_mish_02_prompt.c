@@ -6,41 +6,11 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/03 21:40:43 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 13:23:51 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-
-/* https://patorjk.com/software/taag/#p=display&f=Graffiti&t=minishell */
-/*
-static void	mish_prompt_start(t_mish *mish)
-{
-	char	*str;
-
-	mish->prompt = ft_strempty(mish->prompt);
-	str = ft_strjoinva("", \
-"\001\e[0;32m\002", \
-"              d8b          d8b          888               888 888\n", \
-"              Y8P          Y8P          888               888 888\n", \
-"                                        888               888 888\n", \
-"88888b.d88b.  888 88888b.  888 .d8888b  88888b.   .d88b.  888 888\n", \
-"888 \"888 \"88b 888 888 \"88b 888 88K      888 \"88b d8P  Y8b 888 888\n", \
-"888  888  888 888 888  888 888 \"Y8888b. 888  888 88888888 888 888\n", \
-"888  888  888 888 888  888 888      X88 888  888 Y8b.     888 888\n", \
-"888  888  888 888 888  888 888  88888P' 888  888  \"Y8888  888 888\n", \
-"\001\e[2;32m\002\n", \
-"                                   Louis Charvet & Benjamin Chêne\n\n", \
-	NULL);
-	if (str)
-	{
-		printf("%s", str);
-		free(str);
-	}
-	else
-		mish_error_add(mish, err_malloc, errno, "malloc mish_prompt_start");
-}
-*/
 
 static void	mish_prompt_set(t_mish *mi)
 {
@@ -78,14 +48,6 @@ static void	mish_prompt_set(t_mish *mi)
 		mettre g_dignal = 0
 		affchie "^C\n" a priori rien a ajouter.
 */
-/*
-	if (NULL && mish->prompt == NULL)
-	{
-		mish_prompt_start(mish);
-		mish_prompt(mish);
-		return ;
-	}
-*/
 
 void	mish_prompt(t_mish *mish)
 {
@@ -103,7 +65,7 @@ void	mish_prompt(t_mish *mish)
 	{
 		handler_set_type(handler_prompt);
 		mish->line = readline(mish->prompt);
-		if(g_signal == SIGINT)
+		if (g_signal == SIGINT)
 		{
 			mish_exit_status_set(mish, 130);
 			g_signal = 0;
@@ -113,3 +75,33 @@ void	mish_prompt(t_mish *mish)
 		handler_set_type(handler_ignore);
 	}
 }
+
+/* https://patorjk.com/software/taag/#p=display&f=Graffiti&t=minishell */
+/*
+static void	mish_prompt_start(t_mish *mish)
+{
+	char	*str;
+
+	mish->prompt = ft_strempty(mish->prompt);
+	str = ft_strjoinva("", \
+"\001\e[0;32m\002", \
+"              d8b          d8b          888               888 888\n", \
+"              Y8P          Y8P          888               888 888\n", \
+"                                        888               888 888\n", \
+"88888b.d88b.  888 88888b.  888 .d8888b  88888b.   .d88b.  888 888\n", \
+"888 \"888 \"88b 888 888 \"88b 888 88K      888 \"88b d8P  Y8b 888 888\n", \
+"888  888  888 888 888  888 888 \"Y8888b. 888  888 88888888 888 888\n", \
+"888  888  888 888 888  888 888      X88 888  888 Y8b.     888 888\n", \
+"888  888  888 888 888  888 888  88888P' 888  888  \"Y8888  888 888\n", \
+"\001\e[2;32m\002\n", \
+"                                   Louis Charvet & Benjamin Chêne\n\n", \
+	NULL);
+	if (str)
+	{
+		printf("%s", str);
+		free(str);
+	}
+	else
+		mish_error_add(mish, err_malloc, errno, "malloc mish_prompt_start");
+}
+*/

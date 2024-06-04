@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/03 21:59:51 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 13:29:47 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	mish_open_iofiles(t_mish *mish)
 
 	err = 0;
 	i = -1;
-	while (++i < mish->nb && mish_continue(mish))//mish_exit_status_get(mish) != 130 
+	while (++i < mish->nb && mish_continue(mish))
 	{
 		err += t_process_open_heredoc(mish->p + i, 1);
 	}
@@ -36,7 +36,6 @@ void	mish_open_iofiles(t_mish *mish)
 	}
 }
 
-//mish_continue(p->mish) &&
 int	t_process_open_heredoc(t_process *p, int openfile)
 {
 	t_file	*tfile;
@@ -48,7 +47,7 @@ int	t_process_open_heredoc(t_process *p, int openfile)
 	{
 		if (tfile->type == tf_ifile_heredoc)
 		{
-			if (openfile == 1) //dernier infd
+			if (openfile == 1)
 				err += t_file_heredoc(tfile, 1, p);
 			else
 				err += t_file_heredoc(tfile, 0, p);

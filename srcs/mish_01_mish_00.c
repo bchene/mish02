@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/03 21:56:51 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 13:22:29 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_err_type	mish_init(t_mish *mish, char **envp)
 	ft_bzero(mish, sizeof(t_mish));
 	mish_env_unset_init(mish, envp);
 	handler_set_type(handler_ignore);
-	//init_sa(&mish->sa, handle_signal);
 	return (t_error_exist(mish->error));
 }
 

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 18:10:32 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 13:28:13 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	t_process_cmd_isempty(t_process *process)
 		builtin_error(process, "Command '' not found\n", 127);
 		t_process_cmd_setempty(process, "no_cmd");
 		return (1);
-	}	
+	}
 	return (0);
 }
 
