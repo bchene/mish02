@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/04 13:22:29 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 17:10:57 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	mish_free(t_mish *mish, int isroot)
 
 void	mish_reset(t_mish *mish)
 {
+	g_signal = 0;
 	mish_heredocs_unlink(mish);
 	if (mish->splitline)
 		mish->splitline = ft_freesplit(mish->splitline);
@@ -65,8 +66,6 @@ void	mish_reset(t_mish *mish)
 	mish->nb = 0;
 }
 
-	/*	//printf("///   env :\n");
-		//t_env_print(mish->env, 1); */
 void	mish_print(t_mish *mish)
 {
 	printf("\n////////////////////////// \n");

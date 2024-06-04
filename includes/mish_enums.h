@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:10:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/03 19:55:13 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 17:07:46 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef enum e_handler_type
 	handler_default,
 	handler_prompt,
 	handler_heredoc,
-	handler_ignore
+	handler_ignore,
+	handler_exec
 }	t_handeler_type;
 
 #endif

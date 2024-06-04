@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:28:12 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/04 13:28:32 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 17:19:42 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ void	mish_exec_signal(t_mish *mish, int status)
 		g_signal = 0;
 		write(2, "\n", 1);
 	}
-	if (WTERMSIG(status) == SIGQUIT)
+	else if (WTERMSIG(status) == SIGQUIT)
 	{
 		mish_exit_status_set(mish, 131);
 		g_signal = 0;
 		write(2, "Quit (core dumped)\n", 20);
 	}
+	else if (g_signal == SIGINT)
+	{
+		write(2, "\n", 1);
+	}
+	handler_set_type(handler_default);
 }
 
 t_err_type	mish_exec(t_mish *mish)
@@ -38,6 +43,7 @@ t_err_type	mish_exec(t_mish *mish)
 		t_process_exec_builtin(mish->p + 0);
 	else
 	{
+		handler_set_type(handler_exec);
 		if (mish_fork_parent(mish) == err_none)
 		{
 			mish_p_iofiles_close(mish);
@@ -48,9 +54,9 @@ t_err_type	mish_exec(t_mish *mish)
 				mish_exit_status_set(mish, (int)(((status) & 0xff00) >> 8));
 			else
 				mish_exit_status_set(mish, (mish->p + i)->exitstatus);
-			mish_exec_signal(mish, status);
 			while (--i >= 0)
-				waitpid((mish->pid)[i], &status, 0);
+				waitpid((mish->pid)[i], NULL, 0);
+			mish_exec_signal(mish, status);
 		}
 	}
 	return (t_error_exist(mish->error));
