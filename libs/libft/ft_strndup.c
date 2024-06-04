@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:09:11 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/17 13:36:10 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 16:43:39 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strdupfree(char *dest, const char *src)
 	if (dest)
 	{
 		free(dest);
-		dest =NULL;
+		dest = NULL;
 	}
 	dest = ft_strdup(src);
 	return (dest);

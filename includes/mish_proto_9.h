@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 19:11:01 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 16:45:35 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 15:57:56 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		ft_ischarinstr(char *str, char c);
 void	ft_strswap(char **str1, char **str2);
 
 void	ft_sort_split(char **split);
+int		ft_isspace(char c);
 
 #endif

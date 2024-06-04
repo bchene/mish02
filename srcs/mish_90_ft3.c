@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:29:31 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 16:37:07 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 16:39:15 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,9 @@ void	ft_sort_split(char **split)
 		}
 		size--;
 	}
+}
+
+int	ft_isspace(char c)
+{
+	return ((c >= 9 && c <= 13) || c == 32);
 }

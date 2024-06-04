@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_mish_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:54:51 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/13 16:12:46 by locharve         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:16:05 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static int	m_count_words(char *str, char c)
 	i = 0;
 	count = 0;
 	while (str[i])
-	{		
-		if (i > 0 && str[i] == c && str[i - 1] != c
+	{
+		if (i > 0 && str[i] == c && str[i - 1] != c \
 				&& !is_between_quotes(str, i))
 			count++;
 		i++;

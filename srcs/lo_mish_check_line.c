@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_mish_check_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:35:00 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/15 18:16:22 by locharve         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:15:25 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ t_err_type	mish_first_substitution(t_mish *mish)
 	return (t_error_exist(mish->error));
 }
 
-t_err_type  mish_check_line(t_mish *mish)
+t_err_type	mish_check_line(t_mish *mish)
 {
-	if (mish && mish->line && (!mish->line[0] ///
-			|| (!mish_check_syntax_error(mish)
-			&& !mish_check_unhandled(mish)
+	if (mish && mish->line && (!mish->line[0] \
+			|| (!mish_check_syntax_error(mish) \
+			&& !mish_check_unhandled(mish) \
 			&& !mish_check_open_quotes(mish))))
 		return (0);
 	else

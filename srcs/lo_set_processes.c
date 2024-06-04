@@ -6,66 +6,35 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:18:33 by locharve          #+#    #+#             */
-/*   Updated: 2024/06/03 17:36:12 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 16:29:39 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
 
-t_tfile_type	t_file_line_get_type(char *line)
-{
-	if (!ft_strncmp(line, "<<", 2))
-		return (tf_ifile_heredoc);
-	else if (!ft_strncmp(line, "<", 1))
-		return (tf_ifile_rdonly);
-	else if (!ft_strncmp(line, ">>", 2))
-		return (tf_ofile_append);
-	else if (!ft_strncmp(line, ">", 1))
-		return (tf_ofile_creat);
-	else
-		return (tf_none);
-}
-
-char	*t_file_line_get_path(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line && line[i]
-			&& (is_in_str(WHITESPACES, line[i])
-			|| is_in_str("<>", line[i])))
-		i++;
-	return (&line[i]);
-}
-
-static void	t_process_t_file_set(t_process *p, char **strtab)
+void	t_process_t_file_set(t_process *p, char **strtab)
 {
 	t_file	*tmp;
 	int		i;
 
 	i = 0;
-	p->iofiles = NULL; ///////// TEST
+	p->iofiles = NULL;
 	while (p && strtab && strtab[i] && !t_error_exist(p->mish->error))
 	{
 		if (t_file_line_get_type(strtab[i]) != tf_ifile_heredoc)
 			strtab[i] = mish_substitute_str(p->mish, NULL, strtab[i]);
-		/* if (!mish_remove_quotes(p->mish, strtab))
-		{ */
 		tmp = t_process_line_to_file(p, strtab[i]);
-		//if (tmp) //TEST
-		//	t_file_add_back_rec(&(p->iofiles), tmp); //TEST
-		/* } */
 		i++;
 	}
 	return ;
 }
 
-static void	t_process_args_set(t_process *p, char **strtab)
+void	t_process_args_set(t_process *p, char **strtab)
 {
 	char	*tmp;
+
 	if (p && strtab)
 	{
-		// si '' ou "" -> space ?
 		strtab = mish_substitute_strtab(p->mish, &is_between_quotes, strtab);
 		if (strtab)
 		{
@@ -85,7 +54,8 @@ static void	t_process_args_set(t_process *p, char **strtab)
 	}
 	return ;
 }
-static void	t_process_iofiles_args_set(t_process *p, char **iofiles, char **args)
+
+void	t_process_iofiles_args_set(t_process *p, char **iofiles, char **args)
 {
 	if (iofiles)
 	{
@@ -100,10 +70,10 @@ static void	t_process_iofiles_args_set(t_process *p, char **iofiles, char **args
 		mish_error_add(p->mish, err_malloc, errno, "t_process_set");
 }
 
-void    t_process_set(t_process *p)
+void	t_process_set(t_process *p)
 {
-    char    **split;
-    char    **iofiles;
+	char	**split;
+	char	**iofiles;
 	char	**args;
 
 	split = t_process_split(p, WHITESPACES);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_check_open_quotes.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:54:49 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/20 18:59:02 by locharve         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:53:15 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ int	mish_check_open_quotes(t_mish *mish)
 			{
 				if (q == '\'')
 					return (mish_error_add(mish, err_quote_open, errno, NULL));
-					//return (dup_err_str(mish, "", 0, err_quote_open));
 				else if (q == '\"')
 					return (mish_error_add(mish, err_dquote_open, errno, NULL));
-					//return (dup_err_str(mish, "", 0, err_dquote_open));
 			}
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_strtab_if.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:30:34 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/14 17:42:10 by locharve         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:34:09 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int	strtab_count_if(char **src, t_tfile_type f(char *), int b)
 	return (count);
 }
 
-static char	**strtab_set_if(char **dst, char **src, t_tfile_type f(char *), int b)
+static char	**strtab_set_if(char **dst, char **src, \
+t_tfile_type f(char *), int b)
 {
 	int	i;
 	int	j;
@@ -47,14 +48,14 @@ static char	**strtab_set_if(char **dst, char **src, t_tfile_type f(char *), int 
 	return (dst);
 }
 
-char **strtab_dup_if(char **src, t_tfile_type f(char *), int b)
+char	**strtab_dup_if(char **src, t_tfile_type f(char *), int b)
 {
 	char	**dst;
 	int		count;
 
 	count = strtab_count_if(src, f, b);
 	dst = ft_calloc(count + 1, sizeof(char *));
-	if (dst && count) 					// ca fait la diff ?
+	if (dst && count)
 		dst = strtab_set_if(dst, src, f, b);
 	return (dst);
 }

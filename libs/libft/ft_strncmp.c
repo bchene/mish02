@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:27:52 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/16 18:46:07 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 16:44:03 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 	if (s1 == NULL || s2 == NULL)
 	{
-		if(s1 == s2)
+		if (s1 == s2)
 			return (0);
 		return (42);
 	}

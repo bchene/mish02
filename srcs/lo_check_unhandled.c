@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lo_check_unhandled.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:54:20 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/31 15:14:38 by locharve         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:11:09 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ int	is_between_quotes(char *str, int i)
 		if (q < 0 && (str[j] == '\'' || str[j] == '\"'))
 			q = j;
 		else if (q >= 0 && str[j] == str[q])
-			q = -1;;
+			q = -1;
 		j++;
 	}
-	//printf("str = %s\tq = %d\n", &str[i], q); ////
 	if (q >= 0)
 	{
 		j++;
@@ -49,7 +48,7 @@ int	mish_check_unhandled(t_mish *mish)
 	i = 0;
 	while (mish->line && mish->line[i])
 	{
-		if (is_in_str("\\;&()", mish->line[i])
+		if (is_in_str("\\;&()", mish->line[i]) \
 				&& !is_between_quotes(mish->line, i))
 		{
 			err = ft_calloc(2, sizeof(char));

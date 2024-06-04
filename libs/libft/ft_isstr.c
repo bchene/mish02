@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:18:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/22 21:41:07 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/04 16:43:07 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	ft_isstr_number(const char *str)
 {
-	if(str == NULL || *str == '\0')
+	if (str == NULL || *str == '\0')
 		return (0);
-	while((9 <= *str && *str <= 13) || *str == 32)
+	while ((9 <= *str && *str <= 13) || *str == 32)
 		str++;
-	if(*str == '+' || *str == '-')
+	if (*str == '+' || *str == '-')
 		str++;
-	while(*str)
+	while (*str)
 	{
-		if(!ft_isdigit(*str))
-			return(0);
+		if (!ft_isdigit(*str))
+			return (0);
 		str++;
 	}
 	return (1);

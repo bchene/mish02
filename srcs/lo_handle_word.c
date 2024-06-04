@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lo_handle_word.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locharve <locharve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:12:38 by locharve          #+#    #+#             */
-/*   Updated: 2024/05/22 16:27:21 by locharve         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:14:49 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mish.h"
-
-// gerer "salut"poto"ca va ?" -> [salutpotoca va ?]
 
 int	handle_quotes(char *str, int i, char q)
 {
@@ -23,7 +21,7 @@ int	handle_quotes(char *str, int i, char q)
 		j++;
 	if (str[i + j])
 		j++;
-	while (str[i + j] && ((!is_in_str(WHITESPACES, str[i + j])
+	while (str[i + j] && ((!is_in_str(WHITESPACES, str[i + j]) \
 			&& !is_in_str(SPECIAL_SEP, str[i + j]))
 			|| is_between_quotes(str, i + j)))
 		j++;
@@ -39,8 +37,8 @@ int	handle_redirections(char *str, int i, char r)
 		j++;
 	while (is_in_str(WHITESPACES, str[i + j]))
 		j++;
-	while (str[i + j] && ((!is_in_str(WHITESPACES, str[i + j])
-			&& !is_in_str(SPECIAL_SEP, str[i + j]))
+	while (str[i + j] && ((!is_in_str(WHITESPACES, str[i + j]) \
+			&& !is_in_str(SPECIAL_SEP, str[i + j])) \
 			|| is_between_quotes(str, i + j)))
 		j++;
 	return (j);
@@ -68,11 +66,11 @@ int	handle_word(char *str, char *sep, int i)
 	j = 0;
 	if (is_in_str(SPECIAL_SEP, str[i]) || is_in_str("\'\"", str[i]))
 		j = handle_specials(str, i);
-	while (str[i + j] && !is_in_str(sep, str[i + j]) // else (avant)
+	while (str[i + j] && !is_in_str(sep, str[i + j]) \
 			&& !is_in_str(SPECIAL_SEP, str[i + j]))
 	{
 		if (is_in_str("\'\"", str[i + j]))
-			j += handle_quotes(str, i + j, str[i + j]); //////
+			j += handle_quotes(str, i + j, str[i + j]);
 		else
 			j++;
 	}
