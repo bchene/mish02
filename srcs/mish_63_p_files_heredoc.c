@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/04 13:39:18 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:01:35 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	t_file_readline_heredoc(t_file *tfile, t_mish *mish)
 	char	*line;
 	int		i;
 
-	i = 0;
-	while (tfile->line && mish_continue(mish))
+	i = -1;
+	while (++i >= 0 && tfile->line && mish_continue(mish))
 	{
 		line = readline(">");
 		if (g_signal == SIGINT)
@@ -48,11 +48,11 @@ static void	t_file_readline_heredoc(t_file *tfile, t_mish *mish)
 			free(line);
 			break ;
 		}
-		line = mish_substitute_str(mish, NULL, line);
+		if (tfile->expandhd)
+			line = mish_substitute_str(mish, NULL, line);
 		tfile->line = ft_strjointo(tfile->line, line);
 		tfile->line = ft_strjointo(tfile->line, "\n");
 		free(line);
-		i++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/04 13:29:07 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:01:37 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ t_file	*t_file_new(t_mish *mish, char *path, t_tfile_type type)
 	tf->fd = -1;
 	tf->path = ft_strdup(path);
 	tf->type = type;
-	tf->next = NULL;
 	tf->line = ft_strempty(NULL);
+	tf->expandhd = 1;
+	tf->next = NULL;
 	return (tf);
 }
 

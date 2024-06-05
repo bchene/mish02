@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:36:25 by bchene            #+#    #+#             */
-/*   Updated: 2024/05/31 16:33:18 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:10:23 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void static	mish_error_add_exit(t_mish *mish, t_process *p, int es)
 {
-	if (p->exitstatus == 0)
-		p->exitstatus = es;
 	if (mish->nb == 1)
 	{
 		write (2, "exit\n", ft_strlen("exit\n"));
 		mish_error_add(mish, err_exit, 0, "exit");
 	}
+	if (p->exitstatus == 0)
+		p->exitstatus = es;
 }
 
 /* exit with no options */
@@ -30,7 +30,8 @@ void	builtin_exit(t_process *process)
 	int		n;
 
 	if (process->ac == 1)
-		mish_error_add_exit(process->mish, process, 0);
+		mish_error_add_exit(process->mish, process, \
+		mish_exit_status_get(process->mish));
 	else if (ft_isstr_longlong(process->av[1]))
 	{
 		n = ft_atoll(process->av[1]) % 256;

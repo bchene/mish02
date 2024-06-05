@@ -6,7 +6,7 @@
 /*   By: bchene <bchene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:13:08 by bchene            #+#    #+#             */
-/*   Updated: 2024/06/04 13:23:51 by bchene           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:13:44 by bchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	mish_prompt(t_mish *mish)
 			g_signal = 0;
 		}
 		if (mish->line == NULL)
-			mish->line = ft_strjoinva("exit", " ", "$?", NULL);
+			mish->line = ft_strdup("exit");
 		handler_set_type(handler_ignore);
 	}
 }
